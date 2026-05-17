@@ -32,7 +32,7 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
         {/* Auth Buttons */}
         <div className="flex items-center gap-3">
           <button
-            onClick={() => navigate('/dashboard')}
+            onClick={onGetStarted}
             className="hidden sm:block px-6 h-10 border border-white rounded-xl text-white text-sm font-medium hover:bg-white/10 transition-all cursor-pointer">
             Masuk
           </button>
