@@ -26,8 +26,7 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
         <div className="hidden md:flex items-center gap-8">
           <button onClick={() => scrollTo('fitur')} className="text-white text-sm hover:text-cyan-400 transition-colors bg-transparent border-none cursor-pointer">Fitur</button>
           <button onClick={() => scrollTo('reviews')} className="text-white text-sm hover:text-cyan-400 transition-colors bg-transparent border-none cursor-pointer">Reviews</button>
-          <button onClick={() => navigate('/pricing')} className="text-white text-sm hover:text-cyan-400 transition-colors bg-transparent border-none cursor-pointer">Harga</button>
-          <button onClick={() => navigate('/dashboard/berita')} className="text-white text-sm hover:text-cyan-400 transition-colors bg-transparent border-none cursor-pointer">Blog</button>
+          <button onClick={() => scrollTo('harga')} className="text-white text-sm hover:text-cyan-400 transition-colors bg-transparent border-none cursor-pointer">Harga</button>
         </div>
 
         {/* Auth Buttons */}
