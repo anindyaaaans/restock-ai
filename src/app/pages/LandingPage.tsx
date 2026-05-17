@@ -297,18 +297,22 @@ export default function LandingPage() {
                     Mulai Gratis Sekarang
                   </motion.button>
 
-                  <motion.button
+                  <motion.a
+                    href="https://youtu.be/04854XqcfCY?si=Q8YkpgNGvRugTWMz"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ scale: 1.05, borderColor: 'rgba(255, 255, 255, 1)' }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-8 h-14 rounded-2xl font-bold text-white min-w-[160px] border"
+                    className="px-8 h-14 rounded-2xl font-bold text-white min-w-[160px] border flex items-center justify-center"
                     style={{
                       background: 'rgba(255, 255, 255, 0.1)',
                       backdropFilter: 'blur(10px)',
-                      borderColor: 'rgba(255, 255, 255, 0.3)'
+                      borderColor: 'rgba(255, 255, 255, 0.3)',
+                      textDecoration: 'none'
                     }}
                   >
                     Lihat Demo
-                  </motion.button>
+                  </motion.a>
                 </motion.div>
               </div>
 
