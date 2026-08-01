@@ -12,21 +12,21 @@ export default function DemandChart() {
     <div
       className="rounded-2xl p-7 border"
       style={{
-        background: 'rgba(255, 255, 255, 0.06)',
+        background: 'rgba(0, 0, 0, 0.03)',
         backdropFilter: 'blur(12px)',
-        borderColor: 'rgba(255, 255, 255, 0.15)'
+        borderColor: 'rgba(0, 0, 0, 0.08)'
       }}
     >
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-sm font-bold text-white uppercase">
+        <h3 className="text-sm font-bold text-[#1A1A1B] uppercase">
           Prediksi Permintaan vs Stok
         </h3>
         <div
-          className="px-3 py-1 rounded-full text-[10px] text-white font-bold"
-          style={{ background: 'linear-gradient(135deg, #4A1063, #8B4BBE)' }}
+          className="px-3 py-1 rounded-full text-[10px] text-[#1A1A1B] font-bold"
+          style={{ background: '#FFE16F' }}
         >
-          🧠 AI-Powered
+           AI-Powered
         </div>
       </div>
 
@@ -35,33 +35,32 @@ export default function DemandChart() {
         <AreaChart data={data}>
           <defs>
             <linearGradient id="colorPermintaan" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#00FFFF" stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#FF00FF" stopOpacity={0.1} />
+              <stop offset="5%" stopColor="#98E2FD" stopOpacity={0.3} />
+              <stop offset="95%" stopColor="#1A1A1B" stopOpacity={0.1} />
             </linearGradient>
             <linearGradient id="colorStok" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#F5C897" stopOpacity={0.3} />
               <stop offset="95%" stopColor="#FFD700" stopOpacity={0.1} />
             </linearGradient>
             <linearGradient id="linePermintaan" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#00FFFF" />
-              <stop offset="100%" stopColor="#FF00FF" />
+              <stop offset="0%" stopColor="#98E2FD" />
+              <stop offset="100%" stopColor="#1A1A1B" />
             </linearGradient>
             <linearGradient id="lineStok" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="#F5C897" />
               <stop offset="100%" stopColor="#FFD700" />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.05)" />
-          <XAxis dataKey="date" stroke="#E8E8E8" style={{ fontSize: '12px' }} />
-          <YAxis stroke="#E8E8E8" style={{ fontSize: '12px' }} />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(0, 0, 0, 0.03)" />
+          <XAxis dataKey="date" stroke="#475569" style={{ fontSize: '12px' }} />
+          <YAxis stroke="#475569" style={{ fontSize: '12px' }} />
           <Tooltip
             contentStyle={{
-              background: 'rgba(255, 255, 255, 0.1)',
+              background: 'rgba(0, 0, 0, 0.05)',
               backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              border: '1px solid rgba(0, 0, 0, 0.1)',
               borderRadius: '12px',
-              color: '#fff'
-            }}
+              color: '#1A1A1B'}}
           />
           <Area
             type="monotone"

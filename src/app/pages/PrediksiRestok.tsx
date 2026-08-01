@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import Navbar from '../components/dashboard/Navbar';
 import Sidebar from '../components/dashboard/Sidebar';
-import { Search } from 'lucide-react';
+import { Search, FolderOpen, RotateCcw } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -93,15 +93,15 @@ export default function PrediksiRestok() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const getStockColor = (percent: number) => {
-    if (percent <= 10) return '#FF00FF';
-    if (percent <= 30) return '#FFD700';
-    return '#00FF7F';
+    if (percent <= 10) return '#ef4444';
+    if (percent <= 30) return '#f59e0b';
+    return '#10b981';
   };
 
   const getStockGradient = (percent: number) => {
-    if (percent <= 10) return 'linear-gradient(90deg, #FF00FF, #E63220)';
-    if (percent <= 30) return 'linear-gradient(90deg, #FFD700, #FFA500)';
-    return 'linear-gradient(90deg, #00FF7F, #00FFFF)';
+    if (percent <= 10) return 'linear-gradient(90deg, #ef4444, #dc2626)';
+    if (percent <= 30) return 'linear-gradient(90deg, #f59e0b, #FFA500)';
+    return 'linear-gradient(90deg, #10b981, #4f46e5)';
   };
 
   const tabs = [
@@ -115,7 +115,7 @@ export default function PrediksiRestok() {
     <div
       className="min-h-screen w-full"
       style={{
-        background: 'linear-gradient(180deg, #0F0F0F 0%, #1a0f2e 100%)'
+        background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)'
       }}
     >
       <Sidebar activePage="prediksi" />
@@ -127,20 +127,20 @@ export default function PrediksiRestok() {
         <div
           className="rounded-2xl p-5 mb-6 flex items-center justify-between"
           style={{
-            background: 'linear-gradient(135deg, rgba(74, 16, 99, 0.5), rgba(139, 75, 190, 0.5))',
+            background: 'linear-gradient(135deg, rgba(255, 225, 111, 0.5), rgba(152, 226, 253, 0.5))',
           }}
         >
-          <h1 className="text-xl font-bold text-white">
+          <h1 className="text-xl font-bold text-[#1A1A1B]">
             PREDIKSI RESTOK BERBASIS AI
           </h1>
           <div
-            className="px-4 py-2 rounded-full text-xs font-bold text-white"
+            className="px-4 py-2 rounded-full text-xs font-bold text-[#1A1A1B]"
             style={{
-              background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
-              boxShadow: '0 4px 16px rgba(74, 16, 99, 0.4)'
+              background: '#FFE16F',
+              boxShadow: '0 4px 16px rgba(255, 225, 111, 0.4)'
             }}
           >
-            🧠 AI-Powered
+            AI-Powered
           </div>
         </div>
 
@@ -148,23 +148,24 @@ export default function PrediksiRestok() {
         <div
           className="rounded-2xl p-4 mb-4 flex flex-wrap gap-5 items-center"
           style={{
-            background: 'rgba(255, 255, 255, 0.04)',
+            background: 'rgba(0, 0, 0, 0.02)',
             backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255, 255, 255, 0.1)'
+            border: '1px solid rgba(0, 0, 0, 0.05)'
           }}
         >
           {/* Category Filter */}
           <div>
-            <label className="block text-[11px] uppercase font-bold text-[#E8E8E8] mb-2">
-              📁 Kategori
+            <label className="flex items-center gap-1.5 text-[11px] uppercase font-bold text-[#4B5563] mb-2">
+              <FolderOpen size={12} />
+              Kategori
             </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-[200px] h-10 px-3 rounded-xl border text-sm text-[#E8E8E8] transition-all focus:outline-none focus:border-cyan-400"
+              className="w-[200px] h-10 px-3 rounded-2xl border text-sm text-[#4B5563] transition-all focus:outline-none focus:border-cyan-400"
               style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                borderColor: 'rgba(255, 255, 255, 0.2)'
+                background: 'rgba(0, 0, 0, 0.03)',
+                borderColor: 'rgba(0, 0, 0, 0.1)'
               }}
             >
               <option value="semua">Semua</option>
@@ -179,16 +180,16 @@ export default function PrediksiRestok() {
 
           {/* Supplier Filter */}
           <div>
-            <label className="block text-[11px] uppercase font-bold text-[#E8E8E8] mb-2">
-              🏭 Supplier
+            <label className="block text-[11px] uppercase font-bold text-[#4B5563] mb-2">
+               Supplier
             </label>
             <select
               value={supplier}
               onChange={(e) => setSupplier(e.target.value)}
-              className="w-[200px] h-10 px-3 rounded-xl border text-sm text-[#E8E8E8] transition-all focus:outline-none focus:border-cyan-400"
+              className="w-[200px] h-10 px-3 rounded-2xl border text-sm text-[#4B5563] transition-all focus:outline-none focus:border-cyan-400"
               style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                borderColor: 'rgba(255, 255, 255, 0.2)'
+                background: 'rgba(0, 0, 0, 0.03)',
+                borderColor: 'rgba(0, 0, 0, 0.1)'
               }}
             >
               <option value="semua">Semua</option>
@@ -202,8 +203,9 @@ export default function PrediksiRestok() {
 
           {/* Search */}
           <div className="flex-1">
-            <label className="block text-[11px] uppercase font-bold text-[#E8E8E8] mb-2">
-              🔍 Search
+            <label className="flex items-center gap-1.5 text-[11px] uppercase font-bold text-[#4B5563] mb-2">
+              <Search size={12} />
+              Search
             </label>
             <div className="relative">
               <input
@@ -211,13 +213,13 @@ export default function PrediksiRestok() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari nama produk..."
-                className="w-full h-10 pl-10 pr-4 rounded-xl border text-sm text-[#E8E8E8] placeholder-white/50 transition-all focus:outline-none focus:border-cyan-400"
+                className="w-full h-10 pl-10 pr-4 rounded-2xl border text-sm text-[#4B5563] placeholder-[#94a3b8] transition-all focus:outline-none focus:border-cyan-400"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  borderColor: 'rgba(255, 255, 255, 0.2)'
+                  background: 'rgba(0, 0, 0, 0.03)',
+                  borderColor: 'rgba(0, 0, 0, 0.1)'
                 }}
               />
-              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4B5563]" />
             </div>
           </div>
 
@@ -228,23 +230,24 @@ export default function PrediksiRestok() {
               setSupplier('semua');
               setSearchQuery('');
             }}
-            className="text-sm text-cyan-400 hover:underline transition-all self-end mb-2"
+            className="flex items-center gap-1 text-sm text-[#1A1A1B] hover:underline transition-all self-end mb-2"
           >
-            ✨ Reset
+            <RotateCcw size={13} />
+            Reset
           </button>
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-8 mb-5 border-b border-white/10">
+        <div className="flex gap-8 mb-5 border-b border-gray-100">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`pb-2 text-sm font-bold transition-all ${
-                activeTab === tab.id ? 'text-white' : 'text-[#E8E8E8]'
+                activeTab === tab.id ? 'text-[#1A1A1B]' : 'text-[#4B5563]'
               }`}
               style={{
-                borderBottom: activeTab === tab.id ? '3px solid #00FF7F' : '2px solid transparent'
+                borderBottom: activeTab === tab.id ? '3px solid #D1F07B' : '2px solid transparent'
               }}
               onMouseEnter={(e) => {
                 if (activeTab !== tab.id) {
@@ -277,7 +280,7 @@ export default function PrediksiRestok() {
                 <table className="w-full">
                   <thead>
                     <tr
-                      className="text-[11px] font-bold text-[#E8E8E8] uppercase border-b"
+                      className="text-[11px] font-bold text-[#475569] uppercase border-b"
                       style={{
                         background: 'rgba(255, 255, 255, 0.08)',
                         borderColor: 'rgba(255, 255, 255, 0.1)'
@@ -307,13 +310,13 @@ export default function PrediksiRestok() {
                       >
                         <td className="py-4 px-4">
                           <div>
-                            <p className="text-sm font-bold text-white">{product.name}</p>
+                            <p className="text-sm font-bold text-[#0f172a]">{product.name}</p>
                             <p className="text-xs text-gray-500">({product.sku})</p>
                           </div>
                         </td>
                         <td className="py-4 px-4">
                           <div>
-                            <p className="text-sm text-white mb-1">{product.stock} pcs</p>
+                            <p className="text-sm text-[#0f172a] mb-1">{product.stock} pcs</p>
                             <div className="w-16 h-1.5 rounded-full bg-white/10 overflow-hidden">
                               <motion.div
                                 initial={{ width: 0 }}
@@ -330,13 +333,13 @@ export default function PrediksiRestok() {
                         <td className="py-4 px-4">
                           <span
                             className="text-sm font-bold"
-                            style={{ color: product.stockPercent <= 20 ? '#FF00FF' : '#E8E8E8' }}
+                            style={{ color: product.stockPercent <= 20 ? '#ef4444' : '#475569' }}
                           >
                             {product.prediction}
                           </span>
                         </td>
                         <td className="py-4 px-4">
-                          <span className="text-sm font-bold text-white">
+                          <span className="text-sm font-bold text-[#0f172a]">
                             {product.recommendation}
                           </span>
                         </td>
@@ -346,16 +349,16 @@ export default function PrediksiRestok() {
                           </span>
                         </td>
                         <td className="py-4 px-4">
-                          <span className="text-sm text-white">{product.price}</span>
+                          <span className="text-sm text-[#0f172a]">{product.price}</span>
                         </td>
                         <td className="py-4 px-4">
                           <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="px-4 py-2 rounded-lg text-xs font-bold text-white"
+                            className="px-4 py-2 rounded-lg text-xs font-bold text-[#1A1A1B]"
                             style={{
-                              background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
-                              boxShadow: '0 2px 8px rgba(74, 16, 99, 0.3)'
+                              background: '#FFE16F',
+                              boxShadow: '0 2px 8px rgba(255, 225, 111, 0.3)'
                             }}
                           >
                             Buat PO
@@ -382,11 +385,11 @@ export default function PrediksiRestok() {
               }}
             >
               <div className="flex justify-between items-start mb-4">
-                <h3 className="text-sm font-bold text-white">💡 AI INSIGHT</h3>
+                <h3 className="text-sm font-bold text-[#0f172a]">💡 AI INSIGHT</h3>
                 <span className="text-xl">🚀</span>
               </div>
 
-              <p className="text-xs text-[#E8E8E8] leading-relaxed mb-4">
+              <p className="text-xs text-[#475569] leading-relaxed mb-4">
                 Permintaan beras diprediksi meningkat 30% dalam 2 minggu ke depan karena musim lebaran. Rekomendasi: tingkatkan stok 40% dari usual.
               </p>
 
@@ -395,8 +398,8 @@ export default function PrediksiRestok() {
                 <svg width="100%" height="100%" viewBox="0 0 200 60" preserveAspectRatio="none">
                   <defs>
                     <linearGradient id="sparklineGradient" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="#00FFFF" />
-                      <stop offset="100%" stopColor="#00FF7F" />
+                      <stop offset="0%" stopColor="#4f46e5" />
+                      <stop offset="100%" stopColor="#10b981" />
                     </linearGradient>
                   </defs>
                   <motion.path
@@ -413,16 +416,16 @@ export default function PrediksiRestok() {
 
               {/* Additional Insights */}
               <div className="mt-6 space-y-3">
-                <div className="flex items-center gap-2 text-xs text-[#E8E8E8]">
-                  <div className="w-2 h-2 rounded-full bg-[#00FF7F]" />
+                <div className="flex items-center gap-2 text-xs text-[#475569]">
+                  <div className="w-2 h-2 rounded-full bg-[#10b981]" />
                   <span>Akurasi prediksi: 94%</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-[#E8E8E8]">
-                  <div className="w-2 h-2 rounded-full bg-[#FFD700]" />
+                <div className="flex items-center gap-2 text-xs text-[#475569]">
+                  <div className="w-2 h-2 rounded-full bg-[#f59e0b]" />
                   <span>Confidence level: High</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-[#E8E8E8]">
-                  <div className="w-2 h-2 rounded-full bg-[#00FFFF]" />
+                <div className="flex items-center gap-2 text-xs text-[#475569]">
+                  <div className="w-2 h-2 rounded-full bg-[#4f46e5]" />
                   <span>Last updated: 2 jam lalu</span>
                 </div>
               </div>

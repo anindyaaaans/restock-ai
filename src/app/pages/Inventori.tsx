@@ -5,7 +5,7 @@ import Navbar from '../components/dashboard/Navbar';
 import Sidebar from '../components/dashboard/Sidebar';
 import CategorySidebar from '../components/inventory/CategorySidebar';
 import ProductCard from '../components/inventory/ProductCard';
-import { Grid3x3, List, Search, Filter, Download, Edit2, Trash2, ChevronDown, ChevronUp, AlertTriangle } from 'lucide-react';
+import { Grid3x3, List, Search, Filter, Download, Edit2, Trash2, ChevronDown, ChevronUp, AlertTriangle, Zap } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -123,9 +123,9 @@ function expiryLevel(days: number): ExpiryLevel {
 }
 
 const LEVEL_META: Record<ExpiryLevel, { label: string; color: string; bg: string; borderColor: string }> = {
-  kritis:    { label: 'Kritis',    color: '#FF4444', bg: 'rgba(255,68,68,0.12)',    borderColor: 'rgba(255,68,68,0.35)' },
-  perhatian: { label: 'Perhatian', color: '#FFD700', bg: 'rgba(255,215,0,0.12)',   borderColor: 'rgba(255,215,0,0.35)' },
-  aman:      { label: 'Aman',      color: '#00FF7F', bg: 'rgba(0,255,127,0.12)',   borderColor: 'rgba(0,255,127,0.3)' },
+  kritis:    { label: 'Kritis',    color: '#ef4444', bg: 'rgba(255,68,68,0.12)',    borderColor: 'rgba(255,68,68,0.35)' },
+  perhatian: { label: 'Perhatian', color: '#f59e0b', bg: 'rgba(255,215,0,0.12)',   borderColor: 'rgba(255,215,0,0.35)' },
+  aman:      { label: 'Aman',      color: '#10b981', bg: 'rgba(0,255,127,0.12)',   borderColor: 'rgba(0,255,127,0.3)' },
 };
 
 // ─── Expiry Widget ────────────────────────────────────────────────────────────
@@ -155,7 +155,7 @@ function ExpiryWidget() {
       transition={{ duration: 0.4 }}
       className="rounded-2xl overflow-hidden mb-6"
       style={{
-        background: 'rgba(255,255,255,0.04)',
+        background: '#ffffff', boxShadow: '0 4px 12px -2px rgba(0,0,0,0.05)',
         backdropFilter: 'blur(12px)',
         border: kritisCount > 0
           ? '1px solid rgba(255,68,68,0.3)'
@@ -169,7 +169,7 @@ function ExpiryWidget() {
           background: kritisCount > 0
             ? 'linear-gradient(90deg, rgba(255,68,68,0.1), rgba(255,68,68,0.03))'
             : 'linear-gradient(90deg, rgba(255,215,0,0.08), rgba(255,215,0,0.02))',
-          borderBottom: expanded ? '1px solid rgba(255,255,255,0.07)' : 'none',
+          borderBottom: expanded ? '1px solid rgba(0, 0, 0, 0.07)' : 'none',
         }}
       >
         {/* Left: icon + title + pills */}
@@ -179,7 +179,7 @@ function ExpiryWidget() {
               size={16}
               color={kritisCount > 0 ? '#FF4444' : '#FFD700'}
             />
-            <span className="font-bold text-white" style={{ fontSize: 13 }}>
+            <span className="font-bold text-[#1A1A1B]" style={{ fontSize: 13 }}>
               Pemantauan Kadaluwarsa
             </span>
           </div>
@@ -187,27 +187,29 @@ function ExpiryWidget() {
           {/* Stat pills */}
           <div className="flex flex-wrap" style={{ gap: 6 }}>
             {kritisCount > 0 && (
-              <span className="font-bold" style={{ fontSize: 11, background: LEVEL_META.kritis.bg, color: LEVEL_META.kritis.color, borderRadius: 20, padding: '3px 10px', border: `1px solid ${LEVEL_META.kritis.borderColor}` }}>
-                🔴 {kritisCount} Kritis &lt;7 hari
+              <span className="font-bold" style={{ fontSize: 11, background: LEVEL_META.kritis.bg, color: '#1A1A1B', borderRadius: 20, padding: '3px 10px', border: `1px solid ${LEVEL_META.kritis.borderColor}` }}>
+                {kritisCount} Kritis &lt;7 hari
               </span>
             )}
             {perhatianCount > 0 && (
-              <span className="font-bold" style={{ fontSize: 11, background: LEVEL_META.perhatian.bg, color: LEVEL_META.perhatian.color, borderRadius: 20, padding: '3px 10px', border: `1px solid ${LEVEL_META.perhatian.borderColor}` }}>
-                🟡 {perhatianCount} Perhatian
+              <span className="flex items-center gap-1.5 font-bold" style={{ fontSize: 11, background: LEVEL_META.perhatian.bg, color: '#1A1A1B', borderRadius: 20, padding: '3px 10px', border: `1px solid ${LEVEL_META.perhatian.borderColor}` }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#EAB308' }} />
+                {perhatianCount} Perhatian
               </span>
             )}
             {amanCount > 0 && (
-              <span className="font-bold" style={{ fontSize: 11, background: LEVEL_META.aman.bg, color: LEVEL_META.aman.color, borderRadius: 20, padding: '3px 10px', border: `1px solid ${LEVEL_META.aman.borderColor}` }}>
-                🟢 {amanCount} Aman
+              <span className="flex items-center gap-1.5 font-bold" style={{ fontSize: 11, background: LEVEL_META.aman.bg, color: '#1A1A1B', borderRadius: 20, padding: '3px 10px', border: `1px solid ${LEVEL_META.aman.borderColor}` }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E' }} />
+                {amanCount} Aman
               </span>
             )}
           </div>
 
           {/* AI note */}
           {kritisCount > 0 && (
-            <span style={{ fontSize: 11, color: '#8A8A8A' }}>
+            <span style={{ fontSize: 11, color: '#1A1A1B' }}>
               · AI menyarankan tindakan segera untuk menghindari kerugian{' '}
-              <span style={{ color: '#FF4444', fontWeight: 700 }}>
+              <span style={{ color: '#1A1A1B', fontWeight: 700 }}>
                 ~Rp {(valueSaved / 1000000).toFixed(1)}M
               </span>
             </span>
@@ -217,7 +219,7 @@ function ExpiryWidget() {
         {/* Right: collapse toggle */}
         <button
           onClick={() => setExpanded(!expanded)}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#8A8A8A', display: 'flex', alignItems: 'center', gap: 4, fontSize: 11 }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#1A1A1B', display: 'flex', alignItems: 'center', gap: 4, fontSize: 11 }}
         >
           {expanded ? (
             <><ChevronUp size={14} /> Sembunyikan</>
@@ -245,10 +247,10 @@ function ExpiryWidget() {
                 gridTemplateColumns: '36px 1fr 80px 120px 180px 140px 160px',
                 padding: '10px 20px',
                 fontSize: 10,
-                color: '#8A8A8A',
+                color: '#1A1A1B',
                 letterSpacing: '0.06em',
-                background: 'rgba(255,255,255,0.03)',
-                borderBottom: '1px solid rgba(255,255,255,0.06)',
+                background: '#f8fafc',
+                borderBottom: '1px solid rgba(0, 0, 0, 0.03)',
               }}
             >
               <span />
@@ -275,42 +277,42 @@ function ExpiryWidget() {
                   style={{
                     gridTemplateColumns: '36px 1fr 80px 120px 180px 140px 160px',
                     padding: '13px 20px',
-                    borderColor: 'rgba(255,255,255,0.05)',
+                    borderColor: 'rgba(0, 0, 0, 0.03)',
                     transition: 'background 0.15s',
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0, 0, 0, 0.02)'; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
                 >
                   {/* Thumbnail */}
-                  <div style={{ width: 28, height: 28, borderRadius: 6, overflow: 'hidden', background: '#1a1a1a', flexShrink: 0 }}>
+                  <div style={{ width: 28, height: 28, borderRadius: 6, overflow: 'hidden', background: '#ffffff', flexShrink: 0 }}>
                     {p.image && <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
                   </div>
 
                   {/* Name + SKU */}
                   <div>
-                    <p className="font-bold text-white" style={{ fontSize: 12 }}>{p.name}</p>
-                    <p style={{ fontSize: 10, color: '#8A8A8A' }}>{p.sku}</p>
+                    <p className="font-bold text-[#1A1A1B]" style={{ fontSize: 12 }}>{p.name}</p>
+                    <p style={{ fontSize: 10, color: '#1A1A1B' }}>{p.sku}</p>
                   </div>
 
                   {/* Stock */}
                   <span
                     className="font-bold"
-                    style={{ fontSize: 12, color: p.stock <= 10 ? '#FF00FF' : '#fff' }}
+                    style={{ fontSize: 12, color: '#1A1A1B' }}
                   >
                     {p.stock} pcs
                   </span>
 
                   {/* Expiry date */}
-                  <span style={{ fontSize: 12, color: '#C8C8C8' }}>{formatExpiry(p.expiryDate!)}</span>
+                  <span style={{ fontSize: 12, color: '#1A1A1B' }}>{formatExpiry(p.expiryDate!)}</span>
 
                   {/* Countdown bar */}
                   <div>
                     <div className="flex items-center justify-between" style={{ marginBottom: 5 }}>
-                      <span className="font-bold" style={{ fontSize: 12, color: meta.color }}>
+                      <span className="font-bold" style={{ fontSize: 12, color: '#1A1A1B' }}>
                         {p.days <= 0 ? 'Sudah kadaluwarsa!' : `${p.days} hari lagi`}
                       </span>
                     </div>
-                    <div style={{ width: '100%', height: 5, background: 'rgba(255,255,255,0.08)', borderRadius: 4 }}>
+                    <div style={{ width: '100%', height: 5, background: 'rgba(0, 0, 0, 0.04)', borderRadius: 4 }}>
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${barPct}%` }}
@@ -328,17 +330,20 @@ function ExpiryWidget() {
                   {/* Status pill */}
                   <span>
                     <span
-                      className="font-bold"
+                      className="inline-flex items-center gap-1.5 font-bold"
                       style={{
                         fontSize: 10,
                         background: meta.bg,
-                        color: meta.color,
+                        color: '#1A1A1B',
                         border: `1px solid ${meta.borderColor}`,
                         borderRadius: 20,
                         padding: '3px 10px',
                       }}
                     >
-                      {p.level === 'kritis' ? '🔴' : p.level === 'perhatian' ? '🟡' : '🟢'} {meta.label}
+                      {p.level !== 'kritis' && (
+                        <span style={{ width: 6, height: 6, borderRadius: '50%', background: p.level === 'perhatian' ? '#EAB308' : '#22C55E' }} />
+                      )}
+                      {meta.label}
                     </span>
                   </span>
 
@@ -356,13 +361,17 @@ function ExpiryWidget() {
                           border: '1px solid rgba(255,0,255,0.35)',
                           borderRadius: 7,
                           fontSize: 10,
-                          color: '#FF00FF',
+                          color: '#1A1A1B',
                           fontWeight: 700,
                           cursor: 'pointer',
                           whiteSpace: 'nowrap',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 4,
                         }}
                       >
-                        ⚡ Flash Sale
+                        <Zap size={11} />
+                        Flash Sale
                       </motion.button>
                     )}
                     {(p.level === 'kritis' || p.level === 'perhatian') && (
@@ -376,27 +385,27 @@ function ExpiryWidget() {
                           border: '1px solid rgba(255,215,0,0.3)',
                           borderRadius: 7,
                           fontSize: 10,
-                          color: '#FFD700',
+                          color: '#1A1A1B',
                           fontWeight: 700,
                           cursor: 'pointer',
                           whiteSpace: 'nowrap',
                         }}
                       >
-                        🏷️ Diskon
+                        Diskon
                       </motion.button>
                     )}
                     <motion.button
-                      whileHover={{ borderColor: 'rgba(0,255,255,0.4)', color: '#00FFFF' }}
+                      whileHover={{ borderColor: 'rgba(0,255,255,0.4)', color: '#1A1A1B' }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setDismissed((prev) => [...prev, p.id])}
                       style={{
                         height: 28,
                         padding: '0 10px',
-                        background: 'rgba(255,255,255,0.05)',
-                        border: '1px solid rgba(255,255,255,0.12)',
+                        background: '#ffffff', boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
+                        border: '1px solid rgba(0, 0, 0, 0.08)',
                         borderRadius: 7,
                         fontSize: 10,
-                        color: '#8A8A8A',
+                        color: '#1A1A1B',
                         cursor: 'pointer',
                         whiteSpace: 'nowrap',
                         transition: 'all 0.15s',
@@ -412,31 +421,30 @@ function ExpiryWidget() {
             {/* ── Footer: ESG note + bulk action ── */}
             <div
               className="flex items-center justify-between px-5 py-3"
-              style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+              style={{ borderTop: '1px solid #e2e8f0' }}
             >
               {/* ESG note */}
               <div className="flex items-center" style={{ gap: 8 }}>
-                <span style={{ fontSize: 16 }}>🌱</span>
-                <span style={{ fontSize: 11, color: '#8A8A8A' }}>
-                  Pemantauan kadaluwarsa RestockAI membantu mencegah pemborosan produk.{' '}
-                  <span style={{ color: '#00FF7F', fontWeight: 600 }}>Bulan ini: 0 produk terbuang sia-sia.</span>
+                <span style={{ fontSize: 11, color: '#1A1A1B' }}>
+                  Pemantauan kadaluwarsa Restock AI membantu mencegah pemborosan produk.{' '}
+                  <span style={{ color: '#1A1A1B', fontWeight: 600 }}>Bulan ini: 0 produk terbuang sia-sia.</span>
                 </span>
               </div>
 
               {/* Bulk action */}
               <motion.button
-                whileHover={{ boxShadow: '0 0 16px rgba(74,16,99,0.5)' }}
+                whileHover={{ boxShadow: '0 0 16px rgba(255, 225, 111,0.5)' }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => navigate('/dashboard/penjualan')}
                 style={{
                   height: 34,
                   padding: '0 16px',
-                  background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
+                  background: '#FFE16F',
                   border: 'none',
                   borderRadius: 9,
                   fontSize: 11,
                   fontWeight: 700,
-                  color: '#fff',
+                  color: '#1A1A1B',
                   cursor: 'pointer',
                   flexShrink: 0,
                 }}
@@ -490,7 +498,7 @@ export default function Inventori() {
     <div
       className="min-h-screen w-full"
       style={{
-        background: 'linear-gradient(180deg, #0F0F0F 0%, #1a0f2e 100%)'
+        background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)'
       }}
     >
       <Sidebar activePage="inventori" />
@@ -500,7 +508,16 @@ export default function Inventori() {
       <main className="ml-60" style={{ padding: "96px 40px 32px" }}>
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-xl font-bold text-white">MANAJEMEN INVENTORI</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl font-bold text-[#1A1A1B]">MANAJEMEN INVENTORI</h1>
+            <span
+              className="flex items-center gap-1.5 text-[11px] font-bold px-3 py-1 rounded-full"
+              style={{ background: 'rgba(0,255,127,0.15)', color: '#1A1A1B' }}
+            >
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E' }} />
+              Disinkron dari Moka
+            </span>
+          </div>
 
           <div className="flex items-center gap-4">
             {/* View Toggle */}
@@ -509,30 +526,30 @@ export default function Inventori() {
                 onClick={() => setViewMode('grid')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all"
+                className="w-10 h-10 rounded-2xl border flex items-center justify-center transition-all"
                 style={{
                   background: viewMode === 'grid'
-                    ? 'linear-gradient(135deg, #4A1063, #8B4BBE)'
-                    : 'rgba(255, 255, 255, 0.05)',
-                  borderColor: viewMode === 'grid' ? '#00FFFF' : 'rgba(255, 255, 255, 0.2)'
+                    ? 'linear-gradient(135deg, #FFE16F, #98E2FD)'
+                    : 'rgba(0, 0, 0, 0.03)',
+                  borderColor: viewMode === 'grid' ? '#98E2FD' : 'rgba(0, 0, 0, 0.1)'
                 }}
               >
-                <Grid3x3 size={18} className="text-white" />
+                <Grid3x3 size={18} className="text-[#1A1A1B]" />
               </motion.button>
 
               <motion.button
                 onClick={() => setViewMode('list')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all"
+                className="w-10 h-10 rounded-2xl border flex items-center justify-center transition-all"
                 style={{
                   background: viewMode === 'list'
-                    ? 'linear-gradient(135deg, #4A1063, #8B4BBE)'
-                    : 'rgba(255, 255, 255, 0.05)',
-                  borderColor: viewMode === 'list' ? '#00FFFF' : 'rgba(255, 255, 255, 0.2)'
+                    ? 'linear-gradient(135deg, #FFE16F, #98E2FD)'
+                    : 'rgba(0, 0, 0, 0.03)',
+                  borderColor: viewMode === 'list' ? '#98E2FD' : 'rgba(0, 0, 0, 0.1)'
                 }}
               >
-                <List size={18} className="text-white" />
+                <List size={18} className="text-[#1A1A1B]" />
               </motion.button>
             </div>
 
@@ -543,27 +560,27 @@ export default function Inventori() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari produk..."
-                className="w-60 h-10 pl-10 pr-4 rounded-xl border text-sm text-[#E8E8E8] placeholder-white/50 transition-all focus:outline-none focus:border-cyan-400"
+                className="w-60 h-10 pl-10 pr-4 rounded-2xl border text-sm text-[#4B5563] placeholder-[#8A8A8A] transition-all focus:outline-none focus:border-cyan-400"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
+                  background: 'rgba(0, 0, 0, 0.03)',
                   backdropFilter: 'blur(10px)',
-                  borderColor: 'rgba(255, 255, 255, 0.2)'
+                  borderColor: 'rgba(0, 0, 0, 0.1)'
                 }}
               />
-              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4B5563]" />
             </div>
 
             {/* Filter Button */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all hover:border-cyan-400"
+              className="w-10 h-10 rounded-2xl border flex items-center justify-center transition-all hover:border-cyan-400"
               style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                borderColor: 'rgba(255, 255, 255, 0.2)'
+                background: 'rgba(0, 0, 0, 0.03)',
+                borderColor: 'rgba(0, 0, 0, 0.1)'
               }}
             >
-              <Filter size={18} className="text-white" />
+              <Filter size={18} className="text-[#1A1A1B]" />
             </motion.button>
           </div>
         </div>
@@ -578,7 +595,7 @@ export default function Inventori() {
             animate={{ opacity: 1, y: 0 }}
             className="rounded-2xl p-4 flex justify-between items-center mb-4 sticky top-20 z-30"
             style={{
-              background: 'linear-gradient(135deg, #F5E04A, #FFD700)',
+              background: '#FFE16F',
               boxShadow: '0 8px 24px rgba(245, 224, 74, 0.4)'
             }}
           >
@@ -589,7 +606,7 @@ export default function Inventori() {
                 onChange={handleSelectAll}
                 className="w-5 h-5 rounded cursor-pointer"
               />
-              <span className="text-sm font-bold text-[#0F0F0F]">
+              <span className="text-sm font-bold text-[#1A1A1B]">
                 {selectedProducts.length} items selected
               </span>
             </div>
@@ -602,7 +619,7 @@ export default function Inventori() {
                 style={{
                   background: 'transparent',
                   borderColor: '#8B1A10',
-                  color: '#8B1A10'
+                  color: '#1A1A1B'
                 }}
               >
                 <Trash2 size={16} />
@@ -614,8 +631,8 @@ export default function Inventori() {
                 whileTap={{ scale: 0.95 }}
                 className="px-4 h-10 rounded-lg font-bold text-sm flex items-center gap-2"
                 style={{
-                  background: '#fff',
-                  color: '#4A1063'
+                  background: '#ffffff',
+                  color: '#1A1A1B'
                 }}
               >
                 <Edit2 size={16} />
@@ -627,8 +644,8 @@ export default function Inventori() {
                 whileTap={{ scale: 0.95 }}
                 className="px-4 h-10 rounded-lg font-bold text-sm flex items-center gap-2"
                 style={{
-                  background: '#fff',
-                  color: '#4A1063'
+                  background: '#ffffff',
+                  color: '#1A1A1B'
                 }}
               >
                 <Download size={16} />
@@ -662,7 +679,7 @@ export default function Inventori() {
                 ))}
               </div>
             ) : (
-              <div className="text-white text-center py-20">
+              <div className="text-[#1A1A1B] text-center py-20">
                 List view coming soon...
               </div>
             )}

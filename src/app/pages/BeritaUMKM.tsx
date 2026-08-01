@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { useNavigate } from 'react-router';
 import Navbar from '../components/dashboard/Navbar';
 import Sidebar from '../components/dashboard/Sidebar';
-import { Search, ChevronDown } from 'lucide-react';
+import { Search, ChevronDown, ArrowUpRight, TrendingUp, DollarSign } from 'lucide-react';
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -37,10 +37,10 @@ const categories = ['Semua', 'Harga Pasar', 'Regulasi', 'Tips Bisnis', 'Ekonomi'
 const newsCards: NewsCard[] = [
   {
     id: 'n1',
-    category: '💰 Harga Pasar',
-    categoryColor: '#00FF7F',
+    category: 'Harga Pasar',
+    categorycolor: '#1A1A1B',
     categoryBg: 'rgba(0,255,127,0.2)',
-    gradientBg: 'linear-gradient(135deg, #1a0f2ecc, #2a1040cc)',
+    gradientBg: 'linear-gradient(135deg, #f1f5f9cc, #2a1040cc)',
     imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop',
     readTime: '4 menit',
     title: 'Harga Minyak Goreng Turun 5% Akhir Bulan — Waktu Tepat untuk Restok Besar?',
@@ -50,8 +50,8 @@ const newsCards: NewsCard[] = [
   },
   {
     id: 'n2',
-    category: '📋 Regulasi',
-    categoryColor: '#00FFFF',
+    category: 'Regulasi',
+    categorycolor: '#1A1A1B',
     categoryBg: 'rgba(0,255,255,0.2)',
     gradientBg: 'linear-gradient(135deg, #0f1a2ecc, #0f2a1acc)',
     imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80&fit=crop',
@@ -63,8 +63,8 @@ const newsCards: NewsCard[] = [
   },
   {
     id: 'n3',
-    category: '💡 Tips Bisnis',
-    categoryColor: '#FFD700',
+    category: 'Tips Bisnis',
+    categorycolor: '#1A1A1B',
     categoryBg: 'rgba(255,215,0,0.2)',
     gradientBg: 'linear-gradient(135deg, #1a1a0fcc, #2a2a0fcc)',
     imageUrl: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80&fit=crop',
@@ -76,10 +76,10 @@ const newsCards: NewsCard[] = [
   },
   {
     id: 'n4',
-    category: '📈 Ekonomi',
+    category: 'Ekonomi',
     categoryColor: '#C084FC',
-    categoryBg: 'rgba(139,75,190,0.3)',
-    gradientBg: 'linear-gradient(135deg, #0f0f2acc, #1a0f2ecc)',
+    categoryBg: 'rgba(152, 226, 253,0.3)',
+    gradientBg: 'linear-gradient(135deg, #0f0f2acc, #f1f5f9cc)',
     imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80&fit=crop',
     readTime: '3 menit',
     title: 'Inflasi Mei 2024 Terkendali di 2.7% — Daya Beli Konsumen Tetap Stabil',
@@ -89,8 +89,8 @@ const newsCards: NewsCard[] = [
   },
   {
     id: 'n5',
-    category: '🏭 Supplier',
-    categoryColor: '#00FF7F',
+    category: 'Supplier',
+    categorycolor: '#1A1A1B',
     categoryBg: 'rgba(0,255,127,0.2)',
     gradientBg: 'linear-gradient(135deg, #1a2a0fcc, #0f2a0fcc)',
     imageUrl: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80&fit=crop',
@@ -102,8 +102,8 @@ const newsCards: NewsCard[] = [
   },
   {
     id: 'n6',
-    category: '💡 Tips Bisnis',
-    categoryColor: '#FFD700',
+    category: 'Tips Bisnis',
+    categorycolor: '#1A1A1B',
     categoryBg: 'rgba(255,215,0,0.2)',
     gradientBg: 'linear-gradient(135deg, #2a0f0fcc, #1a0f1acc)',
     imageUrl: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&q=80&fit=crop',
@@ -129,7 +129,7 @@ const commodities: Commodity[] = [
     today: 'Rp 15.200/L',
     yesterday: 'Rp 16.000/L',
     change: '↓ -Rp 800 (-5%)',
-    changeColor: '#00FF7F',
+    changecolor: '#1A1A1B',
     direction: 'down',
   },
   {
@@ -137,7 +137,7 @@ const commodities: Commodity[] = [
     today: 'Rp 17.500/kg',
     yesterday: 'Rp 17.400/kg',
     change: '→ +Rp 100 (+0.6%)',
-    changeColor: '#8A8A8A',
+    changecolor: '#1A1A1B',
     direction: 'flat',
   },
   {
@@ -145,7 +145,7 @@ const commodities: Commodity[] = [
     today: 'Rp 12.000/kg',
     yesterday: 'Rp 12.000/kg',
     change: '→ Stabil',
-    changeColor: '#8A8A8A',
+    changecolor: '#1A1A1B',
     direction: 'flat',
   },
   {
@@ -162,7 +162,7 @@ const commodities: Commodity[] = [
 
 function Sparkline({ direction }: { direction: 'up' | 'down' | 'flat' }) {
   const color =
-    direction === 'up' ? '#FF4444' : direction === 'down' ? '#00FF7F' : '#8A8A8A';
+    direction === 'up' ? '#FF4444' : direction === 'down' ? '#D1F07B' : '#8A8A8A';
 
   const points =
     direction === 'up'
@@ -200,9 +200,9 @@ function NewsCardComp({ card, delay }: { card: NewsCard; delay: number }) {
       onHoverEnd={() => setHovered(false)}
       className="overflow-hidden flex flex-col"
       style={{
-        background: 'rgba(255,255,255,0.05)',
+        background: '#ffffff', boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
         backdropFilter: 'blur(12px)',
-        border: `1px solid ${hovered ? 'rgba(0,255,255,0.35)' : 'rgba(255,255,255,0.1)'}`,
+        border: `1px solid ${hovered ? 'rgba(0,255,255,0.35)' : 'rgba(0, 0, 0, 0.05)'}`,
         borderRadius: 12,
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
         transition: 'all 0.2s ease',
@@ -234,7 +234,7 @@ function NewsCardComp({ card, delay }: { card: NewsCard; delay: number }) {
           style={{
             position: 'absolute',
             inset: 0,
-            background: card.gradientBg,
+            background: 'transparent',
           }}
         />
         {/* Read time top-right */}
@@ -244,7 +244,7 @@ function NewsCardComp({ card, delay }: { card: NewsCard; delay: number }) {
             top: 10,
             right: 10,
             fontSize: 9,
-            color: '#E8E8E8',
+            color: '#1A1A1B',
             background: 'rgba(0,0,0,0.55)',
             backdropFilter: 'blur(4px)',
             borderRadius: 20,
@@ -262,7 +262,7 @@ function NewsCardComp({ card, delay }: { card: NewsCard; delay: number }) {
             left: 12,
             fontSize: 10,
             background: card.categoryBg,
-            color: card.categoryColor,
+            color: '#1A1A1B',
             backdropFilter: 'blur(6px)',
             borderRadius: 20,
             padding: '3px 10px',
@@ -275,7 +275,7 @@ function NewsCardComp({ card, delay }: { card: NewsCard; delay: number }) {
       {/* Content */}
       <div className="flex flex-col flex-1" style={{ padding: 16 }}>
         <p
-          className="font-bold text-white"
+          className="font-bold text-[#1A1A1B]"
           style={{ fontSize: 13, lineHeight: 1.5 }}
         >
           {card.title}
@@ -283,7 +283,7 @@ function NewsCardComp({ card, delay }: { card: NewsCard; delay: number }) {
         <p
           style={{
             fontSize: 11,
-            color: '#8A8A8A',
+            color: '#1A1A1B',
             lineHeight: 1.5,
             marginTop: 6,
             flex: 1,
@@ -300,11 +300,11 @@ function NewsCardComp({ card, delay }: { card: NewsCard; delay: number }) {
           style={{
             marginTop: 10,
             paddingTop: 10,
-            borderTop: '1px solid rgba(255,255,255,0.06)',
+            borderTop: '1px solid #e2e8f0',
           }}
         >
-          <span style={{ fontSize: 10, color: '#8A8A8A' }}>{card.source}</span>
-          <span style={{ fontSize: 10, color: '#8A8A8A' }}>{card.time}</span>
+          <span style={{ fontSize: 10, color: '#1A1A1B' }}>{card.source}</span>
+          <span style={{ fontSize: 10, color: '#1A1A1B' }}>{card.time}</span>
         </div>
       </div>
     </motion.div>
@@ -322,7 +322,7 @@ export default function BeritaUMKM() {
   return (
     <div
       className="min-h-screen w-full"
-      style={{ background: 'linear-gradient(180deg, #0F0F0F 0%, #1a0f2e 100%)' }}
+      style={{ background: '#f8fafc' }}
     >
       <Sidebar activePage="berita" />
       <Navbar />
@@ -331,8 +331,8 @@ export default function BeritaUMKM() {
 
         {/* ── Page Header ── */}
         <div>
-          <h1 className="font-bold text-white" style={{ fontSize: 20 }}>Berita UMKM</h1>
-          <p style={{ fontSize: 13, color: '#8A8A8A', marginTop: 4 }}>
+          <h1 className="font-bold text-[#1A1A1B]" style={{ fontSize: 20 }}>Berita UMKM</h1>
+          <p style={{ fontSize: 13, color: '#1A1A1B', marginTop: 4 }}>
             Informasi terkini yang relevan untuk bisnis Anda
           </p>
         </div>
@@ -359,11 +359,11 @@ export default function BeritaUMKM() {
               onChange={(e) => setSearchValue(e.target.value)}
               onFocus={() => setSearchFocus(true)}
               onBlur={() => setSearchFocus(false)}
-              className="w-full text-white placeholder:text-[#8A8A8A]"
+              className="w-full text-[#1A1A1B] placeholder:text-[#8A8A8A]"
               style={{
                 height: 44,
                 background: 'rgba(255,255,255,0.07)',
-                border: `1px solid ${searchFocus ? '#00FFFF' : 'rgba(255,255,255,0.12)'}`,
+                border: `1px solid ${searchFocus ? '#98E2FD' : 'rgba(255,255,255,0.12)'}`,
                 borderRadius: 12,
                 paddingLeft: 40,
                 paddingRight: 14,
@@ -393,24 +393,24 @@ export default function BeritaUMKM() {
                     cursor: 'pointer',
                     transition: 'all 0.2s',
                     background: isActive
-                      ? 'linear-gradient(135deg, #4A1063, #8B4BBE)'
-                      : 'rgba(255,255,255,0.05)',
+                      ? 'linear-gradient(135deg, #FFE16F, #98E2FD)'
+                      : 'rgba(0, 0, 0, 0.03)',
                     border: isActive
                       ? 'none'
-                      : '1px solid rgba(255,255,255,0.1)',
-                    color: isActive ? '#fff' : '#8A8A8A',
+                      : '1px solid rgba(0, 0, 0, 0.05)',
+                    color: '#1A1A1B',
                     fontWeight: isActive ? 700 : 500,
-                    boxShadow: isActive ? '0 4px 12px rgba(74,16,99,0.3)' : 'none',
+                    boxShadow: isActive ? '0 4px 12px rgba(255, 225, 111,0.3)' : 'none',
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
                       e.currentTarget.style.borderColor = 'rgba(0,255,255,0.4)';
-                      e.currentTarget.style.color = '#fff';
+                      e.currentTarget.style.color = '#1A1A1B';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!isActive) {
-                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                      e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.05)';
                       e.currentTarget.style.color = '#8A8A8A';
                     }
                   }}
@@ -430,9 +430,8 @@ export default function BeritaUMKM() {
           className="flex overflow-hidden"
           style={{
             marginTop: 24,
-            background: 'rgba(255,255,255,0.05)',
+            background: '#ffffff', boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
             backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255,255,255,0.1)',
             borderRadius: 14,
             minHeight: 260,
           }}
@@ -442,7 +441,7 @@ export default function BeritaUMKM() {
             className="flex flex-col"
             style={{
               flex: '0 0 60%',
-              background: 'linear-gradient(135deg, #1a0f2e, #0f0f1a)',
+              background: 'linear-gradient(135deg, #ffffff, #F1F5F9)',
               padding: 24,
               position: 'relative',
             }}
@@ -454,21 +453,21 @@ export default function BeritaUMKM() {
                 style={{
                   fontSize: 10,
                   background: 'rgba(255,68,68,0.2)',
-                  color: '#FF4444',
+                  color: '#1A1A1B',
                   border: '1px solid rgba(255,68,68,0.3)',
                   borderRadius: 20,
                   padding: '4px 12px',
                   letterSpacing: '0.04em',
                 }}
               >
-                🔴 TERKINI
+                 TERKINI
               </span>
-              <span style={{ fontSize: 10, color: '#8A8A8A' }}>2 jam lalu</span>
+              <span style={{ fontSize: 10, color: '#1A1A1B' }}>2 jam lalu</span>
             </div>
 
             {/* Title */}
             <h2
-              className="font-bold text-white"
+              className="font-bold text-[#1A1A1B]"
               style={{ fontSize: 22, lineHeight: 1.4 }}
             >
               Harga Beras Medium Naik 8% Menjelang Hari Raya — Ini Dampaknya untuk UMKM Sembako
@@ -478,7 +477,7 @@ export default function BeritaUMKM() {
             <p
               style={{
                 fontSize: 13,
-                color: 'rgba(255,255,255,0.7)',
+                color: '#1A1A1B',
                 lineHeight: 1.6,
                 marginTop: 12,
                 flex: 1,
@@ -496,12 +495,12 @@ export default function BeritaUMKM() {
               className="flex items-center justify-between"
               style={{ marginTop: 20 }}
             >
-              <span style={{ fontSize: 11, color: '#8A8A8A' }}>Bisnis Indonesia · 28 Mei 2024</span>
+              <span style={{ fontSize: 11, color: '#1A1A1B' }}>Bisnis Indonesia · 28 Mei 2024</span>
               <button
                 className="font-medium"
                 style={{
                   fontSize: 12,
-                  color: '#00FFFF',
+                  color: '#1A1A1B',
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
@@ -529,42 +528,42 @@ export default function BeritaUMKM() {
               style={{
                 fontSize: 9,
                 background: 'rgba(0,255,255,0.15)',
-                color: '#00FFFF',
+                color: '#1A1A1B',
                 border: '1px solid rgba(0,255,255,0.3)',
                 borderRadius: 20,
                 padding: '4px 12px',
                 letterSpacing: '0.05em',
               }}
             >
-              🧠 ANALISIS AI UNTUK TOKO ANDA
+               ANALISIS AI UNTUK TOKO ANDA
             </span>
 
-            <h3 className="font-bold text-white" style={{ fontSize: 14, marginTop: 10, marginBottom: 12 }}>
+            <h3 className="font-bold text-[#1A1A1B]" style={{ fontSize: 14, marginTop: 10, marginBottom: 12 }}>
               Dampak ke Bisnis Anda
             </h3>
 
             <div className="flex flex-col" style={{ gap: 12, flex: 1 }}>
               {[
                 {
-                  icon: '⬆️',
+                  icon: <ArrowUpRight size={16} color="#EC4899" />,
                   iconBg: 'rgba(255,0,255,0.15)',
                   title: 'Harga beli Beras naik ~8%',
                   sub: 'Stok saat ini: 12 pcs — cukup 3 hari',
-                  titleColor: '#fff',
+                  titlecolor: '#1A1A1B',
                 },
                 {
-                  icon: '💡',
+                  icon: <TrendingUp size={16} color="#10B981" />,
                   iconBg: 'rgba(0,255,127,0.15)',
-                  title: 'Restock sekarang sebelum harga naik lagi',
+                  title: 'Optimalkan Kuantitas sebelum harga naik lagi',
                   sub: 'GudangAda masih di harga lama hingga besok',
-                  titleColor: '#00FF7F',
+                  titlecolor: '#1A1A1B',
                 },
                 {
-                  icon: '📊',
+                  icon: <DollarSign size={16} color="#F59E0B" />,
                   iconBg: 'rgba(255,215,0,0.15)',
                   title: 'Sesuaikan harga jual +Rp 1.000/kg',
                   sub: 'Margin tetap terjaga di 18%',
-                  titleColor: '#FFD700',
+                  titlecolor: '#1A1A1B',
                 },
               ].map((item, i) => (
                 <div key={i} className="flex items-start" style={{ gap: 10 }}>
@@ -573,7 +572,7 @@ export default function BeritaUMKM() {
                     style={{
                       width: 28,
                       height: 28,
-                      borderRadius: 8,
+                      borderRadius: 12,
                       background: item.iconBg,
                       fontSize: 14,
                     }}
@@ -581,25 +580,25 @@ export default function BeritaUMKM() {
                     {item.icon}
                   </div>
                   <div>
-                    <p className="font-bold" style={{ fontSize: 12, color: item.titleColor }}>
+                    <p className="font-bold" style={{ fontSize: 12, color: '#1A1A1B'}}>
                       {item.title}
                     </p>
-                    <p style={{ fontSize: 11, color: '#8A8A8A', marginTop: 2 }}>{item.sub}</p>
+                    <p style={{ fontSize: 11, color: '#1A1A1B', marginTop: 2 }}>{item.sub}</p>
                   </div>
                 </div>
               ))}
             </div>
 
             <motion.button
-              whileHover={{ boxShadow: '0 0 20px rgba(74,16,99,0.6)' }}
+              whileHover={{ boxShadow: '0 0 20px rgba(255, 225, 111,0.6)' }}
               whileTap={{ scale: 0.97 }}
               onClick={() => navigate('/dashboard/prediksi')}
-              className="w-full font-bold text-white"
+              className="w-full font-bold text-[#1A1A1B]"
               style={{
                 height: 40,
-                background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
+                background: '#FFE16F',
                 border: 'none',
-                borderRadius: 10,
+                borderRadius: 12,
                 fontSize: 12,
                 cursor: 'pointer',
                 marginTop: 'auto',
@@ -617,7 +616,7 @@ export default function BeritaUMKM() {
           transition={{ delay: 0.2, duration: 0.4 }}
           style={{ marginTop: 28 }}
         >
-          <h2 className="font-bold text-white" style={{ fontSize: 14, marginBottom: 16 }}>
+          <h2 className="font-bold text-[#1A1A1B]" style={{ fontSize: 14, marginBottom: 16 }}>
             Berita Terbaru
           </h2>
 
@@ -630,16 +629,16 @@ export default function BeritaUMKM() {
           {/* Load more */}
           <div className="flex justify-center" style={{ marginTop: 20 }}>
             <motion.button
-              whileHover={{ borderColor: '#00FFFF', color: '#00FFFF' }}
+              whileHover={{ bordercolor: '#1A1A1B', color: '#1A1A1B' }}
               whileTap={{ scale: 0.97 }}
-              className="flex items-center font-medium text-white"
+              className="flex items-center font-medium text-[#1A1A1B]"
               style={{
                 height: 40,
                 padding: '0 24px',
                 gap: 8,
-                background: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 10,
+                background: '#ffffff', boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
+                border: '1px solid rgba(0, 0, 0, 0.08)',
+                borderRadius: 12,
                 fontSize: 12,
                 cursor: 'pointer',
                 transition: 'all 0.2s',
@@ -659,10 +658,10 @@ export default function BeritaUMKM() {
           style={{ marginTop: 32 }}
         >
           <div className="flex items-baseline" style={{ gap: 8, marginBottom: 16 }}>
-            <h2 className="font-bold text-white" style={{ fontSize: 14 }}>
+            <h2 className="font-bold text-[#1A1A1B]" style={{ fontSize: 14 }}>
               Harga Komoditas Hari Ini
             </h2>
-            <span style={{ fontSize: 11, color: '#8A8A8A' }}>
+            <span style={{ fontSize: 11, color: '#1A1A1B' }}>
               Sumber: PIHPS · Diperbarui pukul 08.00
             </span>
           </div>
@@ -670,9 +669,8 @@ export default function BeritaUMKM() {
           <div
             className="overflow-hidden"
             style={{
-              background: 'rgba(255,255,255,0.05)',
+              background: '#ffffff', boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
               backdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255,255,255,0.1)',
               borderRadius: 12,
             }}
           >
@@ -682,9 +680,9 @@ export default function BeritaUMKM() {
               style={{
                 gridTemplateColumns: '180px 1fr 1fr 180px 80px',
                 padding: '12px 20px',
-                background: 'rgba(255,255,255,0.06)',
+                background: '#f8fafc',
                 fontSize: 11,
-                color: '#8A8A8A',
+                color: '#1A1A1B',
                 letterSpacing: '0.05em',
               }}
             >
@@ -706,15 +704,15 @@ export default function BeritaUMKM() {
                 style={{
                   gridTemplateColumns: '180px 1fr 1fr 180px 80px',
                   padding: '14px 20px',
-                  borderColor: 'rgba(255,255,255,0.06)',
+                  borderColor: 'rgba(0, 0, 0, 0.03)',
                 }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
               >
-                <span className="font-medium text-white" style={{ fontSize: 13 }}>{row.name}</span>
-                <span className="font-bold text-white" style={{ fontSize: 13 }}>{row.today}</span>
-                <span style={{ fontSize: 13, color: '#8A8A8A' }}>{row.yesterday}</span>
-                <span className="font-bold" style={{ fontSize: 12, color: row.changeColor }}>{row.change}</span>
+                <span className="font-medium text-[#1A1A1B]" style={{ fontSize: 13 }}>{row.name}</span>
+                <span className="font-bold text-[#1A1A1B]" style={{ fontSize: 13 }}>{row.today}</span>
+                <span style={{ fontSize: 13, color: '#1A1A1B' }}>{row.yesterday}</span>
+                <span className="font-bold" style={{ fontSize: 12, color: '#1A1A1B'}}>{row.change}</span>
                 <Sparkline direction={row.direction} />
               </motion.div>
             ))}
@@ -728,15 +726,15 @@ export default function BeritaUMKM() {
                 borderColor: 'rgba(255,0,255,0.2)',
               }}
             >
-              <span style={{ fontSize: 12, color: '#fff' }}>
-                ⚠️ Beras naik 8% — RestockAI merekomendasikan restock sebelum harga naik lebih tinggi.
+              <span style={{ fontSize: 12, color: '#1A1A1B' }}>
+                 Beras naik 8% — Restock AI merekomendasikan restock sebelum harga naik lebih tinggi.
               </span>
               <button
                 className="font-bold flex-shrink-0"
                 onClick={() => navigate('/dashboard/pembelian')}
                 style={{
                   fontSize: 12,
-                  color: '#FF00FF',
+                  color: '#1A1A1B',
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
@@ -745,7 +743,7 @@ export default function BeritaUMKM() {
                 onMouseEnter={(e) => { e.currentTarget.style.textDecoration = 'underline'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.textDecoration = 'none'; }}
               >
-                Restock Sekarang →
+                Optimalkan Kuantitas →
               </button>
             </div>
           </div>

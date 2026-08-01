@@ -17,7 +17,7 @@ export default function ReviewCard({ name, role, review, rating, avatar, delay =
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="p-6 rounded-2xl border border-white/10 bg-white/5 hover:border-cyan-400/50 transition-all"
+      className="p-6 rounded-2xl border border-gray-100 bg-white/5 hover:border-cyan-400/50 transition-all"
       style={{ backdropFilter: 'blur(10px)' }}
     >
       {/* Stars */}
@@ -26,24 +26,24 @@ export default function ReviewCard({ name, role, review, rating, avatar, delay =
           <Star
             key={i}
             size={16}
-            className={i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-600'}
+            className={i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-[#4B5563]'}
           />
         ))}
       </div>
 
       {/* Review Text */}
-      <p className="text-[#E8E8E8] text-sm leading-relaxed mb-6">
+      <p className="text-[#4B5563] text-sm leading-relaxed mb-6">
         "{review}"
       </p>
 
       {/* User Info */}
       <div className="flex items-center gap-3">
-        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center text-white font-bold">
+        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center text-[#1A1A1B] font-bold">
           {avatar}
         </div>
         <div>
-          <p className="text-white font-bold text-sm">{name}</p>
-          <p className="text-gray-400 text-xs">{role}</p>
+          <p className="text-[#1A1A1B] font-bold text-sm">{name}</p>
+          <p className="text-[#4B5563] text-xs">{role}</p>
         </div>
       </div>
     </motion.div>

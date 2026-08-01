@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Gem, Heart, Star } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import FeatureCard from '../components/FeatureCard';
 import ReviewCard from '../components/ReviewCard';
@@ -37,7 +37,7 @@ function CheckIcon({ size = 16 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
       <circle cx="8" cy="8" r="8" fill="rgba(0,255,127,0.15)" />
-      <path d="M4.5 8.5L6.5 10.5L11.5 5.5" stroke="#00FF7F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4.5 8.5L6.5 10.5L11.5 5.5" stroke="#D1F07B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -45,7 +45,7 @@ function CheckIcon({ size = 16 }: { size?: number }) {
 function XIcon({ size = 16 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
-      <circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.06)" />
+      <circle cx="8" cy="8" r="8" fill="rgba(0, 0, 0, 0.03)" />
       <path d="M5.5 5.5L10.5 10.5M10.5 5.5L5.5 10.5" stroke="#666" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   );
@@ -54,23 +54,23 @@ function XIcon({ size = 16 }: { size?: number }) {
 function TableCell({ value }: { value: string | boolean }) {
   if (value === true) return <div className="flex justify-center"><CheckIcon size={18} /></div>;
   if (value === false) return <div className="flex justify-center"><XIcon size={18} /></div>;
-  return <span className="text-[13px] text-[#E8E8E8] text-center block">{value}</span>;
+  return <span className="text-[13px] text-[#4B5563] text-center block">{value}</span>;
 }
 
 function FAQItem({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-b" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+    <div className="border-b" style={{ borderColor: 'rgba(0, 0, 0, 0.05)' }}>
       <button onClick={() => setOpen(!open)} className="w-full flex justify-between items-center py-5 text-left gap-4">
-        <span className="text-sm font-bold text-white">{q}</span>
+        <span className="text-sm font-bold text-[#1A1A1B]">{q}</span>
         <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }} style={{ flexShrink: 0 }}>
-          <ChevronDown size={18} className="text-white" />
+          <ChevronDown size={18} className="text-[#1A1A1B]" />
         </motion.div>
       </button>
       <AnimatePresence initial={false}>
         {open && (
           <motion.div key="c" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.28, ease: 'easeInOut' }} style={{ overflow: 'hidden' }}>
-            <p className="text-[13px] text-[#E8E8E8] pb-5" style={{ lineHeight: 1.7 }}>{a}</p>
+            <p className="text-[13px] text-[#4B5563] pb-5" style={{ lineHeight: 1.7 }}>{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -99,10 +99,10 @@ function PricingCard({ delay, title, price, priceGradient, subtitle, featured = 
       className="relative flex flex-col rounded-[20px] border"
       style={{
         padding: 32,
-        background: featured ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.04)',
+        background: featured ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.02)',
         backdropFilter: 'blur(12px)',
         borderWidth: featured ? 2 : 1,
-        borderColor: hovered ? '#00FFFF' : featured ? '#00FF7F' : 'rgba(255,255,255,0.15)',
+        borderColor: hovered ? '#98E2FD' : featured ? '#D1F07B' : 'rgba(0, 0, 0, 0.08)',
         boxShadow: hovered ? '0 16px 48px rgba(0,255,255,0.2)' : featured ? '0 8px 40px rgba(0,255,127,0.2)' : 'none',
         zIndex: featured ? 2 : 1,
         marginTop: featured ? -16 : 0,
@@ -111,28 +111,29 @@ function PricingCard({ delay, title, price, priceGradient, subtitle, featured = 
     >
       {featured && (
         <div className="absolute left-1/2 -translate-x-1/2" style={{ top: -14 }}>
-          <span className="text-[11px] font-bold px-4 py-1.5 rounded-full" style={{ background: 'linear-gradient(135deg, #F5E04A, #FFD700)', color: '#0F0F0F', letterSpacing: '0.08em', whiteSpace: 'nowrap' }}>
-            ⭐ PALING POPULER
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-4 py-1.5 rounded-full" style={{ background: '#FFE16F', color: '#1A1A1B', letterSpacing: '0.08em', whiteSpace: 'nowrap' }}>
+            <Star size={12} fill="#1A1A1B" />
+            PALING POPULER
           </span>
         </div>
       )}
-      <h3 className="text-xl font-bold text-white" style={{ marginTop: featured ? 12 : 0, marginBottom: 8 }}>{title}</h3>
+      <h3 className="text-xl font-bold text-[#1A1A1B]" style={{ marginTop: featured ? 12 : 0, marginBottom: 8 }}>{title}</h3>
       <div className="flex items-end gap-1 mb-1">
-        <span className="font-bold" style={{ fontSize: 40, lineHeight: 1, background: priceGradient ?? undefined, WebkitBackgroundClip: priceGradient ? 'text' : undefined, WebkitTextFillColor: priceGradient ? 'transparent' : undefined, color: priceGradient ? undefined : '#fff' }}>
+        <span className="font-bold" style={{ fontSize: 40, lineHeight: 1, background: priceGradient ?? undefined, WebkitBackgroundClip: priceGradient ? 'text' : undefined, WebkitTextFillColor: priceGradient ? 'transparent' : undefined, color: '#1A1A1B' }}>
           {price}
         </span>
-        <span className="text-sm text-[#E8E8E8] mb-1">/bulan</span>
+        <span className="text-sm text-[#4B5563] mb-1">/bulan</span>
       </div>
-      <p className="text-[13px] text-[#E8E8E8]" style={{ marginBottom: 24 }}>{subtitle}</p>
+      <p className="text-[13px] text-[#4B5563]" style={{ marginBottom: 24 }}>{subtitle}</p>
       <ul className="flex flex-col gap-3 flex-1" style={{ marginBottom: 32 }}>
         {features.map((f, i) => (
           <li key={i} className="flex items-start gap-3">
             {f.ok ? <CheckIcon /> : <XIcon />}
-            <span className="text-[13px]" style={{ color: f.ok ? '#fff' : '#666', textDecoration: f.ok ? undefined : 'line-through' }}>{f.label}</span>
+            <span className="text-[13px]" style={{ color: '#1A1A1B', textDecoration: f.ok ? undefined : 'line-through' }}>{f.label}</span>
           </li>
         ))}
       </ul>
-      <motion.button whileHover={{ scale: 1.05, boxShadow: '0 0 24px rgba(139,75,190,0.5)' }} whileTap={{ scale: 0.97 }} onClick={onAction} className="w-full font-bold rounded-xl border-0" style={{ height: 44, fontSize: 14, cursor: 'pointer', ...buttonStyle }}>
+      <motion.button whileHover={{ scale: 1.05, boxShadow: '0 0 24px rgba(152, 226, 253,0.5)' }} whileTap={{ scale: 0.97 }} onClick={onAction} className="w-full font-bold rounded-2xl border-0" style={{ height: 44, fontSize: 14, cursor: 'pointer', ...buttonStyle }}>
         {buttonLabel}
       </motion.button>
     </motion.div>
@@ -144,22 +145,22 @@ export default function LandingPage() {
 
   const features = [
     {
-      icon: '🧠',
+      icon: '',
       title: 'Predict Smart',
       description: 'Algoritma AI yang memprediksi demand produk dengan akurasi tinggi berdasarkan data historis dan tren pasar.'
     },
     {
-      icon: '📦',
+      icon: '',
       title: 'Manage Smart',
       description: 'Dashboard real-time untuk monitoring stok, tracking inventory, dan mendapat insights bisnis yang actionable.'
     },
     {
-      icon: '🚀',
-      title: 'Restock Smart',
+      icon: '',
+      title: 'Restock Insight',
       description: 'Notifikasi otomatis dan rekomendasi pemesanan untuk memastikan stok selalu optimal tanpa overstock.'
     },
     {
-      icon: '📈',
+      icon: '',
       title: 'Grow Smarter',
       description: 'Analytics mendalam untuk memahami performa produk, customer behavior, dan peluang pertumbuhan bisnis.'
     }
@@ -169,7 +170,7 @@ export default function LandingPage() {
     {
       name: 'Budi Santoso',
       role: 'Owner, Toko Elektronik Jakarta',
-      review: 'RestockAI sangat membantu bisnis saya! Sekarang stok selalu optimal, ga ada lagi barang numpuk atau kehabisan. Profit meningkat 30% dalam 3 bulan!',
+      review: 'Restock AI sangat membantu bisnis saya! Sekarang stok selalu optimal, ga ada lagi barang numpuk atau kehabisan. Profit meningkat 30% dalam 3 bulan!',
       rating: 5,
       avatar: 'BS'
     },
@@ -190,16 +191,16 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden relative bg-[#0F0F0F]">
+    <div className="min-h-screen w-full overflow-x-hidden relative bg-slate-50">
       {/* Animated Gradient Background */}
       <div className="fixed inset-0 z-0">
         <motion.div
           className="absolute inset-0"
           animate={{
             background: [
-              'linear-gradient(135deg, #0F0F0F 0%, #1a0f2e 100%)',
-              'linear-gradient(135deg, #1a0f2e 0%, #0F0F0F 100%)',
-              'linear-gradient(135deg, #0F0F0F 0%, #1a0f2e 100%)',
+              'linear-gradient(135deg, #FFFFFF 0%, #f1f5f9 100%)',
+              'linear-gradient(135deg, #f1f5f9 0%, #FFFFFF 100%)',
+              'linear-gradient(135deg, #FFFFFF 0%, #f1f5f9 100%)',
             ],
           }}
           transition={{
@@ -212,7 +213,7 @@ export default function LandingPage() {
         {/* Floating Orbs */}
         <motion.div
           className="absolute w-96 h-96 rounded-full opacity-20 blur-3xl"
-          style={{ background: 'radial-gradient(circle, #8B4BBE, transparent)' }}
+          style={{ background: 'radial-gradient(circle, #98E2FD, transparent)' }}
           animate={{
             x: [0, 100, 0],
             y: [0, 50, 0],
@@ -225,7 +226,7 @@ export default function LandingPage() {
         />
         <motion.div
           className="absolute right-0 bottom-0 w-96 h-96 rounded-full opacity-20 blur-3xl"
-          style={{ background: 'radial-gradient(circle, #00FFFF, transparent)' }}
+          style={{ background: 'radial-gradient(circle, #98E2FD, transparent)' }}
           animate={{
             x: [0, -100, 0],
             y: [0, -50, 0],
@@ -258,13 +259,13 @@ export default function LandingPage() {
                     fontSize: '3.5rem',
                     lineHeight: 1.2,
                     letterSpacing: '-0.02em',
-                    background: 'linear-gradient(135deg, #00FF7F, #00FFFF, #FF00FF)',
+                    background: 'linear-gradient(135deg, #D1F07B, #98E2FD, #1A1A1B)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text'
                   }}
                 >
-                  Prediksi Stok. Stok Optimal. Bisnis Makin Maksimal.
+                  SMART INVENTORY. SMARTER GROWTH.
                 </motion.h1>
 
                 {/* Subheadline */}
@@ -272,9 +273,9 @@ export default function LandingPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="text-lg text-[#E8E8E8] mb-10 leading-relaxed"
+                  className="text-lg text-[#4B5563] mb-10 leading-relaxed"
                 >
-                  AI-powered inventory management yang transform bisnis UMKM Indonesia menjadi lebih efisien & menguntungkan.
+                  AI-powered inventory intelligence yang menganalisis cerita di balik stok Anda untuk bisnis yang lebih efisien & menguntungkan.
                 </motion.p>
 
                 {/* CTA Buttons */}
@@ -288,9 +289,9 @@ export default function LandingPage() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => navigate('/onboarding')}
-                    className="px-8 h-14 rounded-2xl font-bold text-[#0F0F0F] min-w-[200px]"
+                    className="px-8 h-14 rounded-2xl font-bold text-[#1A1A1B] min-w-[200px]"
                     style={{
-                      background: 'linear-gradient(135deg, #F5E04A, #FFD700)',
+                      background: '#FFE16F',
                       boxShadow: '0 8px 32px rgba(245, 224, 74, 0.4)'
                     }}
                   >
@@ -303,9 +304,9 @@ export default function LandingPage() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.05, borderColor: 'rgba(255, 255, 255, 1)' }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-8 h-14 rounded-2xl font-bold text-white min-w-[160px] border flex items-center justify-center"
+                    className="px-8 h-14 rounded-2xl font-bold text-[#1A1A1B] min-w-[160px] border flex items-center justify-center"
                     style={{
-                      background: 'rgba(255, 255, 255, 0.1)',
+                      background: 'rgba(0, 0, 0, 0.05)',
                       backdropFilter: 'blur(10px)',
                       borderColor: 'rgba(255, 255, 255, 0.3)',
                       textDecoration: 'none'
@@ -350,11 +351,11 @@ export default function LandingPage() {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-4xl font-bold mb-4 text-white">
+              <h2 className="text-4xl font-bold mb-4 text-[#1A1A1B]">
                 Dipercaya oleh Ribuan Entrepreneur
               </h2>
-              <p className="text-gray-400 text-lg">
-                Lihat apa kata mereka tentang RestockAI
+              <p className="text-[#4B5563] text-lg">
+                Lihat apa kata mereka tentang Restock AI
               </p>
             </motion.div>
 
@@ -380,34 +381,35 @@ export default function LandingPage() {
 
             {/* Header */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
-              <div className="inline-block text-xs font-bold px-4 py-2 rounded-full mb-6" style={{ background: 'rgba(245,224,74,0.15)', border: '1px solid rgba(245,224,74,0.4)', color: '#F5E04A', letterSpacing: '0.08em' }}>
-                💎 HARGA TRANSPARAN, TANPA KEJUTAN
+              <div className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full mb-6" style={{ background: 'rgba(245,224,74,0.15)', border: '1px solid rgba(245,224,74,0.4)', color: '#1A1A1B', letterSpacing: '0.08em' }}>
+                <Gem size={14} />
+                HARGA TRANSPARAN, TANPA KEJUTAN
               </div>
-              <h2 className="font-bold text-white mb-3" style={{ fontSize: 36, lineHeight: 1.2 }}>Pilih Paket Terbaik untuk<br />Bisnis Anda</h2>
-              <p style={{ fontSize: 18, color: '#E8E8E8' }}>Mulai gratis, upgrade kapan saja. Tidak ada komitmen jangka panjang.</p>
+              <h2 className="font-bold text-[#1A1A1B] mb-3" style={{ fontSize: 36, lineHeight: 1.2 }}>Pilih Paket Terbaik untuk<br />Bisnis Anda</h2>
+              <p style={{ fontSize: 18, color: '#1A1A1B' }}>Mulai gratis, upgrade kapan saja. Tidak ada komitmen jangka panjang.</p>
             </motion.div>
 
             {/* Pricing Cards */}
             <div className="grid items-center mb-16" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
               <PricingCard
-                delay={0} title="Starter" price="Rp 99K" priceGradient="linear-gradient(135deg, #00FF7F, #00FFFF)" subtitle="Untuk UMKM pemula"
+                delay={0} title="Starter" price="Rp 99K" priceGradient={null} subtitle="Untuk UMKM pemula"
                 features={[
                   { label: 'Hingga 100 SKU', ok: true }, { label: 'Prediksi permintaan dasar', ok: true },
                   { label: 'Dashboard stok real-time', ok: true }, { label: '1 outlet', ok: true },
                   { label: 'Email support', ok: true }, { label: 'Integrasi supplier', ok: false }, { label: 'Inventory financing', ok: false },
                 ]}
-                buttonLabel="Mulai Gratis" buttonStyle={{ background: 'linear-gradient(135deg, #4A1063, #8B4BBE)', color: '#fff' }}
+                buttonLabel="Mulai Gratis" buttonStyle={{ background: '#FFE16F', color: '#1A1A1B' }}
                 onAction={() => navigate('/onboarding')}
               />
               <PricingCard
-                delay={0.1} title="Growth" price="Rp 199K" priceGradient="linear-gradient(135deg, #FF00FF, #00FFFF)" subtitle="Untuk bisnis berkembang" featured
+                delay={0.1} title="Growth" price="Rp 199K" priceGradient={null} subtitle="Untuk bisnis berkembang" featured
                 features={[
                   { label: 'Hingga 500 SKU', ok: true }, { label: 'Prediksi permintaan advanced + AI', ok: true },
                   { label: 'Dashboard analytics lengkap', ok: true }, { label: '3 outlet / cabang', ok: true },
                   { label: 'Integrasi POS (Moka, Majoo, Olsera)', ok: true }, { label: 'Sinkronisasi supplier otomatis', ok: true },
                   { label: 'Chat + email support', ok: true }, { label: 'Inventory financing', ok: false },
                 ]}
-                buttonLabel="Upgrade Sekarang" buttonStyle={{ background: 'linear-gradient(135deg, #4A1063, #8B4BBE)', color: '#fff' }}
+                buttonLabel="Upgrade Sekarang" buttonStyle={{ background: '#FFE16F', color: '#1A1A1B' }}
                 onAction={() => navigate('/onboarding')}
               />
               <PricingCard
@@ -419,27 +421,27 @@ export default function LandingPage() {
                   { label: 'Dedicated account manager', ok: true }, { label: 'API access untuk custom integration', ok: true },
                   { label: 'Priority 24/7 support', ok: true },
                 ]}
-                buttonLabel="Hubungi Sales" buttonStyle={{ background: 'linear-gradient(135deg, #F5C897, #FFE5B4)', color: '#0F0F0F' }}
+                buttonLabel="Hubungi Sales" buttonStyle={{ background: 'linear-gradient(135deg, #F5C897, #FFE5B4)', color: '#1A1A1B' }}
                 onAction={() => {}}
               />
             </div>
 
             {/* Feature Comparison */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-16">
-              <h3 className="text-center font-bold text-white mb-6" style={{ fontSize: 18, letterSpacing: '0.04em' }}>PERBANDINGAN FITUR LENGKAP</h3>
-              <div className="rounded-2xl overflow-hidden border" style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(12px)', borderColor: 'rgba(255,255,255,0.12)' }}>
-                <div className="grid" style={{ gridTemplateColumns: '2fr 1fr 1fr 1fr', background: 'rgba(255,255,255,0.08)', padding: '14px 24px' }}>
+              <h3 className="text-center font-bold text-[#1A1A1B] mb-6" style={{ fontSize: 18, letterSpacing: '0.04em' }}>PERBANDINGAN FITUR LENGKAP</h3>
+              <div className="rounded-2xl overflow-hidden border" style={{ background: '#ffffff', boxShadow: '0 4px 12px -2px rgba(0,0,0,0.05)', backdropFilter: 'blur(12px)', borderColor: 'rgba(255,255,255,0.12)' }}>
+                <div className="grid" style={{ gridTemplateColumns: '2fr 1fr 1fr 1fr', background: 'rgba(0, 0, 0, 0.04)', padding: '14px 24px' }}>
                   {['FITUR', 'STARTER', 'GROWTH', 'PRO'].map((h, i) => (
-                    <span key={h} className="text-xs font-bold text-[#E8E8E8]" style={{ letterSpacing: '0.08em', textAlign: i === 0 ? 'left' : 'center' }}>{h}</span>
+                    <span key={h} className="text-xs font-bold text-[#4B5563]" style={{ letterSpacing: '0.08em', textAlign: i === 0 ? 'left' : 'center' }}>{h}</span>
                   ))}
                 </div>
                 {pricingFeatures.map((row, idx) => (
                   <motion.div key={row.label} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: idx * 0.04 }}
-                    className="grid border-t" style={{ gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '13px 24px', borderColor: 'rgba(255,255,255,0.08)' }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; }}
+                    className="grid border-t" style={{ gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '13px 24px', borderColor: 'rgba(0, 0, 0, 0.04)' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0, 0, 0, 0.02)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
                   >
-                    <span className="text-[13px] font-semibold text-white">{row.label}</span>
+                    <span className="text-[13px] font-semibold text-[#1A1A1B]">{row.label}</span>
                     <TableCell value={row.starter} />
                     <TableCell value={row.growth} />
                     <TableCell value={row.pro} />
@@ -450,23 +452,23 @@ export default function LandingPage() {
 
             {/* FAQ */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-16" style={{ maxWidth: 800, margin: '0 auto 64px' }}>
-              <h3 className="text-center font-bold text-white mb-8" style={{ fontSize: 18, letterSpacing: '0.04em' }}>PERTANYAAN YANG SERING DIAJUKAN</h3>
-              <div className="rounded-2xl border px-8" style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(12px)', borderColor: 'rgba(255,255,255,0.12)' }}>
+              <h3 className="text-center font-bold text-[#1A1A1B] mb-8" style={{ fontSize: 18, letterSpacing: '0.04em' }}>PERTANYAAN YANG SERING DIAJUKAN</h3>
+              <div className="rounded-2xl border px-8" style={{ background: '#ffffff', boxShadow: '0 4px 12px -2px rgba(0,0,0,0.05)', backdropFilter: 'blur(12px)', borderColor: 'rgba(255,255,255,0.12)' }}>
                 {faqs.map((faq, i) => <FAQItem key={i} q={faq.q} a={faq.a} defaultOpen={i === 0} />)}
               </div>
             </motion.div>
 
             {/* Bottom CTA */}
             <motion.div initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-              className="rounded-2xl text-center" style={{ maxWidth: 800, margin: '0 auto', padding: '60px 40px', background: 'linear-gradient(135deg, #4A1063, #8B4BBE)', boxShadow: '0 20px 60px rgba(74,16,99,0.5)' }}
+              className="rounded-2xl text-center" style={{ maxWidth: 800, margin: '0 auto', padding: '60px 40px', background: '#FFE16F', boxShadow: '0 20px 60px rgba(255, 225, 111,0.5)' }}
             >
-              <h2 className="font-bold text-white mb-3" style={{ fontSize: 24 }}>Siap mengembangkan bisnis Anda dengan RestockAI?</h2>
-              <p className="text-[#E8E8E8] text-sm mb-8" style={{ lineHeight: 1.7 }}>
-                Bergabung dengan 2.000+ UMKM Indonesia yang sudah menggunakan RestockAI<br />untuk mengelola stok lebih cerdas.
+              <h2 className="font-bold text-[#1A1A1B] mb-3" style={{ fontSize: 24 }}>Siap mengembangkan bisnis Anda dengan Restock AI?</h2>
+              <p className="text-[#4B5563] text-sm mb-8" style={{ lineHeight: 1.7 }}>
+                Bergabung dengan 2.000+ UMKM Indonesia yang sudah menggunakan Restock AI<br />untuk mengelola stok lebih cerdas.
               </p>
-              <motion.button whileHover={{ scale: 1.08, boxShadow: '0 0 32px rgba(245,224,74,0.6)' }} whileTap={{ scale: 0.97 }}
+              <motion.button whileHover={{ scale: 1.05, boxShadow: '0 12px 24px rgba(26,26,27,0.3)' }} whileTap={{ scale: 0.97 }}
                 onClick={() => navigate('/onboarding')} className="font-bold"
-                style={{ height: 52, width: 280, borderRadius: 12, background: 'linear-gradient(135deg, #F5E04A, #FFD700)', color: '#0F0F0F', fontSize: 16, border: 'none', cursor: 'pointer' }}
+                style={{ height: 52, width: 280, borderRadius: 12, background: '#1A1A1B', color: '#FFE16F', fontSize: 16, border: 'none', cursor: 'pointer' }}
               >
                 Daftar Sekarang — Gratis
               </motion.button>
@@ -479,8 +481,8 @@ export default function LandingPage() {
         <footer className="py-12 px-6 mt-16">
           <div className="max-w-7xl mx-auto">
             <div className="h-px bg-white/10 mb-6" />
-            <p className="text-center text-[#E8E8E8] text-sm">
-              © 2024 RestockAI. Made with ❤️ for Indonesian entrepreneurs.
+            <p className="flex items-center justify-center gap-1 text-center text-[#4B5563] text-sm">
+              © 2024 Restock AI. Made with <Heart size={12} fill="currentColor" /> for Indonesian entrepreneurs.
             </p>
           </div>
         </footer>

@@ -28,9 +28,9 @@ const recommendations = [
 ];
 
 const getProgressColor = (percent: number) => {
-  if (percent <= 10) return 'linear-gradient(90deg, #FF6B6B, #FF0000)';
-  if (percent <= 30) return 'linear-gradient(90deg, #FFD700, #FFA500)';
-  return 'linear-gradient(90deg, #00FF7F, #00FFFF)';
+  if (percent <= 10) return 'linear-gradient(90deg, #ef4444, #dc2626)';
+  if (percent <= 30) return 'linear-gradient(90deg, #f59e0b, #f97316)';
+  return 'linear-gradient(90deg, #10b981, #4f46e5)';
 };
 
 export default function RecommendationTable() {
@@ -45,10 +45,10 @@ export default function RecommendationTable() {
     >
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-sm font-bold text-white uppercase">
+        <h3 className="text-sm font-bold text-[#0f172a] uppercase">
           Rekomendasi Restok
         </h3>
-        <a href="#" className="text-xs text-cyan-400 hover:underline">
+        <a href="#" className="text-xs text-[#1A1A1B] font-semibold hover:underline">
           Lihat Semua
         </a>
       </div>
@@ -58,7 +58,7 @@ export default function RecommendationTable() {
         <table className="w-full">
           <thead>
             <tr
-              className="text-[11px] font-bold text-white uppercase"
+              className="text-[11px] font-bold text-[#0f172a] uppercase"
               style={{ background: 'rgba(255, 255, 255, 0.08)' }}
             >
               <th className="text-left py-3 px-4 rounded-l-lg">Produk</th>
@@ -73,16 +73,16 @@ export default function RecommendationTable() {
             {recommendations.map((item, index) => (
               <motion.tr
                 key={index}
-                className="border-b border-white/5 transition-all"
+                className="border-b border-black/5 transition-all"
                 whileHover={{
                   backgroundColor: 'rgba(255, 255, 255, 0.08)'
                 }}
               >
-                <td className="py-4 px-4 text-sm text-white">{item.product}</td>
-                <td className="py-4 px-4 text-sm text-[#E8E8E8]">{item.category}</td>
+                <td className="py-4 px-4 text-sm text-[#0f172a]">{item.product}</td>
+                <td className="py-4 px-4 text-sm text-[#475569]">{item.category}</td>
                 <td className="py-4 px-4">
                   <div>
-                    <p className="text-sm text-white mb-1">{item.stock} pcs</p>
+                    <p className="text-sm text-[#0f172a] mb-1">{item.stock} pcs</p>
                     <div className="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
                       <div
                         className="h-full rounded-full transition-all"
@@ -94,18 +94,18 @@ export default function RecommendationTable() {
                     </div>
                   </div>
                 </td>
-                <td className="py-4 px-4 text-sm text-[#E8E8E8]">{item.prediction}</td>
-                <td className="py-4 px-4 text-sm text-white font-bold">
+                <td className="py-4 px-4 text-sm text-[#475569]">{item.prediction}</td>
+                <td className="py-4 px-4 text-sm text-[#0f172a] font-bold">
                   {item.recommendation}
                 </td>
                 <td className="py-4 px-4">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-4 py-2 rounded-lg text-xs font-bold text-white"
+                    className="px-4 py-2 rounded-lg text-xs font-bold text-[#1A1A1B]"
                     style={{
-                      background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
-                      boxShadow: '0 2px 8px rgba(74, 16, 99, 0.3)'
+                      background: '#FFE16F',
+                      boxShadow: '0 2px 8px rgba(255, 225, 111, 0.3)'
                     }}
                   >
                     Buat PO

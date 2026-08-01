@@ -14,7 +14,7 @@ export default function FeatureCard({ icon, title, description, delay = 0 }: Fea
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="group relative p-8 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all bg-white/5"
+      className="group relative p-8 rounded-2xl border border-gray-100 hover:border-cyan-400/50 transition-all bg-white/5"
       style={{ backdropFilter: 'blur(10px)' }}
     >
       {/* Icon Background Glow */}
@@ -23,7 +23,7 @@ export default function FeatureCard({ icon, title, description, delay = 0 }: Fea
 
       {/* Icon */}
       <div className="relative text-5xl mb-4" style={{
-        background: 'linear-gradient(135deg, #00FFFF, #FF00FF)',
+        background: 'linear-gradient(135deg, #98E2FD, #1A1A1B)',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
         backgroundClip: 'text'
@@ -32,8 +32,8 @@ export default function FeatureCard({ icon, title, description, delay = 0 }: Fea
       </div>
 
       {/* Content */}
-      <h3 className="text-white font-bold mb-3">{title}</h3>
-      <p className="text-[#E8E8E8] text-sm leading-relaxed">{description}</p>
+      <h3 className="text-[#1A1A1B] font-bold mb-3">{title}</h3>
+      <p className="text-[#4B5563] text-sm leading-relaxed">{description}</p>
     </motion.div>
   );
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Gem, Heart } from 'lucide-react';
 import RestockAILogo from '../components/brand/RestockAILogo';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -46,7 +46,7 @@ function CheckIcon({ size = 16 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
       <circle cx="8" cy="8" r="8" fill="rgba(0,255,127,0.15)" />
-      <path d="M4.5 8.5L6.5 10.5L11.5 5.5" stroke="#00FF7F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4.5 8.5L6.5 10.5L11.5 5.5" stroke="#D1F07B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -54,7 +54,7 @@ function CheckIcon({ size = 16 }: { size?: number }) {
 function XIcon({ size = 16 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
-      <circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.06)" />
+      <circle cx="8" cy="8" r="8" fill="rgba(0, 0, 0, 0.03)" />
       <path d="M5.5 5.5L10.5 10.5M10.5 5.5L5.5 10.5" stroke="#666" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   );
@@ -71,7 +71,7 @@ function TableCell({ value }: { value: string | boolean }) {
       <XIcon size={18} />
     </div>
   );
-  return <span className="text-[13px] text-[#E8E8E8] text-center block">{value}</span>;
+  return <span className="text-[13px] text-[#4B5563] text-center block">{value}</span>;
 }
 
 function FAQItem({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen?: boolean }) {
@@ -79,19 +79,19 @@ function FAQItem({ q, a, defaultOpen = false }: { q: string; a: string; defaultO
   return (
     <div
       className="border-b"
-      style={{ borderColor: 'rgba(255,255,255,0.1)' }}
+      style={{ borderColor: 'rgba(0, 0, 0, 0.05)' }}
     >
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex justify-between items-center py-5 text-left gap-4"
       >
-        <span className="text-sm font-bold text-white">{q}</span>
+        <span className="text-sm font-bold text-[#1A1A1B]">{q}</span>
         <motion.div
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.25 }}
           style={{ flexShrink: 0 }}
         >
-          <ChevronDown size={18} className="text-white" />
+          <ChevronDown size={18} className="text-[#1A1A1B]" />
         </motion.div>
       </button>
       <AnimatePresence initial={false}>
@@ -104,7 +104,7 @@ function FAQItem({ q, a, defaultOpen = false }: { q: string; a: string; defaultO
             transition={{ duration: 0.28, ease: 'easeInOut' }}
             style={{ overflow: 'hidden' }}
           >
-            <p className="text-[13px] text-[#E8E8E8] pb-5" style={{ lineHeight: 1.7 }}>
+            <p className="text-[13px] text-[#4B5563] pb-5" style={{ lineHeight: 1.7 }}>
               {a}
             </p>
           </motion.div>
@@ -122,7 +122,7 @@ export default function Pricing() {
   return (
     <div
       className="min-h-screen w-full overflow-x-hidden"
-      style={{ background: 'linear-gradient(180deg, #0F0F0F 0%, #2a0f4a 100%)' }}
+      style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #2a0f4a 100%)' }}
     >
       {/* Ambient blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
@@ -131,7 +131,7 @@ export default function Pricing() {
           style={{
             width: 600, height: 600,
             top: -100, left: '20%',
-            background: 'radial-gradient(circle, rgba(74,16,99,0.35) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(255, 225, 111,0.35) 0%, transparent 70%)',
             filter: 'blur(60px)'
           }}
         />
@@ -154,7 +154,7 @@ export default function Pricing() {
           style={{
             background: 'rgba(15,15,15,0.85)',
             backdropFilter: 'blur(15px)',
-            borderColor: 'rgba(255,255,255,0.1)',
+            borderColor: 'rgba(0, 0, 0, 0.05)',
             zIndex: 50
           }}
         >
@@ -167,7 +167,7 @@ export default function Pricing() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => navigate('/dashboard')}
-              className="text-sm text-[#E8E8E8] hover:text-white transition-colors"
+              className="text-sm text-[#4B5563] hover:text-[#1A1A1B] transition-colors"
             >
               ← Kembali ke Dashboard
             </button>
@@ -184,23 +184,24 @@ export default function Pricing() {
             style={{ maxWidth: 900, margin: '0 auto' }}
           >
             <div
-              className="inline-block text-xs font-bold px-4 py-2 rounded-full mb-6"
+              className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full mb-6"
               style={{
                 background: 'rgba(245,224,74,0.15)',
                 border: '1px solid rgba(245,224,74,0.4)',
-                color: '#F5E04A',
+                color: '#1A1A1B',
                 letterSpacing: '0.08em'
               }}
             >
-              💎 HARGA TRANSPARAN, TANPA KEJUTAN
+              <Gem size={14} />
+              HARGA TRANSPARAN, TANPA KEJUTAN
             </div>
             <h1
-              className="font-bold text-white"
+              className="font-bold text-[#1A1A1B]"
               style={{ fontSize: 40, lineHeight: 1.2, marginBottom: 12 }}
             >
               Pilih Paket Terbaik untuk<br />Bisnis Anda
             </h1>
-            <p style={{ fontSize: 18, color: '#E8E8E8' }}>
+            <p style={{ fontSize: 18, color: '#1A1A1B' }}>
               Mulai gratis, upgrade kapan saja. Tidak ada komitmen jangka panjang.
             </p>
           </motion.div>
@@ -222,7 +223,7 @@ export default function Pricing() {
               delay={0}
               title="Starter"
               price="Rp 99K"
-              priceGradient="linear-gradient(135deg, #00FF7F, #00FFFF)"
+              priceGradient={null}
               subtitle="Untuk UMKM pemula"
               features={[
                 { label: 'Hingga 100 SKU', ok: true },
@@ -235,9 +236,8 @@ export default function Pricing() {
               ]}
               buttonLabel="Mulai Gratis"
               buttonStyle={{
-                background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
-                color: '#fff'
-              }}
+                background: '#FFE16F',
+                color: '#1A1A1B'}}
               onAction={() => navigate('/onboarding')}
             />
 
@@ -246,7 +246,7 @@ export default function Pricing() {
               delay={0.1}
               title="Growth"
               price="Rp 199K"
-              priceGradient="linear-gradient(135deg, #FF00FF, #00FFFF)"
+              priceGradient={null}
               subtitle="Untuk bisnis berkembang"
               featured
               features={[
@@ -261,9 +261,8 @@ export default function Pricing() {
               ]}
               buttonLabel="Upgrade Sekarang"
               buttonStyle={{
-                background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
-                color: '#fff'
-              }}
+                background: '#FFE16F',
+                color: '#1A1A1B'}}
               onAction={() => navigate('/onboarding')}
             />
 
@@ -288,8 +287,7 @@ export default function Pricing() {
               buttonLabel="Hubungi Sales"
               buttonStyle={{
                 background: 'linear-gradient(135deg, #F5C897, #FFE5B4)',
-                color: '#0F0F0F'
-              }}
+                color: '#1A1A1B'}}
               onAction={() => {}}
             />
           </div>
@@ -304,14 +302,14 @@ export default function Pricing() {
             transition={{ duration: 0.5 }}
             style={{ maxWidth: 1100, margin: '0 auto' }}
           >
-            <h2 className="text-center font-bold text-white mb-6" style={{ fontSize: 18, letterSpacing: '0.04em' }}>
+            <h2 className="text-center font-bold text-[#1A1A1B] mb-6" style={{ fontSize: 18, letterSpacing: '0.04em' }}>
               PERBANDINGAN FITUR LENGKAP
             </h2>
 
             <div
               className="rounded-2xl overflow-hidden border"
               style={{
-                background: 'rgba(255,255,255,0.04)',
+                background: '#ffffff', boxShadow: '0 4px 12px -2px rgba(0,0,0,0.05)',
                 backdropFilter: 'blur(12px)',
                 borderColor: 'rgba(255,255,255,0.12)'
               }}
@@ -321,14 +319,14 @@ export default function Pricing() {
                 className="grid"
                 style={{
                   gridTemplateColumns: '2fr 1fr 1fr 1fr',
-                  background: 'rgba(255,255,255,0.08)',
+                  background: 'rgba(0, 0, 0, 0.04)',
                   padding: '14px 24px'
                 }}
               >
                 {['FITUR', 'STARTER', 'GROWTH', 'PRO'].map((h, i) => (
                   <span
                     key={h}
-                    className="text-xs font-bold text-[#E8E8E8]"
+                    className="text-xs font-bold text-[#4B5563]"
                     style={{
                       letterSpacing: '0.08em',
                       textAlign: i === 0 ? 'left' : 'center'
@@ -351,16 +349,16 @@ export default function Pricing() {
                   style={{
                     gridTemplateColumns: '2fr 1fr 1fr 1fr',
                     padding: '13px 24px',
-                    borderColor: 'rgba(255,255,255,0.08)'
+                    borderColor: 'rgba(0, 0, 0, 0.04)'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                    e.currentTarget.style.background = 'rgba(0, 0, 0, 0.02)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = 'transparent';
                   }}
                 >
-                  <span className="text-[13px] font-semibold text-white">{row.label}</span>
+                  <span className="text-[13px] font-semibold text-[#1A1A1B]">{row.label}</span>
                   <TableCell value={row.starter} />
                   <TableCell value={row.growth} />
                   <TableCell value={row.pro} />
@@ -379,14 +377,14 @@ export default function Pricing() {
             transition={{ duration: 0.5 }}
             style={{ maxWidth: 800, margin: '0 auto' }}
           >
-            <h2 className="text-center font-bold text-white mb-8" style={{ fontSize: 18, letterSpacing: '0.04em' }}>
+            <h2 className="text-center font-bold text-[#1A1A1B] mb-8" style={{ fontSize: 18, letterSpacing: '0.04em' }}>
               PERTANYAAN YANG SERING DIAJUKAN
             </h2>
 
             <div
               className="rounded-2xl border px-8"
               style={{
-                background: 'rgba(255,255,255,0.04)',
+                background: '#ffffff', boxShadow: '0 4px 12px -2px rgba(0,0,0,0.05)',
                 backdropFilter: 'blur(12px)',
                 borderColor: 'rgba(255,255,255,0.12)'
               }}
@@ -410,19 +408,19 @@ export default function Pricing() {
               maxWidth: 800,
               margin: '0 auto',
               padding: '60px 40px',
-              background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
-              boxShadow: '0 20px 60px rgba(74,16,99,0.5)'
+              background: '#FFE16F',
+              boxShadow: '0 20px 60px rgba(255, 225, 111,0.5)'
             }}
           >
-            <h2 className="font-bold text-white mb-3" style={{ fontSize: 24 }}>
-              Siap mengembangkan bisnis Anda dengan RestockAI?
+            <h2 className="font-bold text-[#1A1A1B] mb-3" style={{ fontSize: 24 }}>
+              Siap mengembangkan bisnis Anda dengan Restock AI?
             </h2>
-            <p className="text-[#E8E8E8] text-sm mb-8" style={{ lineHeight: 1.7 }}>
-              Bergabung dengan 2.000+ UMKM Indonesia yang sudah menggunakan RestockAI<br />
+            <p className="text-[#4B5563] text-sm mb-8" style={{ lineHeight: 1.7 }}>
+              Bergabung dengan 2.000+ UMKM Indonesia yang sudah menggunakan Restock AI<br />
               untuk mengelola stok lebih cerdas.
             </p>
             <motion.button
-              whileHover={{ scale: 1.08, boxShadow: '0 0 32px rgba(245,224,74,0.6)' }}
+              whileHover={{ scale: 1.05, boxShadow: '0 12px 24px rgba(26,26,27,0.3)' }}
               whileTap={{ scale: 0.97 }}
               onClick={() => navigate('/onboarding')}
               className="font-bold"
@@ -430,8 +428,8 @@ export default function Pricing() {
                 height: 52,
                 width: 280,
                 borderRadius: 12,
-                background: 'linear-gradient(135deg, #F5E04A, #FFD700)',
-                color: '#0F0F0F',
+                background: '#1A1A1B',
+                color: '#FFE16F',
                 fontSize: 16,
                 border: 'none',
                 cursor: 'pointer'
@@ -444,8 +442,8 @@ export default function Pricing() {
 
         {/* ── Footer ── */}
         <footer className="text-center pb-10" style={{ marginTop: -20 }}>
-          <p className="text-xs text-[#E8E8E8]">
-            © 2024 RestockAI. Made with ❤️ for Indonesian entrepreneurs.
+          <p className="flex items-center justify-center gap-1 text-xs text-[#4B5563]">
+            © 2024 Restock AI. Made with <Heart size={12} fill="currentColor" /> for Indonesian entrepreneurs.
           </p>
         </footer>
 
@@ -488,14 +486,14 @@ function PricingCard({
       className="relative flex flex-col rounded-[20px] border"
       style={{
         padding: 32,
-        background: featured ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.04)',
+        background: featured ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.02)',
         backdropFilter: 'blur(12px)',
         borderWidth: featured ? 2 : 1,
         borderColor: hovered
-          ? '#00FFFF'
+          ? '#98E2FD'
           : featured
-          ? '#00FF7F'
-          : 'rgba(255,255,255,0.15)',
+          ? '#D1F07B'
+          : 'rgba(0, 0, 0, 0.08)',
         boxShadow: hovered
           ? '0 16px 48px rgba(0,255,255,0.2)'
           : featured
@@ -510,21 +508,22 @@ function PricingCard({
       {featured && (
         <div className="absolute left-1/2 -translate-x-1/2" style={{ top: -14 }}>
           <span
-            className="text-[11px] font-bold px-4 py-1.5 rounded-full"
+            className="inline-flex items-center gap-1.5 text-[11px] font-bold px-4 py-1.5 rounded-full"
             style={{
-              background: 'linear-gradient(135deg, #F5E04A, #FFD700)',
-              color: '#0F0F0F',
+              background: '#FFE16F',
+              color: '#1A1A1B',
               letterSpacing: '0.08em',
               whiteSpace: 'nowrap'
             }}
           >
-            ⭐ PALING POPULER
+            <Star size={12} fill="#1A1A1B" />
+            PALING POPULER
           </span>
         </div>
       )}
 
       {/* Title */}
-      <h3 className="text-xl font-bold text-white" style={{ marginTop: featured ? 12 : 0, marginBottom: 8 }}>
+      <h3 className="text-xl font-bold text-[#1A1A1B]" style={{ marginTop: featured ? 12 : 0, marginBottom: 8 }}>
         {title}
       </h3>
 
@@ -538,16 +537,15 @@ function PricingCard({
             background: priceGradient ?? undefined,
             WebkitBackgroundClip: priceGradient ? 'text' : undefined,
             WebkitTextFillColor: priceGradient ? 'transparent' : undefined,
-            color: priceGradient ? undefined : '#fff'
-          }}
+            color: '#1A1A1B'}}
         >
           {price}
         </span>
-        <span className="text-sm text-[#E8E8E8] mb-1">/bulan</span>
+        <span className="text-sm text-[#4B5563] mb-1">/bulan</span>
       </div>
 
       {/* Subtitle */}
-      <p className="text-[13px] text-[#E8E8E8]" style={{ marginBottom: 24 }}>
+      <p className="text-[13px] text-[#4B5563]" style={{ marginBottom: 24 }}>
         {subtitle}
       </p>
 
@@ -559,7 +557,7 @@ function PricingCard({
             <span
               className="text-[13px]"
               style={{
-                color: f.ok ? '#fff' : '#666',
+                color: '#1A1A1B',
                 textDecoration: f.ok ? undefined : 'line-through'
               }}
             >
@@ -571,10 +569,10 @@ function PricingCard({
 
       {/* Button */}
       <motion.button
-        whileHover={{ scale: 1.05, boxShadow: '0 0 24px rgba(139,75,190,0.5)' }}
+        whileHover={{ scale: 1.05, boxShadow: '0 0 24px rgba(152, 226, 253,0.5)' }}
         whileTap={{ scale: 0.97 }}
         onClick={onAction}
-        className="w-full font-bold rounded-xl border-0"
+        className="w-full font-bold rounded-2xl border-0"
         style={{
           height: 44,
           fontSize: 14,

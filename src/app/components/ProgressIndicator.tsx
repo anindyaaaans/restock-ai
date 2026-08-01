@@ -20,33 +20,33 @@ export default function ProgressIndicator({ currentStep }: ProgressIndicatorProp
             <div
               className={`w-12 h-12 rounded-full flex items-center justify-center font-bold transition-all ${
                 step.number < currentStep
-                  ? 'text-white border-2'
+                  ? 'text-[#1A1A1B] border-2'
                   : step.number === currentStep
-                  ? 'text-white border-2'
-                  : 'text-gray-500 border'
+                  ? 'text-[#1A1A1B] border-2'
+                  : 'text-[#4B5563] border'
               }`}
               style={
                 step.number < currentStep
                   ? {
-                      background: '#00FF7F',
-                      borderColor: '#00FF7F',
+                      background: '#D1F07B',
+                      bordercolor: '#1A1A1B',
                       boxShadow: '0 0 20px rgba(0, 255, 127, 0.5)'
                     }
                   : step.number === currentStep
                   ? {
-                      background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
-                      borderColor: '#00FF7F',
+                      background: '#FFE16F',
+                      bordercolor: '#1A1A1B',
                       boxShadow: '0 0 20px rgba(0, 255, 127, 0.5)'
                     }
                   : {
                       background: '#1a1a1a',
-                      borderColor: 'rgba(255, 255, 255, 0.2)'
+                      borderColor: 'rgba(0, 0, 0, 0.1)'
                     }
               }
             >
               {step.number < currentStep ? <Check size={24} /> : step.number}
             </div>
-            <p className="text-xs mt-2 text-[#E8E8E8]">{step.label}</p>
+            <p className="text-xs mt-2 text-[#4B5563]">{step.label}</p>
           </div>
 
           {/* Connecting Line */}
@@ -56,8 +56,8 @@ export default function ProgressIndicator({ currentStep }: ProgressIndicatorProp
               style={{
                 background:
                   step.number < currentStep
-                    ? '#00FF7F'
-                    : 'rgba(255, 255, 255, 0.2)'
+                    ? '#D1F07B'
+                    : 'rgba(0, 0, 0, 0.1)'
               }}
             />
           )}

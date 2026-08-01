@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Smartphone, Calculator, Truck, Landmark } from 'lucide-react';
 import Navbar from '../components/dashboard/Navbar';
 import Sidebar from '../components/dashboard/Sidebar';
 
@@ -7,7 +8,8 @@ interface Integration {
   id: string;
   name: string;
   description: string;
-  logoFile: string;
+  logoFile?: string;
+  logoFallback?: string;
   logoBg: string;
   connected: boolean;
   lastSync?: string;
@@ -50,7 +52,7 @@ const integrations: Integration[] = [
     name: 'Jurnal',
     description: 'Sinkronisasi laporan keuangan otomatis dengan Jurnal.id',
     logoFile: '/logos/logo jurnal.png',
-    logoBg: '#fff',
+    logoBg: '#1A1A1B',
     connected: false,
     category: 'akuntansi'
   },
@@ -59,7 +61,7 @@ const integrations: Integration[] = [
     name: 'Accurate',
     description: 'Integrasi dengan Accurate Online untuk pembukuan bisnis Anda',
     logoFile: '/logos/logo accurate.webp',
-    logoBg: '#fff',
+    logoBg: '#1A1A1B',
     connected: false,
     category: 'akuntansi'
   },
@@ -69,7 +71,7 @@ const integrations: Integration[] = [
     name: 'GudangAda',
     description: 'Pesan stok langsung ke supplier lewat platform GudangAda',
     logoFile: '/logos/logo gudangada.png',
-    logoBg: '#fff',
+    logoBg: '#1A1A1B',
     connected: false,
     category: 'logistik'
   },
@@ -78,7 +80,7 @@ const integrations: Integration[] = [
     name: 'Deliveree',
     description: 'Atur pengiriman barang dengan armada Deliveree secara mudah',
     logoFile: '/logos/logo Deliveree.png',
-    logoBg: '#fff',
+    logoBg: '#1A1A1B',
     connected: false,
     category: 'logistik'
   },
@@ -87,7 +89,7 @@ const integrations: Integration[] = [
     name: 'J&T Cargo',
     description: 'Lacak dan kelola pengiriman kargo J&T secara terintegrasi',
     logoFile: '/logos/logo J&T Cargo.png',
-    logoBg: '#fff',
+    logoBg: '#1A1A1B',
     connected: false,
     category: 'logistik'
   },
@@ -97,17 +99,17 @@ const integrations: Integration[] = [
     name: 'Modalku',
     description: 'Akses modal usaha fleksibel lewat platform pinjaman Modalku',
     logoFile: '/logos/logo modalku.png',
-    logoBg: '#fff',
+    logoBg: '#1A1A1B',
     connected: false,
     category: 'fintech'
   }
 ];
 
 const categories = [
-  { id: 'pos', label: '📱 SISTEM POS' },
-  { id: 'akuntansi', label: '📊 SOFTWARE AKUNTANSI' },
-  { id: 'logistik', label: '🚚 SUPPLIER & LOGISTIK' },
-  { id: 'fintech', label: '💰 FINTECH & LENDING' }
+  { id: 'pos', label: 'SISTEM POS', icon: Smartphone },
+  { id: 'akuntansi', label: 'SOFTWARE AKUNTANSI', icon: Calculator },
+  { id: 'logistik', label: 'SUPPLIER & LOGISTIK', icon: Truck },
+  { id: 'fintech', label: 'FINTECH & LENDING', icon: Landmark }
 ];
 
 interface ToastMessage {
@@ -147,7 +149,7 @@ export default function Integrasi() {
   return (
     <div
       className="min-h-screen w-full"
-      style={{ background: 'linear-gradient(180deg, #0F0F0F 0%, #1a0f2e 100%)' }}
+      style={{ background: '#f8fafc' }}
     >
       <Sidebar activePage="integrasi" />
       <Navbar />
@@ -161,7 +163,7 @@ export default function Integrasi() {
               initial={{ opacity: 0, x: 60, scale: 0.9 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: 60, scale: 0.9 }}
-              className="px-5 py-3 rounded-xl text-sm font-bold text-white shadow-xl"
+              className="px-5 py-3 rounded-full text-sm font-bold text-[#1A1A1B] shadow-xl"
               style={{
                 background:
                   toast.type === 'success'
@@ -174,7 +176,7 @@ export default function Integrasi() {
                     : '0 8px 24px rgba(230,50,32,0.3)'
               }}
             >
-              {toast.type === 'success' ? '✓' : '✕'} {toast.message}
+              {toast.type === 'success' ? '' : '✕'} {toast.message}
             </motion.div>
           ))}
         </AnimatePresence>
@@ -185,9 +187,9 @@ export default function Integrasi() {
         {/* Header */}
         <div className="flex justify-between items-start">
           <div>
-            <h1 className="text-xl font-bold text-white">INTEGRASI & KONEKSI</h1>
-            <p className="text-sm text-[#E8E8E8] mt-1">
-              Hubungkan RestockAI dengan tools bisnis Anda
+            <h1 className="text-xl font-bold text-[#1A1A1B]">INTEGRASI & KONEKSI</h1>
+            <p className="text-sm text-[#4B5563] mt-1">
+              Hubungkan Restock AI dengan tools bisnis Anda
             </p>
           </div>
 
@@ -195,12 +197,11 @@ export default function Integrasi() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="px-5 py-2 rounded-full border text-sm font-bold"
+            className="px-5 py-2 rounded-2xl border text-sm font-bold"
             style={{
-              background: 'rgba(0,255,127,0.12)',
+              background: 'rgba(16,185,129,0.15)',
               borderColor: 'rgba(0,255,127,0.4)',
-              color: '#00FF7F'
-            }}
+              color: '#1A1A1B'}}
           >
             {connectedCount} dari {integrations.length} terhubung
           </motion.div>
@@ -215,9 +216,10 @@ export default function Integrasi() {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: catIndex * 0.08 }}
-                className="text-sm font-bold text-white"
+                className="flex items-center gap-2 text-sm font-bold text-[#1A1A1B]"
                 style={{ marginTop: catIndex === 0 ? 32 : 36, marginBottom: 12 }}
               >
+                <category.icon size={16} strokeWidth={2.25} />
                 {category.label}
               </motion.p>
 
@@ -274,13 +276,13 @@ function IntegrationCard({ integration, isConnected, isLoading, onToggle, delay 
         padding: 24,
         background: isConnected
           ? `rgba(0, 255, 127, 0.08)`
-          : 'rgba(255, 255, 255, 0.06)',
+          : 'rgba(0, 0, 0, 0.03)',
         backdropFilter: 'blur(12px)',
         borderColor: hovered
-          ? '#00FFFF'
+          ? '#98E2FD'
           : isConnected
           ? 'rgba(0, 255, 127, 0.35)'
-          : 'rgba(255, 255, 255, 0.15)',
+          : 'rgba(0, 0, 0, 0.08)',
         boxShadow: hovered
           ? '0 12px 32px rgba(0, 255, 255, 0.2)'
           : isConnected
@@ -293,18 +295,18 @@ function IntegrationCard({ integration, isConnected, isLoading, onToggle, delay 
       <div className="absolute top-5 right-5">
         {isConnected ? (
           <span
-            className="text-[10px] font-bold text-white px-3 py-1 rounded-full"
+            className="text-[10px] font-bold text-[#1A1A1B] px-3 py-1 rounded-full"
             style={{
-              background: 'linear-gradient(135deg, #00C853, #00FF7F)',
+              background: 'linear-gradient(135deg, #00C853, #D1F07B)',
               boxShadow: '0 0 10px rgba(0, 255, 127, 0.5)'
             }}
           >
-            ✓ Terhubung
+             Terhubung
           </span>
         ) : (
           <span
-            className="text-[10px] font-bold text-[#E8E8E8] px-3 py-1 rounded-full"
-            style={{ background: 'rgba(255, 255, 255, 0.1)' }}
+            className="text-[10px] font-bold text-[#4B5563] px-3 py-1 rounded-full"
+            style={{ background: 'rgba(0, 0, 0, 0.05)' }}
           >
             Tidak Terhubung
           </span>
@@ -313,26 +315,29 @@ function IntegrationCard({ integration, isConnected, isLoading, onToggle, delay 
 
       {/* Logo */}
       <div
-        className="w-[60px] h-[60px] rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden"
+        className="w-[64px] h-[64px] rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden bg-white"
         style={{
-          background: integration.logoBg,
-          boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
-          padding: 6,
+          boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+          padding: 8,
         }}
       >
-        <img
-          src={integration.logoFile}
-          alt={integration.name}
-          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-        />
+        {integration.logoFile ? (
+          <img
+            src={integration.logoFile}
+            alt={integration.name}
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+          />
+        ) : (
+          <span className="text-sm font-bold text-[#1A1A1B]">{integration.logoFallback}</span>
+        )}
       </div>
 
       {/* Title */}
-      <h3 className="text-base font-bold text-white mt-4">{integration.name}</h3>
+      <h3 className="text-base font-bold text-[#1A1A1B] mt-4">{integration.name}</h3>
 
       {/* Description */}
       <p
-        className="text-xs text-[#E8E8E8] mt-1"
+        className="text-xs text-[#4B5563] mt-1"
         style={{ lineHeight: 1.5 }}
       >
         {integration.description}
@@ -340,7 +345,7 @@ function IntegrationCard({ integration, isConnected, isLoading, onToggle, delay 
 
       {/* Last sync */}
       {isConnected && (
-        <p className="text-[10px] text-[#E8E8E8] mt-2">
+        <p className="text-[10px] text-[#4B5563] mt-2">
           Sinkronisasi terakhir: {integration.lastSync ?? 'baru saja'}
         </p>
       )}
@@ -353,24 +358,23 @@ function IntegrationCard({ integration, isConnected, isLoading, onToggle, delay 
             whileHover={{ boxShadow: '0 0 16px rgba(230, 50, 32, 0.5)' }}
             whileTap={{ scale: 0.97 }}
             disabled={isLoading}
-            className="w-full h-10 rounded-xl text-sm font-bold border transition-all"
+            className="w-full h-10 rounded-full text-sm font-bold border transition-all"
             style={{
               background: 'transparent',
               borderColor: '#E63220',
-              color: '#E63220'
-            }}
+              color: '#1A1A1B'}}
           >
             {isLoading ? <SpinnerIcon /> : 'Disconnect'}
           </motion.button>
         ) : (
           <motion.button
             onClick={(e) => { e.stopPropagation(); onToggle(); }}
-            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(139, 75, 190, 0.6)' }}
+            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(152, 226, 253, 0.6)' }}
             whileTap={{ scale: 0.98 }}
             disabled={isLoading}
-            className="w-full h-10 rounded-xl text-sm font-bold text-white transition-all"
+            className="w-full h-10 rounded-full text-sm font-bold text-[#1A1A1B] transition-all"
             style={{
-              background: 'linear-gradient(135deg, #4A1063, #8B4BBE)'
+              background: '#FFE16F'
             }}
           >
             {isLoading ? <SpinnerIcon /> : 'Hubungkan'}

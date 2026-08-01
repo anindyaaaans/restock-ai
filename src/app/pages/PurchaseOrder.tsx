@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import Navbar from '../components/dashboard/Navbar';
 import Sidebar from '../components/dashboard/Sidebar';
 import POStatusIndicator from '../components/po/POStatusIndicator';
-import { X, Calendar, ChevronRight, ShieldCheck, Clock, Zap } from 'lucide-react';
+import { X, Calendar, ChevronRight, ShieldCheck, Clock, Zap, Pin, ClipboardList, PartyPopper } from 'lucide-react';
 
 interface RecommendedProduct {
   id: string;
@@ -112,31 +112,31 @@ function FinancingBanner({ totalPO }: { totalPO: number }) {
           transition={{ duration: 0.35 }}
           className="rounded-2xl overflow-hidden mb-6"
           style={{
-            background: 'linear-gradient(135deg, #071a2e 0%, #0d2233 50%, #0a1f1a 100%)',
-            border: '1px solid rgba(0,200,160,0.3)',
-            boxShadow: '0 4px 32px rgba(0,180,140,0.08)',
+            background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+            border: '1px solid rgba(0, 0, 0, 0.08)',
+            boxShadow: '0 4px 32px rgba(0, 0, 0, 0.04)',
           }}
         >
           {/* ── Top accent line ── */}
-          <div style={{ height: 3, background: 'linear-gradient(90deg, #00C8A0, #00FFCC, #4A1063)' }} />
+          <div style={{ height: 3, background: 'linear-gradient(90deg, #98E2FD, #FFE16F, #D1F07B)' }} />
 
           <div className="flex items-stretch" style={{ padding: '20px 24px', gap: 0 }}>
 
             {/* ── LEFT: Branding + headline ── */}
-            <div className="flex flex-col justify-center" style={{ flex: '0 0 260px', paddingRight: 24, borderRight: '1px solid rgba(255,255,255,0.07)' }}>
+            <div className="flex flex-col justify-center" style={{ flex: '0 0 260px', paddingRight: 24, borderRight: '1px solid rgba(0,0,0,0.06)' }}>
               {/* Co-brand logos */}
               <div className="flex items-center" style={{ gap: 10, marginBottom: 12 }}>
                 <div
-                  className="flex items-center justify-center font-bold text-white"
-                  style={{ width: 32, height: 32, borderRadius: 8, background: 'linear-gradient(135deg,#4A1063,#8B4BBE)', fontSize: 11 }}
+                  className="flex items-center justify-center font-bold text-[#1A1A1B]"
+                  style={{ width: 32, height: 32, borderRadius: 12, background: 'linear-gradient(135deg,#FFE16F,#98E2FD)', fontSize: 11 }}
                 >
                   R
                 </div>
-                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', fontWeight: 700 }}>×</span>
+                <span style={{ fontSize: 11, color: '#4B5563', fontWeight: 700 }}>×</span>
                 <img
                   src="/logos/logo modalku.png"
                   alt="Modalku"
-                  style={{ height: 24, objectFit: 'contain', filter: 'brightness(1.1)' }}
+                  style={{ height: 24, objectFit: 'contain' }}
                   onError={(e) => {
                     const el = e.currentTarget as HTMLImageElement;
                     el.style.display = 'none';
@@ -145,17 +145,17 @@ function FinancingBanner({ totalPO }: { totalPO: number }) {
                 />
                 <div
                   className="items-center justify-center font-bold"
-                  style={{ display: 'none', height: 24, padding: '0 8px', background: 'rgba(0,200,160,0.2)', borderRadius: 6, fontSize: 11, color: '#00C8A0' }}
+                  style={{ display: 'none', height: 24, padding: '0 8px', background: 'rgba(152,226,253,0.2)', borderRadius: 6, fontSize: 11, color: '#1A1A1B' }}
                 >
                   Modalku
                 </div>
               </div>
 
-              <p className="font-bold text-white" style={{ fontSize: 14, lineHeight: 1.4 }}>
-                Butuh modal restock? <span style={{ color: '#00FFCC' }}>Ajukan sekarang</span>
+              <p className="font-bold text-[#1A1A1B]" style={{ fontSize: 14, lineHeight: 1.4 }}>
+                Butuh modal restock? <span style={{ color: '#00A8CC' }}>Ajukan sekarang</span>
               </p>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', marginTop: 6, lineHeight: 1.5 }}>
-                Pembiayaan inventaris berbasis data prediksi AI RestockAI. Proses 1 hari kerja, tanpa agunan.
+              <p style={{ fontSize: 11, color: '#4B5563', marginTop: 6, lineHeight: 1.5 }}>
+                Pembiayaan inventaris berbasis data prediksi AI Restock AI. Proses 1 hari kerja, tanpa agunan.
               </p>
 
               {/* Trust badges */}
@@ -168,7 +168,7 @@ function FinancingBanner({ totalPO }: { totalPO: number }) {
                   <span
                     key={b.text}
                     className="flex items-center font-medium"
-                    style={{ gap: 4, fontSize: 10, color: '#00C8A0', background: 'rgba(0,200,160,0.1)', border: '1px solid rgba(0,200,160,0.2)', borderRadius: 20, padding: '3px 8px' }}
+                    style={{ gap: 4, fontSize: 10, color: '#1A1A1B', background: 'rgba(152,226,253,0.2)', border: '1px solid rgba(152,226,253,0.4)', borderRadius: 20, padding: '3px 8px' }}
                   >
                     {b.icon}{b.text}
                   </span>
@@ -177,21 +177,21 @@ function FinancingBanner({ totalPO }: { totalPO: number }) {
             </div>
 
             {/* ── CENTER: Tenor selector + calculation ── */}
-            <div className="flex flex-col justify-center" style={{ flex: 1, padding: '0 24px', borderRight: '1px solid rgba(255,255,255,0.07)' }}>
+            <div className="flex flex-col justify-center" style={{ flex: 1, padding: '0 24px', borderRight: '1px solid rgba(0,0,0,0.06)' }}>
               {/* PO amount */}
               <div className="flex items-baseline" style={{ gap: 8, marginBottom: 14 }}>
-                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)' }}>Total PO:</span>
-                <span className="font-bold text-white" style={{ fontSize: 18 }}>{fmt(totalPO)}</span>
+                <span style={{ fontSize: 11, color: '#4B5563' }}>Total PO:</span>
+                <span className="font-bold text-[#1A1A1B]" style={{ fontSize: 18 }}>{fmt(totalPO)}</span>
                 {eligible && (
-                  <span style={{ fontSize: 10, color: '#00FF7F', background: 'rgba(0,255,127,0.12)', borderRadius: 20, padding: '2px 8px', fontWeight: 700 }}>
-                    ✓ Memenuhi Syarat
+                  <span style={{ fontSize: 10, color: '#1A1A1B', background: 'rgba(209, 240, 123, 0.5)', borderRadius: 20, padding: '2px 8px', fontWeight: 700 }}>
+                    Memenuhi Syarat
                   </span>
                 )}
               </div>
 
               {/* Tenor chips */}
               <div style={{ marginBottom: 14 }}>
-                <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8, fontWeight: 700 }}>
+                <p style={{ fontSize: 10, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8, fontWeight: 700 }}>
                   Pilih Tenor
                 </p>
                 <div className="flex" style={{ gap: 8 }}>
@@ -202,15 +202,15 @@ function FinancingBanner({ totalPO }: { totalPO: number }) {
                       style={{
                         height: 36,
                         padding: '0 16px',
-                        borderRadius: 10,
+                        borderRadius: 12,
                         fontSize: 12,
                         fontWeight: 700,
                         cursor: 'pointer',
                         transition: 'all 0.18s',
-                        background: tenor === t ? 'linear-gradient(135deg,#00947A,#00C8A0)' : 'rgba(255,255,255,0.05)',
-                        border: tenor === t ? 'none' : '1px solid rgba(255,255,255,0.12)',
-                        color: tenor === t ? '#0F0F0F' : 'rgba(255,255,255,0.55)',
-                        boxShadow: tenor === t ? '0 4px 12px rgba(0,200,160,0.35)' : 'none',
+                        background: tenor === t ? '#98E2FD' : '#f8fafc',
+                        border: tenor === t ? 'none' : '1px solid rgba(0,0,0,0.08)',
+                        color: tenor === t ? '#1A1A1B' : '#4B5563',
+                        boxShadow: tenor === t ? '0 4px 12px rgba(152,226,253,0.4)' : 'none',
                       }}
                     >
                       {t} Bulan
@@ -222,21 +222,21 @@ function FinancingBanner({ totalPO }: { totalPO: number }) {
               {/* Calculation breakdown */}
               <div
                 className="flex"
-                style={{ gap: 20, padding: '12px 16px', background: 'rgba(0,200,160,0.06)', borderRadius: 10, border: '1px solid rgba(0,200,160,0.12)' }}
+                style={{ gap: 20, padding: '12px 16px', background: 'rgba(152,226,253,0.1)', borderRadius: 12, border: '1px solid rgba(152,226,253,0.3)' }}
               >
                 {[
-                  { label: 'Cicilan/Bulan', value: fmt(monthly), color: '#00FFCC', big: true },
-                  { label: `Total Bayar (${tenor} bln)`, value: fmt(totalRepay), color: '#fff' },
-                  { label: 'Bunga Total', value: fmt(interest), color: 'rgba(255,255,255,0.45)' },
+                  { label: 'Cicilan/Bulan', value: fmt(monthly), color: '#1A1A1B', big: true },
+                  { label: `Total Bayar (${tenor} bln)`, value: fmt(totalRepay), color: '#1A1A1B' },
+                  { label: 'Bunga Total', value: fmt(interest), color: '#1A1A1B' },
                 ].map((stat) => (
                   <div key={stat.label} style={{ flex: 1 }}>
-                    <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', marginBottom: 4 }}>{stat.label}</p>
+                    <p style={{ fontSize: 10, color: '#4B5563', marginBottom: 4 }}>{stat.label}</p>
                     <p className="font-bold" style={{ fontSize: stat.big ? 15 : 13, color: stat.color }}>{stat.value}</p>
                   </div>
                 ))}
               </div>
 
-              <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', marginTop: 8 }}>
+              <p style={{ fontSize: 10, color: '#8A8A8A', marginTop: 8 }}>
                 *Simulasi. Bunga flat 1.5%/bulan. Syarat & ketentuan berlaku.
               </p>
             </div>
@@ -245,29 +245,29 @@ function FinancingBanner({ totalPO }: { totalPO: number }) {
             <div className="flex flex-col justify-between" style={{ flex: '0 0 220px', paddingLeft: 24 }}>
               {/* Eligibility from AI data */}
               <div
-                style={{ background: 'rgba(0,255,127,0.06)', border: '1px solid rgba(0,255,127,0.15)', borderRadius: 10, padding: '10px 12px', marginBottom: 16 }}
+                style={{ background: '#f8fafc', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 12, padding: '10px 12px', marginBottom: 16 }}
               >
-                <p style={{ fontSize: 10, color: '#00FF7F', fontWeight: 700, marginBottom: 4 }}>🧠 AI Pre-screening</p>
-                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-                  Berdasarkan 6 bulan riwayat transaksi, skor kredit Anda <span style={{ color: '#00FF7F', fontWeight: 700 }}>Sangat Baik</span>.
+                <p style={{ fontSize: 10, color: '#1A1A1B', fontWeight: 700, marginBottom: 4 }}>AI Pre-screening</p>
+                <p style={{ fontSize: 11, color: '#4B5563', lineHeight: 1.5 }}>
+                  Berdasarkan 6 bulan riwayat transaksi, skor kredit Anda <span style={{ color: '#00A8CC', fontWeight: 700 }}>Sangat Baik</span>.
                 </p>
                 <div className="flex items-center" style={{ gap: 6, marginTop: 8 }}>
-                  <div style={{ flex: 1, height: 4, background: 'rgba(255,255,255,0.08)', borderRadius: 4 }}>
+                  <div style={{ flex: 1, height: 4, background: 'rgba(0, 0, 0, 0.04)', borderRadius: 4 }}>
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: '82%' }}
                       transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
-                      style={{ height: '100%', background: 'linear-gradient(90deg,#00FF7F,#00FFCC)', borderRadius: 4 }}
+                      style={{ height: '100%', background: '#D1F07B', borderRadius: 4 }}
                     />
                   </div>
-                  <span style={{ fontSize: 10, color: '#00FF7F', fontWeight: 700 }}>82/100</span>
+                  <span style={{ fontSize: 10, color: '#1A1A1B', fontWeight: 700 }}>82/100</span>
                 </div>
               </div>
 
               {/* CTA */}
               {!applied ? (
                 <motion.button
-                  whileHover={!applying ? { boxShadow: '0 0 24px rgba(0,200,160,0.5)' } : {}}
+                  whileHover={!applying ? { boxShadow: '0 0 24px rgba(255, 225, 111, 0.5)' } : {}}
                   whileTap={{ scale: 0.97 }}
                   onClick={handleApply}
                   disabled={applying || !eligible}
@@ -278,10 +278,10 @@ function FinancingBanner({ totalPO }: { totalPO: number }) {
                     fontSize: 13,
                     cursor: eligible ? 'pointer' : 'not-allowed',
                     background: eligible
-                      ? 'linear-gradient(135deg,#00947A,#00C8A0)'
-                      : 'rgba(255,255,255,0.08)',
-                    border: 'none',
-                    color: eligible ? '#0F0F0F' : '#555',
+                      ? '#FFE16F'
+                      : '#f1f5f9',
+                    border: eligible ? 'none' : '1px solid #e2e8f0',
+                    color: eligible ? '#1A1A1B' : '#94a3b8',
                     gap: 6,
                     transition: 'all 0.2s',
                     opacity: applying ? 0.7 : 1,
@@ -306,9 +306,9 @@ function FinancingBanner({ totalPO }: { totalPO: number }) {
                   className="flex flex-col items-center"
                   style={{ padding: '10px 0', gap: 6 }}
                 >
-                  <span style={{ fontSize: 22 }}>🎉</span>
-                  <p className="font-bold text-white text-center" style={{ fontSize: 13 }}>Pengajuan Terkirim!</p>
-                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', textAlign: 'center' }}>
+                  <PartyPopper size={22} color="#1A1A1B" />
+                  <p className="font-bold text-[#1A1A1B] text-center" style={{ fontSize: 13 }}>Pengajuan Terkirim!</p>
+                  <p style={{ fontSize: 11, color: '#4B5563', textAlign: 'center' }}>
                     Tim Modalku akan menghubungi dalam 1 hari kerja.
                   </p>
                 </motion.div>
@@ -317,9 +317,9 @@ function FinancingBanner({ totalPO }: { totalPO: number }) {
               {/* Learn more */}
               {!applied && (
                 <button
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 11, color: 'rgba(0,200,160,0.7)', marginTop: 8, textAlign: 'center' }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = '#00C8A0'; e.currentTarget.style.textDecoration = 'underline'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(0,200,160,0.7)'; e.currentTarget.style.textDecoration = 'none'; }}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 11, color: '#00A8CC', marginTop: 8, textAlign: 'center' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.textDecoration = 'underline'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.textDecoration = 'none'; }}
                 >
                   Pelajari Syarat & Ketentuan →
                 </button>
@@ -335,8 +335,8 @@ function FinancingBanner({ totalPO }: { totalPO: number }) {
               position: 'absolute',
               top: 12,
               right: 12,
-              background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(255,255,255,0.1)',
+              background: '#f8fafc',
+              border: '1px solid rgba(0,0,0,0.1)',
               borderRadius: '50%',
               width: 24,
               height: 24,
@@ -418,7 +418,7 @@ export default function PurchaseOrder() {
     <div
       className="min-h-screen w-full"
       style={{
-        background: 'linear-gradient(180deg, #0F0F0F 0%, #1a0f2e 100%)'
+        background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)'
       }}
     >
       <Sidebar activePage="pembelian" />
@@ -428,7 +428,7 @@ export default function PurchaseOrder() {
       <main className="ml-60" style={{ padding: "96px 40px 32px" }}>
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-xl font-bold text-white mb-4">
+          <h1 className="text-xl font-bold text-[#0f172a] mb-4">
             ONE-CLICK RESTOCK & PURCHASE ORDER
           </h1>
           <POStatusIndicator currentStep={1} />
@@ -445,15 +445,15 @@ export default function PurchaseOrder() {
           <div
             className="rounded-2xl p-7 border flex flex-col"
             style={{
-              background: 'rgba(255, 255, 255, 0.05)',
+              background: 'rgba(0, 0, 0, 0.03)',
               backdropFilter: 'blur(12px)',
-              borderColor: 'rgba(255, 255, 255, 0.15)'
+              borderColor: 'rgba(0, 0, 0, 0.08)'
             }}
           >
-            <h2 className="text-sm font-bold text-white mb-2">
-              📌 REKOMENDASI RESTOK AI
+            <h2 className="text-sm font-bold text-[#1A1A1B] mb-2 flex items-center gap-2">
+              <Pin size={16} color="#1A1A1B" /> REKOMENDASI RESTOK AI
             </h2>
-            <p className="text-xs text-[#E8E8E8] mb-5">
+            <p className="text-xs text-[#4B5563] mb-5">
               Produk yang perlu direstock berdasarkan prediksi
             </p>
 
@@ -466,32 +466,32 @@ export default function PurchaseOrder() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
                   onClick={() => addItemFromRecommendation(rec)}
-                  className="py-3 border-b border-white/5 cursor-pointer transition-all hover:bg-white/5 px-2 rounded-lg"
+                  className="py-3 border-b border-black/5 cursor-pointer transition-all hover:bg-black/[0.02] px-2 rounded-lg"
                 >
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex-1">
-                      <h4 className="text-xs font-bold text-white">
+                      <h4 className="text-xs font-bold text-[#1A1A1B]">
                         {rec.name}
                       </h4>
-                      <p className="text-[10px] text-[#E8E8E8] mt-1">
+                      <p className="text-[10px] text-[#4B5563] mt-1">
                         Stok: {rec.currentStock} pcs
                       </p>
                     </div>
                     <div
                       className="px-2 py-1 rounded-full text-[10px] font-bold"
                       style={{
-                        background: 'linear-gradient(135deg, #F5E04A, #FFD700)',
-                        color: '#0F0F0F'
+                        background: '#FFE16F',
+                        color: '#1A1A1B'
                       }}
                     >
                       {rec.recommendedQty} pcs
                     </div>
                   </div>
                   <div className="flex justify-between items-center text-[11px]">
-                    <span className="text-white">
+                    <span className="text-[#1A1A1B]">
                       {formatCurrency(rec.pricePerUnit)}/pcs
                     </span>
-                    <span className="font-bold text-white">
+                    <span className="font-bold text-[#1A1A1B]">
                       {formatCurrencyLarge(rec.recommendedQty * rec.pricePerUnit)}
                     </span>
                   </div>
@@ -501,15 +501,15 @@ export default function PurchaseOrder() {
 
             {/* Total Recommendation */}
             <div
-              className="mt-auto p-4 rounded-xl border"
+              className="mt-auto p-4 rounded-2xl border"
               style={{
-                background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
-                borderColor: '#00FF7F',
-                boxShadow: '0 8px 24px rgba(74, 16, 99, 0.4)'
+                background: '#FFE16F',
+                borderColor: '#1A1A1B',
+                boxShadow: '0 8px 24px rgba(255, 225, 111, 0.4)'
               }}
             >
-              <p className="text-xs text-white mb-1">Total Rekomendasi:</p>
-              <p className="text-xl font-bold text-white">
+              <p className="text-xs text-[#1A1A1B] mb-1">Total Rekomendasi:</p>
+              <p className="text-xl font-bold text-[#1A1A1B]">
                 {formatCurrencyLarge(totalRecommendation)}
               </p>
             </div>
@@ -519,27 +519,27 @@ export default function PurchaseOrder() {
           <div
             className="rounded-2xl p-7 border flex flex-col"
             style={{
-              background: 'rgba(255, 255, 255, 0.06)',
+              background: 'rgba(0, 0, 0, 0.03)',
               backdropFilter: 'blur(12px)',
-              borderColor: 'rgba(255, 255, 255, 0.15)'
+              borderColor: 'rgba(0, 0, 0, 0.08)'
             }}
           >
-            <h2 className="text-sm font-bold text-white mb-6">📋 DRAFT PO</h2>
+            <h2 className="text-sm font-bold text-[#1A1A1B] mb-6 flex items-center gap-2"><ClipboardList size={18} color="#1A1A1B" /> DRAFT PO</h2>
 
             {/* Form Fields */}
             <div className="space-y-4 mb-6">
               {/* Supplier */}
               <div>
-                <label className="block text-[10px] uppercase font-bold text-[#E8E8E8] mb-2">
+                <label className="block text-[10px] uppercase font-bold text-[#4B5563] mb-2">
                   Pilih Supplier
                 </label>
                 <select
                   value={supplier}
                   onChange={(e) => setSupplier(e.target.value)}
-                  className="w-full h-11 px-4 rounded-xl border text-sm text-[#E8E8E8] transition-all focus:outline-none focus:border-cyan-400"
+                  className="w-full h-11 px-4 rounded-2xl border text-sm text-[#4B5563] transition-all focus:outline-none focus:border-cyan-400"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    borderColor: 'rgba(255, 255, 255, 0.2)'
+                    background: 'rgba(0, 0, 0, 0.03)',
+                    borderColor: 'rgba(0, 0, 0, 0.1)'
                   }}
                 >
                   <option value="GudangAda">GudangAda</option>
@@ -550,7 +550,7 @@ export default function PurchaseOrder() {
 
               {/* Delivery Date */}
               <div>
-                <label className="block text-[10px] uppercase font-bold text-[#E8E8E8] mb-2">
+                <label className="block text-[10px] uppercase font-bold text-[#4B5563] mb-2">
                   Tanggal Pengiriman
                 </label>
                 <div className="relative">
@@ -558,32 +558,32 @@ export default function PurchaseOrder() {
                     type="text"
                     value={deliveryDate}
                     onChange={(e) => setDeliveryDate(e.target.value)}
-                    className="w-full h-11 px-4 pr-10 rounded-xl border text-sm text-[#E8E8E8] transition-all focus:outline-none focus:border-cyan-400"
+                    className="w-full h-11 px-4 pr-10 rounded-2xl border text-sm text-[#4B5563] transition-all focus:outline-none focus:border-cyan-400"
                     style={{
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      borderColor: 'rgba(255, 255, 255, 0.2)'
+                      background: 'rgba(0, 0, 0, 0.03)',
+                      borderColor: 'rgba(0, 0, 0, 0.1)'
                     }}
                   />
                   <Calendar
                     size={16}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4B5563]"
                   />
                 </div>
               </div>
 
               {/* Notes */}
               <div>
-                <label className="block text-[10px] uppercase font-bold text-[#E8E8E8] mb-2">
+                <label className="block text-[10px] uppercase font-bold text-[#4B5563] mb-2">
                   Catatan (Opsional)
                 </label>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Catatan khusus untuk supplier..."
-                  className="w-full h-20 px-4 py-3 rounded-xl border text-sm text-[#E8E8E8] placeholder-white/50 resize-none transition-all focus:outline-none focus:border-cyan-400"
+                  className="w-full h-20 px-4 py-3 rounded-2xl border text-sm text-[#4B5563] placeholder-gray-400 resize-none transition-all focus:outline-none focus:border-cyan-400"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    borderColor: 'rgba(255, 255, 255, 0.2)'
+                    background: 'rgba(0, 0, 0, 0.03)',
+                    borderColor: 'rgba(0, 0, 0, 0.1)'
                   }}
                 />
               </div>
@@ -591,14 +591,14 @@ export default function PurchaseOrder() {
 
             {/* PO Items Table */}
             <div
-              className="rounded-xl p-4 mb-6 overflow-x-auto"
+              className="rounded-2xl p-4 mb-6 overflow-x-auto"
               style={{
-                background: 'rgba(255, 255, 255, 0.04)'
+                background: 'rgba(0, 0, 0, 0.02)'
               }}
             >
               <table className="w-full text-xs">
                 <thead>
-                  <tr className="text-[10px] uppercase font-bold text-[#E8E8E8] border-b border-white/10">
+                  <tr className="text-[10px] uppercase font-bold text-[#4B5563] border-b border-gray-100">
                     <th className="text-left pb-2">Produk</th>
                     <th className="text-center pb-2">Qty</th>
                     <th className="text-right pb-2">Harga</th>
@@ -611,9 +611,9 @@ export default function PurchaseOrder() {
                     <motion.tr
                       key={item.id}
                       layout
-                      className="border-b border-white/5 hover:bg-white/5 transition-all"
+                      className="border-b border-black/5 hover:bg-black/[0.02] transition-all"
                     >
-                      <td className="py-3 text-white font-bold">{item.name}</td>
+                      <td className="py-3 text-[#1A1A1B] font-bold">{item.name}</td>
                       <td className="py-3 text-center">
                         <input
                           type="number"
@@ -621,15 +621,15 @@ export default function PurchaseOrder() {
                           onChange={(e) =>
                             updateQty(item.id, parseInt(e.target.value) || 1)
                           }
-                          className="w-16 h-8 px-2 text-center rounded-lg border text-white bg-white/5 focus:outline-none focus:border-cyan-400"
-                          style={{ borderColor: 'rgba(255, 255, 255, 0.2)' }}
+                          className="w-16 h-8 px-2 text-center rounded-lg border text-[#1A1A1B] bg-white focus:outline-none focus:border-cyan-400"
+                          style={{ borderColor: 'rgba(0, 0, 0, 0.1)' }}
                           min="1"
                         />
                       </td>
-                      <td className="py-3 text-right text-white">
+                      <td className="py-3 text-right text-[#1A1A1B]">
                         {formatCurrency(item.pricePerUnit)}
                       </td>
-                      <td className="py-3 text-right text-white font-bold">
+                      <td className="py-3 text-right text-[#1A1A1B] font-bold">
                         {formatCurrencyLarge(item.qty * item.pricePerUnit)}
                       </td>
                       <td className="py-3 text-center">
@@ -637,7 +637,7 @@ export default function PurchaseOrder() {
                           onClick={() => removeItem(item.id)}
                           className="p-1 hover:text-red-500 transition-colors"
                         >
-                          <X size={14} className="text-white" />
+                          <X size={14} className="text-[#1A1A1B]" />
                         </button>
                       </td>
                     </motion.tr>
@@ -648,11 +648,11 @@ export default function PurchaseOrder() {
 
             {/* Total & Actions */}
             <div className="mt-auto">
-              <div className="h-px bg-white/10 mb-4" />
+              <div className="h-px bg-black/10 mb-4" />
 
               <div className="flex justify-between items-center mb-4">
-                <span className="text-sm text-[#E8E8E8]">Total:</span>
-                <span className="text-xl font-bold text-white">
+                <span className="text-sm text-[#4B5563]">Total:</span>
+                <span className="text-xl font-bold text-[#1A1A1B]">
                   {formatCurrencyLarge(totalPO)}
                 </span>
               </div>
@@ -661,10 +661,10 @@ export default function PurchaseOrder() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full h-12 rounded-xl font-bold text-white"
+                  className="w-full h-12 rounded-full font-bold text-[#1A1A1B]"
                   style={{
-                    background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
-                    boxShadow: '0 4px 16px rgba(74, 16, 99, 0.4)'
+                    background: '#FFE16F',
+                    boxShadow: '0 4px 16px rgba(255, 225, 111, 0.4)'
                   }}
                 >
                   Kirim ke Supplier
@@ -673,16 +673,16 @@ export default function PurchaseOrder() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full h-11 rounded-xl border font-bold text-cyan-400 transition-all"
+                  className="w-full h-11 rounded-2xl border font-bold text-[#1A1A1B] transition-all"
                   style={{
                     background: 'transparent',
-                    borderColor: 'rgba(255, 255, 255, 0.3)'
+                    borderColor: 'rgba(0, 0, 0, 0.15)'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(0, 255, 255, 0.6)';
+                    e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.35)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                    e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.15)';
                   }}
                 >
                   Simpan Draft

@@ -26,9 +26,9 @@ export default function OnboardingStep1() {
           className="absolute inset-0"
           animate={{
             background: [
-              'linear-gradient(135deg, #0F0F0F 0%, #2a0f4a 100%)',
-              'linear-gradient(135deg, #2a0f4a 0%, #0F0F0F 100%)',
-              'linear-gradient(135deg, #0F0F0F 0%, #2a0f4a 100%)',
+              'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%)',
+              'linear-gradient(135deg, #E2E8F0 0%, #FFFFFF 100%)',
+              'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%)',
             ],
           }}
           transition={{
@@ -41,7 +41,7 @@ export default function OnboardingStep1() {
         {/* Floating Shapes */}
         <motion.div
           className="absolute w-64 h-64 rounded-full opacity-10 blur-3xl"
-          style={{ background: 'radial-gradient(circle, #8B4BBE, transparent)' }}
+          style={{ background: 'radial-gradient(circle, #98E2FD, transparent)' }}
           animate={{
             x: [0, 50, 0],
             y: [0, 30, 0],
@@ -66,19 +66,19 @@ export default function OnboardingStep1() {
 
         {/* Form Card */}
         <div
-          className="rounded-3xl p-12 border"
+          className="rounded-2xl p-12 border"
           style={{
-            background: 'rgba(255, 255, 255, 0.08)',
+            background: 'rgba(0, 0, 0, 0.04)',
             backdropFilter: 'blur(20px)',
-            borderColor: 'rgba(255, 255, 255, 0.15)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+            borderColor: 'rgba(0, 0, 0, 0.08)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.05)'
           }}
         >
           {/* Title */}
-          <h1 className="text-3xl font-bold text-white mb-3">
-            Buat Akun RestockAI
+          <h1 className="text-3xl font-bold text-[#1A1A1B] mb-3">
+            Buat Akun Restock AI
           </h1>
-          <p className="text-sm text-[#E8E8E8] mb-8">
+          <p className="text-sm text-[#4B5563] mb-8">
             Langkah 1 dari 3
           </p>
 
@@ -86,7 +86,7 @@ export default function OnboardingStep1() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email Field */}
             <div>
-              <label className="block text-xs font-medium text-white uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-[#1A1A1B] uppercase tracking-wider mb-2">
                 Email
               </label>
               <input
@@ -94,27 +94,27 @@ export default function OnboardingStep1() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="nama@email.com"
-                className="w-full h-12 px-4 rounded-xl border text-sm text-[#E8E8E8] placeholder-white/50 transition-all focus:outline-none focus:border-cyan-400"
+                className="w-full h-12 px-4 rounded-2xl border text-sm text-[#4B5563] placeholder-white/50 transition-all focus:outline-none focus:border-cyan-400"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  borderColor: 'rgba(255, 255, 255, 0.2)'
+                  background: 'rgba(0, 0, 0, 0.03)',
+                  borderColor: 'rgba(0, 0, 0, 0.1)'
                 }}
                 onFocus={(e) => {
                   e.target.style.borderColor = 'rgba(0, 255, 255, 0.8)';
                   e.target.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.2)';
-                  e.target.style.background = 'rgba(255, 255, 255, 0.08)';
+                  e.target.style.background = 'rgba(0, 0, 0, 0.04)';
                 }}
                 onBlur={(e) => {
-                  e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                  e.target.style.borderColor = 'rgba(0, 0, 0, 0.1)';
                   e.target.style.boxShadow = 'none';
-                  e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                  e.target.style.background = 'rgba(0, 0, 0, 0.03)';
                 }}
               />
             </div>
 
             {/* Password Field */}
             <div>
-              <label className="block text-xs font-medium text-white uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-[#1A1A1B] uppercase tracking-wider mb-2">
                 Password
               </label>
               <div className="relative">
@@ -123,26 +123,26 @@ export default function OnboardingStep1() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Minimal 8 karakter"
-                  className="w-full h-12 px-4 pr-12 rounded-xl border text-sm text-[#E8E8E8] placeholder-white/50 transition-all focus:outline-none focus:border-cyan-400"
+                  className="w-full h-12 px-4 pr-12 rounded-2xl border text-sm text-[#4B5563] placeholder-white/50 transition-all focus:outline-none focus:border-cyan-400"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    borderColor: 'rgba(255, 255, 255, 0.2)'
+                    background: 'rgba(0, 0, 0, 0.03)',
+                    borderColor: 'rgba(0, 0, 0, 0.1)'
                   }}
                   onFocus={(e) => {
                     e.target.style.borderColor = 'rgba(0, 255, 255, 0.8)';
                     e.target.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.2)';
-                    e.target.style.background = 'rgba(255, 255, 255, 0.08)';
+                    e.target.style.background = 'rgba(0, 0, 0, 0.04)';
                   }}
                   onBlur={(e) => {
-                    e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                    e.target.style.borderColor = 'rgba(0, 0, 0, 0.1)';
                     e.target.style.boxShadow = 'none';
-                    e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                    e.target.style.background = 'rgba(0, 0, 0, 0.03)';
                   }}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#00FF7F] transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#4B5563] hover:text-[#4B5563] transition-colors"
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
@@ -151,7 +151,7 @@ export default function OnboardingStep1() {
 
             {/* Confirm Password Field */}
             <div>
-              <label className="block text-xs font-medium text-white uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-[#1A1A1B] uppercase tracking-wider mb-2">
                 Konfirmasi Password
               </label>
               <div className="relative">
@@ -160,26 +160,26 @@ export default function OnboardingStep1() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Ulangi password"
-                  className="w-full h-12 px-4 pr-12 rounded-xl border text-sm text-[#E8E8E8] placeholder-white/50 transition-all focus:outline-none focus:border-cyan-400"
+                  className="w-full h-12 px-4 pr-12 rounded-2xl border text-sm text-[#4B5563] placeholder-white/50 transition-all focus:outline-none focus:border-cyan-400"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    borderColor: 'rgba(255, 255, 255, 0.2)'
+                    background: 'rgba(0, 0, 0, 0.03)',
+                    borderColor: 'rgba(0, 0, 0, 0.1)'
                   }}
                   onFocus={(e) => {
                     e.target.style.borderColor = 'rgba(0, 255, 255, 0.8)';
                     e.target.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.2)';
-                    e.target.style.background = 'rgba(255, 255, 255, 0.08)';
+                    e.target.style.background = 'rgba(0, 0, 0, 0.04)';
                   }}
                   onBlur={(e) => {
-                    e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                    e.target.style.borderColor = 'rgba(0, 0, 0, 0.1)';
                     e.target.style.boxShadow = 'none';
-                    e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                    e.target.style.background = 'rgba(0, 0, 0, 0.03)';
                   }}
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#00FF7F] transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#4B5563] hover:text-[#4B5563] transition-colors"
                 >
                   {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
@@ -196,12 +196,11 @@ export default function OnboardingStep1() {
                 className="w-[18px] h-[18px] rounded border cursor-pointer"
                 style={{
                   borderColor: 'rgba(255, 255, 255, 0.3)',
-                  accentColor: '#00FF7F'
-                }}
+                  accentcolor: '#1A1A1B'}}
               />
-              <label htmlFor="terms" className="text-xs text-[#E8E8E8] cursor-pointer">
-                Saya setuju dengan{' '}
-                <a href="#" className="text-cyan-400 hover:underline">
+              <label htmlFor="terms" className="text-xs text-[#4B5563] cursor-pointer">
+                Saya setuju dengan{''}
+                <a href="#" className="text-[#1A1A1B] hover:underline">
                   Syarat & Ketentuan
                 </a>
               </label>
@@ -212,16 +211,16 @@ export default function OnboardingStep1() {
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full h-12 rounded-xl font-bold text-white mt-8 cursor-pointer transition-all"
+              className="w-full h-12 rounded-full font-bold text-[#1A1A1B] mt-8 cursor-pointer transition-all"
               style={{
-                background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
-                boxShadow: '0 4px 16px rgba(74, 16, 99, 0.3)'
+                background: '#FFE16F',
+                boxShadow: '0 4px 16px rgba(255, 225, 111, 0.3)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(74, 16, 99, 0.4)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(255, 225, 111, 0.4)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 4px 16px rgba(74, 16, 99, 0.3)';
+                e.currentTarget.style.boxShadow = '0 4px 16px rgba(255, 225, 111, 0.3)';
               }}
             >
               Lanjut ke Profil
@@ -229,7 +228,7 @@ export default function OnboardingStep1() {
 
             {/* Login Link */}
             <div className="text-center mt-3">
-              <a href="#" className="text-sm text-cyan-400 hover:opacity-80 transition-opacity">
+              <a href="#" className="text-sm text-[#1A1A1B] hover:opacity-80 transition-opacity">
                 Sudah punya akun? Masuk
               </a>
             </div>
@@ -250,8 +249,8 @@ export default function OnboardingStep1() {
         >
           <div className="relative">
             <div className="absolute inset-0 rounded-full opacity-40 blur-2xl"
-                 style={{ background: 'radial-gradient(circle, rgba(138, 75, 190, 0.6), transparent)' }} />
-            <div className="text-7xl">🤖</div>
+                 style={{ background: 'radial-gradient(circle, rgba(255, 225, 111, 0.6), transparent)' }} />
+            <img src="/hero-yellow.png" alt="Restock AI Mascot" className="w-56 h-56 object-contain relative z-10 drop-shadow-2xl" />
           </div>
         </motion.div>
       </motion.div>

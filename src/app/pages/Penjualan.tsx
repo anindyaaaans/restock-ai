@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Navbar from '../components/dashboard/Navbar';
 import Sidebar from '../components/dashboard/Sidebar';
-import { Download, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { Download, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Calendar, Receipt, Package, DollarSign, Smartphone, Landmark, Banknote, CreditCard } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, defs, linearGradient, stop,
@@ -11,10 +11,10 @@ import {
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const summaryCards = [
-  { icon: '💰', bg: 'rgba(255,215,0,0.15)',    label: 'HARI INI',        value: 'Rp 2.45M',  sub: '↑ 12.4% vs kemarin',        subColor: '#00FF7F' },
-  { icon: '🧾', bg: 'rgba(0,255,255,0.15)',    label: 'TRANSAKSI',       value: '84',         sub: '↑ 8 transaksi vs kemarin',   subColor: '#00FF7F' },
-  { icon: '📦', bg: 'rgba(139,75,190,0.2)',    label: 'PRODUK TERJUAL',  value: '312 pcs',    sub: 'dari 48 SKU berbeda',         subColor: '#8A8A8A' },
-  { icon: '📊', bg: 'rgba(0,255,127,0.15)',    label: 'AVG TRANSAKSI',   value: 'Rp 29.2K',  sub: 'Per transaksi hari ini',      subColor: '#8A8A8A' },
+  { icon: <Calendar size={20} color="#F59E0B" />, bg: 'rgba(255,215,0,0.15)',    label: 'HARI INI',        value: 'Rp 2.45M',  sub: '↑ 12.4% vs kemarin' },
+  { icon: <Receipt size={20} color="#06B6D4" />, bg: 'rgba(0,255,255,0.15)',    label: 'TRANSAKSI',       value: '84',         sub: '↑ 8 transaksi vs kemarin' },
+  { icon: <Package size={20} color="#0EA5E9" />, bg: 'rgba(152, 226, 253,0.2)',    label: 'PRODUK TERJUAL',  value: '312 pcs',    sub: 'dari 48 SKU berbeda' },
+  { icon: <DollarSign size={20} color="#10B981" />, bg: 'rgba(0,255,127,0.15)',    label: 'AVG TRANSAKSI',   value: 'Rp 29.2K',  sub: 'Per transaksi hari ini' },
 ];
 
 type TxStatus = 'lunas' | 'pending' | 'refund';
@@ -60,13 +60,13 @@ const chartData = [
 
 const DATE_TABS = ['Hari Ini', '7 Hari', '30 Hari', 'Custom'];
 
-const STATUS_CONFIG: Record<TxStatus, { label: string; bg: string; color: string }> = {
-  lunas:   { label: '✓ Lunas',   bg: 'rgba(0,255,127,0.15)',  color: '#00FF7F' },
-  pending: { label: '⏳ Pending', bg: 'rgba(255,215,0,0.15)',  color: '#FFD700' },
-  refund:  { label: '↩ Refund',  bg: 'rgba(231,50,32,0.15)',  color: '#E63220' },
+const STATUS_CONFIG: Record<TxStatus, { label: string; bg: string }> = {
+  lunas:   { label: 'Lunas',   bg: 'rgba(0,255,127,0.15)' },
+  pending: { label: 'Pending', bg: 'rgba(255,215,0,0.15)' },
+  refund:  { label: 'Refund',  bg: 'rgba(231,50,32,0.15)' },
 };
 
-const PAYMENT_ICON: Record<string, string> = { QRIS: '📱', Transfer: '🏦', Tunai: '💵' };
+const PAYMENT_ICON: Record<string, typeof Smartphone> = { QRIS: Smartphone, Transfer: Landmark, Tunai: Banknote };
 
 function formatRp(v: number) {
   if (v >= 1_000_000) return `Rp ${(v / 1_000_000).toFixed(2)}M`;
@@ -78,9 +78,9 @@ function formatRp(v: number) {
 function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: {value: number}[]; label?: string }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-xl border px-3 py-2 text-xs" style={{ background: '#1a1a2e', borderColor: 'rgba(255,255,255,0.15)', color: '#fff' }}>
+    <div className="rounded-2xl border px-3 py-2 text-xs" style={{ background: '#ffffff', boxShadow: '0 4px 16px rgba(0,0,0,0.12)', borderColor: 'rgba(0, 0, 0, 0.08)', color: '#1A1A1B' }}>
       <p className="font-bold mb-1">{label}</p>
-      <p style={{ color: '#00FFFF' }}>{formatRp(payload[0].value)}</p>
+      <p style={{ color: '#1A1A1B' }}>{formatRp(payload[0].value)}</p>
     </div>
   );
 }
@@ -96,7 +96,7 @@ export default function Penjualan() {
   const toggleRow = (id: string) => setExpandedRow((prev) => (prev === id ? null : id));
 
   return (
-    <div className="min-h-screen w-full" style={{ background: 'linear-gradient(180deg, #0F0F0F 0%, #1a0f2e 100%)' }}>
+    <div className="min-h-screen w-full" style={{ background: '#f8fafc' }}>
       <Sidebar activePage="penjualan" />
       <Navbar />
 
@@ -104,8 +104,17 @@ export default function Penjualan() {
 
         {/* ── Header ── */}
         <div>
-          <h1 className="text-xl font-bold text-white">Penjualan</h1>
-          <p className="text-[13px] mt-1" style={{ color: '#8A8A8A' }}>Riwayat transaksi penjualan dari sistem POS</p>
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl font-bold text-[#1A1A1B]">Penjualan</h1>
+            <span
+              className="flex items-center gap-1.5 text-[11px] font-bold px-3 py-1 rounded-full"
+              style={{ background: 'rgba(0,255,127,0.15)', color: '#1A1A1B' }}
+            >
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E' }} />
+              Disinkron dari Moka
+            </span>
+          </div>
+          <p className="text-[13px] mt-1" style={{ color: '#1A1A1B' }}>Riwayat transaksi penjualan dari sistem POS</p>
         </div>
 
         {/* ── Summary Cards ── */}
@@ -116,21 +125,21 @@ export default function Penjualan() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.07, duration: 0.4 }}
-              className="rounded-xl border p-5"
+              className="rounded-2xl border p-5"
               style={{
-                background: 'rgba(255,255,255,0.05)',
+                background: '#ffffff', boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
                 backdropFilter: 'blur(12px)',
-                borderColor: 'rgba(255,255,255,0.1)',
+                borderColor: 'rgba(0, 0, 0, 0.05)',
               }}
             >
               <div className="flex items-start gap-3">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{ background: c.bg }}>
+                <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl flex-shrink-0" style={{ background: c.bg }}>
                   {c.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[10px] uppercase font-bold mb-1" style={{ color: '#8A8A8A', letterSpacing: '0.06em' }}>{c.label}</p>
-                  <p className="text-2xl font-bold text-white leading-none mb-1">{c.value}</p>
-                  <p className="text-[12px]" style={{ color: c.subColor }}>{c.sub}</p>
+                  <p className="text-[10px] uppercase font-bold mb-1" style={{ color: '#1A1A1B', letterSpacing: '0.06em' }}>{c.label}</p>
+                  <p className="text-2xl font-bold text-[#1A1A1B] leading-none mb-1">{c.value}</p>
+                  <p className="text-[12px]" style={{ color: '#1A1A1B' }}>{c.sub}</p>
                 </div>
               </div>
             </motion.div>
@@ -142,14 +151,15 @@ export default function Penjualan() {
           <div className="flex items-center gap-3">
             {/* Date pill */}
             <div
-              className="px-4 h-9 rounded-full border flex items-center text-[12px] text-white gap-2 cursor-pointer"
+              className="px-4 h-9 rounded-2xl border flex items-center text-[12px] text-[#1A1A1B] gap-2 cursor-pointer"
               style={{
-                background: 'rgba(255,255,255,0.05)',
+                background: '#ffffff', boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
                 backdropFilter: 'blur(10px)',
-                borderColor: 'rgba(255,255,255,0.15)',
+                borderColor: 'rgba(0, 0, 0, 0.08)',
               }}
             >
-              📅 01 Mei 2024 — 31 Mei 2024
+              <Calendar size={14} />
+              01 Mei 2024 — 31 Mei 2024
             </div>
 
             {/* Tab chips */}
@@ -161,16 +171,16 @@ export default function Penjualan() {
                     key={tab}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setActiveTab(tab)}
-                    className="px-3 text-xs font-semibold rounded-full border transition-all"
+                    className="px-3 text-xs font-semibold rounded-2xl border transition-all"
                     style={{
                       height: 32,
-                      background: isActive ? 'linear-gradient(135deg, #4A1063, #8B4BBE)' : 'transparent',
-                      borderColor: isActive ? 'transparent' : 'rgba(255,255,255,0.15)',
-                      color: isActive ? '#fff' : '#8A8A8A',
+                      background: isActive ? 'linear-gradient(135deg, #FFE16F, #98E2FD)' : 'transparent',
+                      borderColor: isActive ? 'transparent' : 'rgba(0, 0, 0, 0.08)',
+                      color: '#1A1A1B',
                       cursor: 'pointer',
                     }}
-                    onMouseEnter={(e) => { if (!isActive) { e.currentTarget.style.borderColor = '#00FFFF'; e.currentTarget.style.color = '#00FFFF'; } }}
-                    onMouseLeave={(e) => { if (!isActive) { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; e.currentTarget.style.color = '#8A8A8A'; } }}
+                    onMouseEnter={(e) => { if (!isActive) { e.currentTarget.style.borderColor = '#98E2FD'; e.currentTarget.style.color = '#1A1A1B'; } }}
+                    onMouseLeave={(e) => { if (!isActive) { e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.08)'; e.currentTarget.style.color = '#1A1A1B'; } }}
                   >
                     {tab}
                   </motion.button>
@@ -184,14 +194,14 @@ export default function Penjualan() {
             {['Export CSV', 'Export PDF'].map((label) => (
               <motion.button
                 key={label}
-                whileHover={{ borderColor: '#00FFFF', color: '#00FFFF' }}
+                whileHover={{ borderColor: '#1A1A1B', color: '#1A1A1B' }}
                 whileTap={{ scale: 0.96 }}
-                className="flex items-center gap-2 px-3 text-xs text-white border rounded-lg transition-colors"
+                className="flex items-center gap-2 px-3 text-xs text-[#1A1A1B] border rounded-lg transition-colors"
                 style={{
                   height: 36,
-                  background: 'rgba(255,255,255,0.05)',
+                  background: '#ffffff', boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
                   backdropFilter: 'blur(10px)',
-                  borderColor: 'rgba(255,255,255,0.15)',
+                  borderColor: 'rgba(0, 0, 0, 0.08)',
                   cursor: 'pointer',
                 }}
               >
@@ -206,11 +216,11 @@ export default function Penjualan() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.4 }}
-          className="mt-4 rounded-xl border overflow-hidden"
+          className="mt-4 rounded-2xl border overflow-hidden"
           style={{
-            background: 'rgba(255,255,255,0.04)',
+            background: '#ffffff', boxShadow: '0 4px 12px -2px rgba(0,0,0,0.05)',
             backdropFilter: 'blur(12px)',
-            borderColor: 'rgba(255,255,255,0.1)',
+            borderColor: 'rgba(0, 0, 0, 0.05)',
           }}
         >
           {/* Header */}
@@ -219,8 +229,8 @@ export default function Penjualan() {
             style={{
               gridTemplateColumns: '40px 130px 160px 1fr 70px 110px 110px 110px 90px',
               padding: '14px 20px',
-              background: 'rgba(255,255,255,0.06)',
-              color: '#8A8A8A',
+              background: '#f8fafc',
+              color: '#1A1A1B',
               letterSpacing: '0.06em',
             }}
           >
@@ -246,50 +256,50 @@ export default function Penjualan() {
                   style={{
                     gridTemplateColumns: '40px 130px 160px 1fr 70px 110px 110px 110px 90px',
                     padding: '14px 20px',
-                    borderColor: 'rgba(255,255,255,0.05)',
+                    borderColor: 'rgba(0, 0, 0, 0.03)',
                     opacity: dimmed ? 0.6 : 1,
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0, 0, 0, 0.02)'; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
                 >
                   {/* No */}
-                  <span className="text-[12px]" style={{ color: '#8A8A8A' }}>{tx.no}</span>
+                  <span className="text-[12px]" style={{ color: '#1A1A1B' }}>{tx.no}</span>
 
                   {/* Datetime */}
                   <div>
-                    <p className="text-[12px] text-white">{tx.datetime}</p>
-                    <p className="text-[11px]" style={{ color: '#8A8A8A' }}>{tx.time}</p>
+                    <p className="text-[12px] text-[#1A1A1B]">{tx.datetime}</p>
+                    <p className="text-[11px]" style={{ color: '#1A1A1B' }}>{tx.time}</p>
                   </div>
 
                   {/* TX ID */}
                   <span
                     className="text-[11px] font-mono"
-                    style={{ color: '#00FFFF', cursor: 'pointer' }}
+                    style={{ color: '#1A1A1B', cursor: 'pointer' }}
                     title={tx.txid}
                   >
                     {tx.txid}
                   </span>
 
                   {/* Produk */}
-                  <span className="text-[13px] font-bold text-white truncate pr-2">{tx.produk}</span>
+                  <span className="text-[13px] font-bold text-[#1A1A1B] truncate pr-2">{tx.produk}</span>
 
                   {/* Qty */}
-                  <span className="text-[12px] text-white">{tx.qty}</span>
+                  <span className="text-[12px] text-[#1A1A1B]">{tx.qty}</span>
 
                   {/* Harga Satuan */}
-                  <span className="text-[12px] text-white">{tx.harga}</span>
+                  <span className="text-[12px] text-[#1A1A1B]">{tx.harga}</span>
 
                   {/* Total */}
-                  <span className="text-[13px] font-bold text-white">{tx.total}</span>
+                  <span className="text-[13px] font-bold text-[#1A1A1B]">{tx.total}</span>
 
                   {/* Sumber */}
                   <span>
                     <span
-                      className="text-[10px] font-bold px-2 py-1 rounded-full border"
+                      className="text-[10px] font-bold px-2 py-1 rounded-2xl border"
                       style={{
-                        background: 'rgba(139,75,190,0.2)',
-                        borderColor: 'rgba(139,75,190,0.35)',
-                        color: '#C084FC',
+                        background: 'rgba(152, 226, 253,0.2)',
+                        borderColor: 'rgba(152, 226, 253,0.35)',
+                        color: '#1A1A1B',
                       }}
                     >
                       {tx.sumber}
@@ -300,7 +310,7 @@ export default function Penjualan() {
                   <div className="flex items-center gap-1.5">
                     <span
                       className="text-[10px] font-bold px-2 py-1 rounded-full"
-                      style={{ background: st.bg, color: st.color }}
+                      style={{ background: st.bg, color: '#1A1A1B' }}
                     >
                       {st.label}
                     </span>
@@ -323,27 +333,30 @@ export default function Penjualan() {
                         className="flex items-center gap-8 border-t border-l-2"
                         style={{
                           padding: '12px 20px 12px 40px',
-                          borderTopColor: 'rgba(255,255,255,0.05)',
-                          borderLeftColor: '#00FFFF',
+                          borderTopColor: 'rgba(0, 0, 0, 0.03)',
+                          borderLeftColor: '#1A1A1B',
                           background: 'rgba(0,255,255,0.03)',
                         }}
                       >
                         <div className="flex items-center gap-2">
-                          <span className="text-base">{PAYMENT_ICON[tx.payment] ?? '💳'}</span>
+                          {(() => {
+                            const PaymentIcon = PAYMENT_ICON[tx.payment] ?? CreditCard;
+                            return <PaymentIcon size={16} className="text-[#1A1A1B]" />;
+                          })()}
                           <div>
-                            <p className="text-[10px]" style={{ color: '#8A8A8A' }}>Pembayaran</p>
-                            <p className="text-[12px] font-semibold text-white">{tx.payment}</p>
+                            <p className="text-[10px]" style={{ color: '#1A1A1B' }}>Pembayaran</p>
+                            <p className="text-[12px] font-semibold text-[#1A1A1B]">{tx.payment}</p>
                           </div>
                         </div>
                         {tx.notes && (
                           <div>
-                            <p className="text-[10px]" style={{ color: '#8A8A8A' }}>Catatan</p>
-                            <p className="text-[12px] text-white">{tx.notes}</p>
+                            <p className="text-[10px]" style={{ color: '#1A1A1B' }}>Catatan</p>
+                            <p className="text-[12px] text-[#1A1A1B]">{tx.notes}</p>
                           </div>
                         )}
                         <button
                           className="text-[12px] font-semibold ml-auto"
-                          style={{ color: '#00FFFF', background: 'none', border: 'none', cursor: 'pointer' }}
+                          style={{ color: '#1A1A1B', background: 'none', border: 'none', cursor: 'pointer' }}
                         >
                           Lihat Detail Lengkap →
                         </button>
@@ -358,16 +371,16 @@ export default function Penjualan() {
           {/* Pagination */}
           <div
             className="flex items-center justify-between border-t"
-            style={{ padding: '14px 20px', borderColor: 'rgba(255,255,255,0.06)' }}
+            style={{ padding: '14px 20px', borderColor: 'rgba(0, 0, 0, 0.03)' }}
           >
-            <span className="text-[12px]" style={{ color: '#8A8A8A' }}>Menampilkan 1–10 dari 273 transaksi</span>
+            <span className="text-[12px]" style={{ color: '#1A1A1B' }}>Menampilkan 1–10 dari 273 transaksi</span>
 
             <div className="flex items-center gap-1.5">
               <PagBtn onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} icon={<ChevronLeft size={13} />} />
               {[1, 2, 3].map((n) => (
                 <PagBtn key={n} label={String(n)} active={currentPage === n} onClick={() => setCurrentPage(n)} />
               ))}
-              <span className="text-xs px-1" style={{ color: '#8A8A8A' }}>...</span>
+              <span className="text-xs px-1" style={{ color: '#1A1A1B' }}>...</span>
               <PagBtn label={String(totalPages)} active={currentPage === totalPages} onClick={() => setCurrentPage(totalPages)} />
               <PagBtn onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))} icon={<ChevronRight size={13} />} />
             </div>
@@ -379,24 +392,24 @@ export default function Penjualan() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.4 }}
-          className="mt-6 rounded-xl border"
+          className="mt-6 rounded-2xl border"
           style={{
-            background: 'rgba(255,255,255,0.04)',
+            background: '#ffffff', boxShadow: '0 4px 12px -2px rgba(0,0,0,0.05)',
             backdropFilter: 'blur(12px)',
-            borderColor: 'rgba(255,255,255,0.1)',
+            borderColor: 'rgba(0, 0, 0, 0.05)',
             padding: 24,
           }}
         >
-          <h2 className="text-sm font-bold text-white mb-5">Trend Penjualan Harian</h2>
+          <h2 className="text-sm font-bold text-[#1A1A1B] mb-5">Trend Penjualan Harian</h2>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={chartData} barSize={18}>
               <defs>
                 <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#8B4BBE" />
-                  <stop offset="100%" stopColor="#4A1063" />
+                  <stop offset="0%" stopColor="#98E2FD" />
+                  <stop offset="100%" stopColor="#FFE16F" />
                 </linearGradient>
               </defs>
-              <CartesianGrid vertical={false} stroke="rgba(255,255,255,0.05)" />
+              <CartesianGrid vertical={false} stroke="rgba(0, 0, 0, 0.03)" />
               <XAxis
                 dataKey="day"
                 tick={{ fill: '#8A8A8A', fontSize: 10 }}
@@ -410,7 +423,7 @@ export default function Penjualan() {
                 tickLine={false}
                 width={40}
               />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.04)' }} />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0, 0, 0, 0.02)' }} />
               <Bar dataKey="value" fill="url(#barGrad)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -427,13 +440,13 @@ export default function Penjualan() {
 function PagBtn({ label, active, onClick, icon }: { label?: string; active?: boolean; onClick: () => void; icon?: React.ReactNode }) {
   return (
     <motion.button
-      whileHover={{ borderColor: active ? 'transparent' : '#00FFFF', color: active ? '#fff' : '#00FFFF' }}
+      whileHover={{ borderColor: active ? 'transparent' : '#98E2FD', color: '#1A1A1B' }}
       whileTap={{ scale: 0.92 }}
       onClick={onClick}
-      className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold border text-white transition-all"
+      className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold border text-[#1A1A1B] transition-all"
       style={{
-        background: active ? 'linear-gradient(135deg, #4A1063, #8B4BBE)' : 'rgba(255,255,255,0.05)',
-        borderColor: active ? 'transparent' : 'rgba(255,255,255,0.12)',
+        background: active ? 'linear-gradient(135deg, #FFE16F, #98E2FD)' : 'rgba(0, 0, 0, 0.03)',
+        borderColor: active ? 'transparent' : 'rgba(0, 0, 0, 0.1)',
         cursor: 'pointer',
       }}
     >

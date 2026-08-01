@@ -3,14 +3,19 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router';
 import Navbar from '../components/dashboard/Navbar';
 import Sidebar from '../components/dashboard/Sidebar';
-import { Search as SearchIcon, X, ArrowRight } from 'lucide-react';
+import {
+  Search as SearchIcon, X, ArrowRight, Clock, Flame,
+  Wheat, Droplet, Candy, Soup, Coffee, CupSoda, Warehouse, Store, Newspaper,
+  ClipboardList, TrendingDown, Brain, Sparkles, ShoppingCart, FileText, Users,
+  type LucideIcon,
+} from 'lucide-react';
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
 interface SearchResult {
   id: string;
   type: 'produk' | 'supplier' | 'berita' | 'fitur';
-  icon: string;
+  icon: LucideIcon;
   iconBg: string;
   title: string;
   subtitle: string;
@@ -23,26 +28,26 @@ interface SearchResult {
 
 const allResults: SearchResult[] = [
   // Produk
-  { id: 'r1', type: 'produk', icon: '🌾', iconBg: 'rgba(0,255,127,0.12)', title: 'Beras Premium 5kg', subtitle: 'Stok: 12 pcs · Harga: Rp 55.000', path: '/dashboard/produk', badge: '⚠️ Stok Rendah', badgeColor: '#FF00FF' },
-  { id: 'r2', type: 'produk', icon: '🍳', iconBg: 'rgba(255,215,0,0.12)', title: 'Minyak Goreng 2L', subtitle: 'Stok: 5 pcs · Harga: Rp 45.000', path: '/dashboard/produk', badge: '⚠️ Stok Rendah', badgeColor: '#FF00FF' },
-  { id: 'r3', type: 'produk', icon: '🍬', iconBg: 'rgba(0,255,255,0.1)', title: 'Gula Pasir 1kg', subtitle: 'Stok: 48 pcs · Harga: Rp 14.000', path: '/dashboard/produk' },
-  { id: 'r4', type: 'produk', icon: '🍜', iconBg: 'rgba(255,0,255,0.1)', title: 'Indomie Goreng', subtitle: 'Stok: 120 pcs · Harga: Rp 4.500', path: '/dashboard/produk' },
-  { id: 'r5', type: 'produk', icon: '☕', iconBg: 'rgba(139,75,190,0.15)', title: 'Kopi Sachet 10x', subtitle: 'Stok: 34 pcs · Harga: Rp 20.000', path: '/dashboard/produk' },
-  { id: 'r6', type: 'produk', icon: '🫖', iconBg: 'rgba(0,255,255,0.1)', title: 'Teh Celup 25s', subtitle: 'Stok: 22 pcs · Harga: Rp 12.000', path: '/dashboard/produk' },
+  { id: 'r1', type: 'produk', icon: Wheat, iconBg: 'rgba(16,185,129,0.15)', title: 'Beras Premium 5kg', subtitle: 'Stok: 12 pcs · Harga: Rp 55.000', path: '/dashboard/produk', badge: 'Stok Rendah', badgeColor: '#1A1A1B' },
+  { id: 'r2', type: 'produk', icon: Droplet, iconBg: 'rgba(245,158,11,0.15)', title: 'Minyak Goreng 2L', subtitle: 'Stok: 5 pcs · Harga: Rp 45.000', path: '/dashboard/produk', badge: 'Stok Rendah', badgeColor: '#1A1A1B' },
+  { id: 'r3', type: 'produk', icon: Candy, iconBg: 'rgba(79,70,229,0.15)', title: 'Gula Pasir 1kg', subtitle: 'Stok: 48 pcs · Harga: Rp 14.000', path: '/dashboard/produk' },
+  { id: 'r4', type: 'produk', icon: Soup, iconBg: 'rgba(236,72,153,0.15)', title: 'Indomie Goreng', subtitle: 'Stok: 120 pcs · Harga: Rp 4.500', path: '/dashboard/produk' },
+  { id: 'r5', type: 'produk', icon: Coffee, iconBg: 'rgba(152, 226, 253,0.15)', title: 'Kopi Sachet 10x', subtitle: 'Stok: 34 pcs · Harga: Rp 20.000', path: '/dashboard/produk' },
+  { id: 'r6', type: 'produk', icon: CupSoda, iconBg: 'rgba(79,70,229,0.15)', title: 'Teh Celup 25s', subtitle: 'Stok: 22 pcs · Harga: Rp 12.000', path: '/dashboard/produk' },
   // Supplier
-  { id: 's1', type: 'supplier', icon: '🏪', iconBg: 'rgba(74,16,99,0.3)', title: 'GudangAda', subtitle: 'Jakarta · ⭐ 4.8 · 2.3 km', path: '/dashboard/supplier', badge: '🏆 Terbaik', badgeColor: '#FFD700' },
-  { id: 's2', type: 'supplier', icon: '🏬', iconBg: 'rgba(245,200,150,0.2)', title: 'Mitra Toko', subtitle: 'Jakarta · ⭐ 4.6 · 3.8 km', path: '/dashboard/supplier' },
-  { id: 's3', type: 'supplier', icon: '🏭', iconBg: 'rgba(0,191,191,0.15)', title: 'GrosirSatu', subtitle: 'Jakarta · ⭐ 4.3 · 5.1 km', path: '/dashboard/supplier' },
+  { id: 's1', type: 'supplier', icon: Warehouse, iconBg: 'rgba(255, 225, 111,0.3)', title: 'GudangAda', subtitle: 'Jakarta · 4.8 · 2.3 km', path: '/dashboard/supplier', badge: 'Terbaik', badgeColor: '#1A1A1B' },
+  { id: 's2', type: 'supplier', icon: Store, iconBg: 'rgba(245,200,150,0.2)', title: 'Mitra Toko', subtitle: 'Jakarta · 4.6 · 3.8 km', path: '/dashboard/supplier' },
+  { id: 's3', type: 'supplier', icon: Warehouse, iconBg: 'rgba(0,191,191,0.15)', title: 'GrosirSatu', subtitle: 'Jakarta · 4.3 · 5.1 km', path: '/dashboard/supplier' },
   // Berita
-  { id: 'n1', type: 'berita', icon: '📰', iconBg: 'rgba(255,68,68,0.12)', title: 'Harga Beras Naik 8% Menjelang Hari Raya', subtitle: 'Bisnis Indonesia · 2 jam lalu', path: '/dashboard/berita' },
-  { id: 'n2', type: 'berita', icon: '📋', iconBg: 'rgba(0,255,255,0.1)', title: 'Program KUR UMKM 2024 — Bunga 3%', subtitle: 'Detik Finance · 6 jam lalu', path: '/dashboard/berita' },
-  { id: 'n3', type: 'berita', icon: '💡', iconBg: 'rgba(255,215,0,0.12)', title: 'Tips Manajemen Stok Musim Lebaran', subtitle: 'SWA · Kemarin', path: '/dashboard/berita' },
+  { id: 'n1', type: 'berita', icon: TrendingDown, iconBg: 'rgba(255,68,68,0.12)', title: 'Harga Beras Naik 8% Menjelang Hari Raya', subtitle: 'Bisnis Indonesia · 2 jam lalu', path: '/dashboard/berita' },
+  { id: 'n2', type: 'berita', icon: ClipboardList, iconBg: 'rgba(79,70,229,0.15)', title: 'Program KUR UMKM 2024 — Bunga 3%', subtitle: 'Detik Finance · 6 jam lalu', path: '/dashboard/berita' },
+  { id: 'n3', type: 'berita', icon: Newspaper, iconBg: 'rgba(245,158,11,0.15)', title: 'Tips Manajemen Stok Musim Lebaran', subtitle: 'SWA · Kemarin', path: '/dashboard/berita' },
   // Fitur
-  { id: 'f1', type: 'fitur', icon: '🧠', iconBg: 'rgba(0,255,255,0.1)', title: 'Prediksi Restok', subtitle: 'Prediksi kebutuhan stok berbasis AI', path: '/dashboard/prediksi' },
-  { id: 'f2', type: 'fitur', icon: '💡', iconBg: 'rgba(255,215,0,0.12)', title: 'Rekomendasi AI', subtitle: 'Saran cerdas untuk bisnis Anda', path: '/dashboard/rekomendasi' },
-  { id: 'f3', type: 'fitur', icon: '🛒', iconBg: 'rgba(139,75,190,0.15)', title: 'Purchase Order', subtitle: 'Buat & kelola PO ke supplier', path: '/dashboard/pembelian' },
-  { id: 'f4', type: 'fitur', icon: '📊', iconBg: 'rgba(0,255,127,0.1)', title: 'Laporan', subtitle: 'Analisis penjualan & keuangan', path: '/dashboard/laporan' },
-  { id: 'f5', type: 'fitur', icon: '👥', iconBg: 'rgba(74,16,99,0.2)', title: 'Komunitas', subtitle: 'Forum & grup UMKM Indonesia', path: '/dashboard/komunitas' },
+  { id: 'f1', type: 'fitur', icon: Brain, iconBg: 'rgba(79,70,229,0.15)', title: 'Prediksi Restock', subtitle: 'Prediksi kebutuhan stok berbasis AI', path: '/dashboard/prediksi' },
+  { id: 'f2', type: 'fitur', icon: Sparkles, iconBg: 'rgba(245,158,11,0.15)', title: 'Restock Intelligence', subtitle: 'Saran cerdas untuk bisnis Anda', path: '/dashboard/rekomendasi' },
+  { id: 'f3', type: 'fitur', icon: ShoppingCart, iconBg: 'rgba(152, 226, 253,0.15)', title: 'Purchase Order', subtitle: 'Buat & kelola PO ke supplier', path: '/dashboard/pembelian' },
+  { id: 'f4', type: 'fitur', icon: FileText, iconBg: 'rgba(0,255,127,0.1)', title: 'Laporan', subtitle: 'Analisis penjualan & keuangan', path: '/dashboard/laporan' },
+  { id: 'f5', type: 'fitur', icon: Users, iconBg: 'rgba(255, 225, 111,0.2)', title: 'Komunitas', subtitle: 'Forum & grup UMKM Indonesia', path: '/dashboard/komunitas' },
 ];
 
 const typeLabels: Record<string, string> = {
@@ -90,7 +95,7 @@ export default function SearchPage() {
   return (
     <div
       className="min-h-screen w-full"
-      style={{ background: 'linear-gradient(180deg, #0F0F0F 0%, #1a0f2e 100%)' }}
+      style={{ background: '#f8fafc' }}
     >
       <Sidebar activePage="search" />
       <Navbar />
@@ -116,7 +121,7 @@ export default function SearchPage() {
             placeholder="Cari produk, supplier, berita, atau fitur..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full text-white placeholder:text-[#8A8A8A]"
+            className="w-full text-[#1A1A1B] placeholder:text-[#8A8A8A]"
             style={{
               height: 56,
               background: 'rgba(255,255,255,0.07)',
@@ -135,7 +140,7 @@ export default function SearchPage() {
               onClick={() => setQuery('')}
               style={{
                 position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)',
-                background: 'rgba(255,255,255,0.1)', border: 'none', borderRadius: '50%',
+                background: 'rgba(0, 0, 0, 0.05)', border: 'none', borderRadius: '50%',
                 width: 24, height: 24, cursor: 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}
@@ -167,14 +172,14 @@ export default function SearchPage() {
                   fontSize: 12,
                   fontWeight: isActive ? 700 : 500,
                   cursor: 'pointer',
-                  background: isActive ? 'linear-gradient(135deg, #4A1063, #8B4BBE)' : 'rgba(255,255,255,0.05)',
-                  border: isActive ? 'none' : '1px solid rgba(255,255,255,0.1)',
-                  color: isActive ? '#fff' : '#8A8A8A',
-                  boxShadow: isActive ? '0 4px 12px rgba(74,16,99,0.3)' : 'none',
+                  background: isActive ? 'linear-gradient(135deg, #FFE16F, #98E2FD)' : 'rgba(0, 0, 0, 0.03)',
+                  border: isActive ? 'none' : '1px solid rgba(0, 0, 0, 0.05)',
+                  color: '#1A1A1B',
+                  boxShadow: isActive ? '0 4px 12px rgba(255, 225, 111,0.3)' : 'none',
                   transition: 'all 0.2s',
                 }}
-                onMouseEnter={(e) => { if (!isActive) { e.currentTarget.style.borderColor = 'rgba(0,255,255,0.4)'; e.currentTarget.style.color = '#fff'; }}}
-                onMouseLeave={(e) => { if (!isActive) { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = '#8A8A8A'; }}}
+                onMouseEnter={(e) => { if (!isActive) { e.currentTarget.style.borderColor = 'rgba(0,255,255,0.4)'; e.currentTarget.style.color = '#1A1A1B'; }}}
+                onMouseLeave={(e) => { if (!isActive) { e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.05)'; e.currentTarget.style.color = '#8A8A8A'; }}}
               >
                 {label}
               </button>
@@ -197,7 +202,7 @@ export default function SearchPage() {
               >
                 {/* Recent searches */}
                 <div style={{ marginBottom: 28 }}>
-                  <p className="font-bold text-white" style={{ fontSize: 13, marginBottom: 12 }}>
+                  <p className="font-bold text-[#1A1A1B]" style={{ fontSize: 13, marginBottom: 12 }}>
                     Pencarian Terakhir
                   </p>
                   <div className="flex flex-wrap" style={{ gap: 8 }}>
@@ -210,19 +215,19 @@ export default function SearchPage() {
                           padding: '0 14px',
                           borderRadius: 20,
                           fontSize: 12,
-                          color: '#C8C8C8',
-                          background: 'rgba(255,255,255,0.06)',
-                          border: '1px solid rgba(255,255,255,0.1)',
+                          color: '#1A1A1B',
+                          background: '#f8fafc',
                           cursor: 'pointer',
                           transition: 'all 0.15s',
                           display: 'flex',
                           alignItems: 'center',
                           gap: 6,
                         }}
-                        onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(0,255,255,0.35)'; e.currentTarget.style.color = '#fff'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = '#C8C8C8'; }}
+                        onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(0,255,255,0.35)'; e.currentTarget.style.color = '#1A1A1B'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.05)'; e.currentTarget.style.color = '#C8C8C8'; }}
                       >
-                        🕐 {s}
+                        <Clock size={12} />
+                        {s}
                       </button>
                     ))}
                   </div>
@@ -230,8 +235,9 @@ export default function SearchPage() {
 
                 {/* Trending */}
                 <div>
-                  <p className="font-bold text-white" style={{ fontSize: 13, marginBottom: 12 }}>
-                    🔥 Trending
+                  <p className="flex items-center gap-1.5 font-bold text-[#1A1A1B]" style={{ fontSize: 13, marginBottom: 12 }}>
+                    <Flame size={14} />
+                    Trending
                   </p>
                   <div className="flex flex-col" style={{ gap: 2 }}>
                     {trendingSearches.map((s, i) => (
@@ -242,21 +248,21 @@ export default function SearchPage() {
                         style={{
                           gap: 12,
                           padding: '11px 14px',
-                          borderRadius: 10,
+                          borderRadius: 12,
                           background: 'transparent',
                           border: 'none',
                           cursor: 'pointer',
                           transition: 'background 0.15s',
                           width: '100%',
                         }}
-                        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }}
+                        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0, 0, 0, 0.03)'; }}
                         onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
                       >
-                        <span style={{ fontSize: 12, color: '#8A8A8A', width: 16, textAlign: 'right', flexShrink: 0 }}>
+                        <span style={{ fontSize: 12, color: '#1A1A1B', width: 16, textAlign: 'right', flexShrink: 0 }}>
                           {i + 1}
                         </span>
                         <SearchIcon size={13} color="#8A8A8A" style={{ flexShrink: 0 }} />
-                        <span style={{ fontSize: 13, color: '#E8E8E8', flex: 1 }}>{s}</span>
+                        <span style={{ fontSize: 13, color: '#1A1A1B', flex: 1 }}>{s}</span>
                         <ArrowRight size={13} color="#8A8A8A" style={{ flexShrink: 0 }} />
                       </button>
                     ))}
@@ -276,11 +282,11 @@ export default function SearchPage() {
                 className="flex flex-col items-center"
                 style={{ paddingTop: 48, gap: 12 }}
               >
-                <span style={{ fontSize: 40 }}>🔍</span>
-                <p className="font-bold text-white" style={{ fontSize: 15 }}>
+                <SearchIcon size={40} color="#8A8A8A" />
+                <p className="font-bold text-[#1A1A1B]" style={{ fontSize: 15 }}>
                   Tidak ada hasil untuk "{query}"
                 </p>
-                <p style={{ fontSize: 13, color: '#8A8A8A' }}>
+                <p style={{ fontSize: 13, color: '#1A1A1B' }}>
                   Coba kata kunci lain atau periksa ejaan Anda
                 </p>
               </motion.div>
@@ -296,9 +302,9 @@ export default function SearchPage() {
                 transition={{ duration: 0.25 }}
               >
                 {/* Result count */}
-                <p style={{ fontSize: 12, color: '#8A8A8A', marginBottom: 16 }}>
-                  {filtered.length} hasil untuk{' '}
-                  <span style={{ color: '#fff', fontWeight: 600 }}>"{query}"</span>
+                <p style={{ fontSize: 12, color: '#1A1A1B', marginBottom: 16 }}>
+                  {filtered.length} hasil untuk{''}
+                  <span style={{ color: '#1A1A1B', fontWeight: 600 }}>"{query}"</span>
                 </p>
 
                 <div className="flex flex-col" style={{ gap: 24 }}>
@@ -309,7 +315,7 @@ export default function SearchPage() {
                         className="font-bold uppercase"
                         style={{
                           fontSize: 10,
-                          color: '#8A8A8A',
+                          color: '#1A1A1B',
                           letterSpacing: '0.06em',
                           marginBottom: 8,
                         }}
@@ -321,9 +327,8 @@ export default function SearchPage() {
                       <div
                         className="overflow-hidden"
                         style={{
-                          background: 'rgba(255,255,255,0.05)',
+                          background: '#ffffff', boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
                           backdropFilter: 'blur(12px)',
-                          border: '1px solid rgba(255,255,255,0.1)',
                           borderRadius: 12,
                         }}
                       >
@@ -338,29 +343,28 @@ export default function SearchPage() {
                             style={{
                               gap: 14,
                               padding: '13px 16px',
-                              borderColor: 'rgba(255,255,255,0.06)',
+                              borderColor: 'rgba(0, 0, 0, 0.03)',
                               background: 'transparent',
                               border: idx < items.length - 1 ? '0 0 1px 0' : 'none',
-                              borderBottom: idx < items.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                              borderBottom: idx < items.length - 1 ? '1px solid rgba(0, 0, 0, 0.03)' : 'none',
                               cursor: 'pointer',
                               transition: 'background 0.15s',
                             }}
-                            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; }}
+                            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0, 0, 0, 0.02)'; }}
                             onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
                           >
                             <div
                               className="flex items-center justify-center flex-shrink-0"
                               style={{
-                                width: 38, height: 38, borderRadius: 10,
+                                width: 38, height: 38, borderRadius: 12,
                                 background: result.iconBg,
-                                fontSize: 18,
                               }}
                             >
-                              {result.icon}
+                              <result.icon size={18} color="#1A1A1B" />
                             </div>
                             <div style={{ flex: 1, minWidth: 0 }}>
                               <div className="flex items-center" style={{ gap: 8 }}>
-                                <span className="font-bold text-white" style={{ fontSize: 13 }}>
+                                <span className="font-bold text-[#1A1A1B]" style={{ fontSize: 13 }}>
                                   {result.title}
                                 </span>
                                 {result.badge && (
@@ -368,7 +372,7 @@ export default function SearchPage() {
                                     className="font-bold flex-shrink-0"
                                     style={{
                                       fontSize: 9,
-                                      color: result.badgeColor,
+                                      color: '#1A1A1B',
                                       background: `${result.badgeColor}22`,
                                       borderRadius: 20,
                                       padding: '2px 8px',
@@ -378,7 +382,7 @@ export default function SearchPage() {
                                   </span>
                                 )}
                               </div>
-                              <p style={{ fontSize: 11, color: '#8A8A8A', marginTop: 2 }}>
+                              <p style={{ fontSize: 11, color: '#1A1A1B', marginTop: 2 }}>
                                 {result.subtitle}
                               </p>
                             </div>

@@ -27,13 +27,13 @@ export default function ProductCard({
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'safe':
-        return '#00FF7F';
+        return '#D1F07B';
       case 'warning':
         return '#FFD700';
       case 'critical':
-        return '#FF00FF';
+        return '#1A1A1B';
       default:
-        return '#E8E8E8';
+        return '#475569';
     }
   };
 
@@ -58,50 +58,48 @@ export default function ProductCard({
       whileHover={{ y: -8 }}
       className="rounded-2xl p-3 border transition-all cursor-pointer flex flex-col"
       style={{
-        background: 'rgba(255, 255, 255, 0.06)',
+        background: 'rgba(0, 0, 0, 0.03)',
         backdropFilter: 'blur(10px)',
-        borderColor: isSelected ? '#00FF7F' : 'rgba(255, 255, 255, 0.15)',
-        aspectRatio: '1 / 1.3',
+        borderColor: isSelected ? '#D1F07B' : 'rgba(0, 0, 0, 0.08)',
         boxShadow: isSelected ? '0 8px 32px rgba(0, 255, 127, 0.3)' : 'none'
       }}
       onMouseEnter={(e) => {
         if (!isSelected) {
           e.currentTarget.style.borderColor = 'rgba(0, 255, 255, 0.6)';
-          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+          e.currentTarget.style.background = 'rgba(0, 0, 0, 0.04)';
           e.currentTarget.style.boxShadow = '0 16px 32px rgba(0, 255, 255, 0.2)';
         }
       }}
       onMouseLeave={(e) => {
         if (!isSelected) {
-          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
-          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.06)';
+          e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.08)';
+          e.currentTarget.style.background = 'rgba(0, 0, 0, 0.03)';
           e.currentTarget.style.boxShadow = 'none';
         }
       }}
     >
       {/* Product Image */}
       <div
-        className="w-full h-28 rounded-xl mb-2 overflow-hidden"
-        style={{ background: '#1a1a1a' }}
+        className="w-full h-32 rounded-xl mb-3 overflow-hidden bg-white/50"
       >
         {product.image ? (
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain p-2"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-4xl">📦</div>
+          <div className="w-full h-full flex items-center justify-center text-4xl"></div>
         )}
       </div>
 
       {/* Product Name */}
-      <h4 className="text-xs font-bold text-white line-clamp-2 mb-1">
+      <h4 className="text-xs font-bold text-[#1A1A1B] line-clamp-2 mb-1">
         {product.name}
       </h4>
 
       {/* SKU */}
-      <p className="text-[10px] text-[#E8E8E8] mb-2">{product.sku}</p>
+      <p className="text-[10px] text-[#4B5563] mb-2">{product.sku}</p>
 
       {/* Stock Badge */}
       <div
@@ -116,7 +114,7 @@ export default function ProductCard({
         />
         <span
           className="text-[11px] font-bold"
-          style={{ color: getStatusColor(product.status) }}
+          style={{ color: '#1A1A1B'}}
         >
           {product.stock} pcs
         </span>
@@ -126,7 +124,7 @@ export default function ProductCard({
       {product.expiryDate && (
         <p
           className="text-[9px] mb-2"
-          style={{ color: isNearExpiry ? '#FF00FF' : '#E8E8E8' }}
+          style={{ color: '#1A1A1B'}}
         >
           Exp: {product.expiryDate}
         </p>
@@ -143,19 +141,19 @@ export default function ProductCard({
           whileTap={{ scale: 0.95 }}
           className="flex-1 h-9 rounded-lg border flex items-center justify-center transition-all"
           style={{
-            background: 'rgba(255, 255, 255, 0.08)',
-            borderColor: 'rgba(255, 255, 255, 0.15)'
+            background: 'rgba(0, 0, 0, 0.04)',
+            borderColor: 'rgba(0, 0, 0, 0.08)'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = 'rgba(0, 255, 255, 0.6)';
             e.currentTarget.style.boxShadow = '0 0 12px rgba(0, 255, 255, 0.3)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+            e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.08)';
             e.currentTarget.style.boxShadow = 'none';
           }}
         >
-          <Edit2 size={14} className="text-white" />
+          <Edit2 size={14} className="text-[#1A1A1B]" />
         </motion.button>
 
         <motion.button
@@ -167,19 +165,19 @@ export default function ProductCard({
           whileTap={{ scale: 0.95 }}
           className="flex-1 h-9 rounded-lg border flex items-center justify-center transition-all"
           style={{
-            background: 'rgba(255, 255, 255, 0.08)',
-            borderColor: 'rgba(255, 255, 255, 0.15)'
+            background: 'rgba(0, 0, 0, 0.04)',
+            borderColor: 'rgba(0, 0, 0, 0.08)'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = 'rgba(255, 0, 255, 0.6)';
             e.currentTarget.style.boxShadow = '0 0 12px rgba(255, 0, 255, 0.3)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+            e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.08)';
             e.currentTarget.style.boxShadow = 'none';
           }}
         >
-          <Trash2 size={14} className="text-white" />
+          <Trash2 size={14} className="text-[#1A1A1B]" />
         </motion.button>
 
         <motion.button
@@ -188,11 +186,11 @@ export default function ProductCard({
           whileTap={{ scale: 0.95 }}
           className="w-9 h-9 rounded-lg border flex items-center justify-center transition-all"
           style={{
-            background: 'rgba(255, 255, 255, 0.08)',
-            borderColor: 'rgba(255, 255, 255, 0.15)'
+            background: 'rgba(0, 0, 0, 0.04)',
+            borderColor: 'rgba(0, 0, 0, 0.08)'
           }}
         >
-          <MoreVertical size={14} className="text-white" />
+          <MoreVertical size={14} className="text-[#1A1A1B]" />
         </motion.button>
       </div>
     </motion.div>

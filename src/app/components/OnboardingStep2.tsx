@@ -46,9 +46,9 @@ export default function OnboardingStep2() {
           className="absolute inset-0"
           animate={{
             background: [
-              'linear-gradient(135deg, #0F0F0F 0%, #2a0f4a 100%)',
-              'linear-gradient(135deg, #2a0f4a 0%, #0F0F0F 100%)',
-              'linear-gradient(135deg, #0F0F0F 0%, #2a0f4a 100%)',
+              'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%)',
+              'linear-gradient(135deg, #E2E8F0 0%, #FFFFFF 100%)',
+              'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%)',
             ],
           }}
           transition={{
@@ -61,7 +61,7 @@ export default function OnboardingStep2() {
         {/* Floating Shapes */}
         <motion.div
           className="absolute w-64 h-64 rounded-full opacity-10 blur-3xl"
-          style={{ background: 'radial-gradient(circle, #8B4BBE, transparent)' }}
+          style={{ background: 'radial-gradient(circle, #98E2FD, transparent)' }}
           animate={{
             x: [0, 50, 0],
             y: [0, 30, 0],
@@ -86,19 +86,19 @@ export default function OnboardingStep2() {
 
         {/* Form Card */}
         <div
-          className="rounded-3xl p-12 border"
+          className="rounded-2xl p-12 border"
           style={{
-            background: 'rgba(255, 255, 255, 0.08)',
+            background: 'rgba(0, 0, 0, 0.04)',
             backdropFilter: 'blur(20px)',
-            borderColor: 'rgba(255, 255, 255, 0.15)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+            borderColor: 'rgba(0, 0, 0, 0.08)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.05)'
           }}
         >
           {/* Title */}
-          <h1 className="text-3xl font-bold text-white mb-3">
+          <h1 className="text-3xl font-bold text-[#1A1A1B] mb-3">
             Profil Bisnis Anda
           </h1>
-          <p className="text-sm text-[#E8E8E8] mb-8">
+          <p className="text-sm text-[#4B5563] mb-8">
             Langkah 2 dari 3
           </p>
 
@@ -106,7 +106,7 @@ export default function OnboardingStep2() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Business Name Field */}
             <div>
-              <label className="block text-xs font-medium text-white uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-[#1A1A1B] uppercase tracking-wider mb-2">
                 Nama Toko
               </label>
               <input
@@ -114,53 +114,52 @@ export default function OnboardingStep2() {
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
                 placeholder="e.g., Toko Berkah"
-                className="w-full h-12 px-4 rounded-xl border text-sm text-[#E8E8E8] placeholder-white/50 transition-all focus:outline-none focus:border-cyan-400"
+                className="w-full h-12 px-4 rounded-2xl border text-sm text-[#4B5563] placeholder-white/50 transition-all focus:outline-none focus:border-cyan-400"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  borderColor: 'rgba(255, 255, 255, 0.2)'
+                  background: 'rgba(0, 0, 0, 0.03)',
+                  borderColor: 'rgba(0, 0, 0, 0.1)'
                 }}
                 onFocus={(e) => {
                   e.target.style.borderColor = 'rgba(0, 255, 255, 0.8)';
                   e.target.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.2)';
-                  e.target.style.background = 'rgba(255, 255, 255, 0.08)';
+                  e.target.style.background = 'rgba(0, 0, 0, 0.04)';
                 }}
                 onBlur={(e) => {
-                  e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                  e.target.style.borderColor = 'rgba(0, 0, 0, 0.1)';
                   e.target.style.boxShadow = 'none';
-                  e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                  e.target.style.background = 'rgba(0, 0, 0, 0.03)';
                 }}
               />
             </div>
 
             {/* Business Type - Custom Dropdown */}
             <div className="relative">
-              <label className="block text-xs font-medium text-white uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-[#1A1A1B] uppercase tracking-wider mb-2">
                 Jenis Usaha
               </label>
               <button
                 type="button"
                 onClick={() => setIsBusinessTypeOpen(!isBusinessTypeOpen)}
-                className="w-full h-12 px-4 rounded-xl border text-sm text-[#E8E8E8] flex items-center justify-between transition-all hover:border-cyan-400"
+                className="w-full h-12 px-4 rounded-2xl border text-sm text-[#4B5563] flex items-center justify-between transition-all hover:border-cyan-400"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  borderColor: isBusinessTypeOpen ? 'rgba(0, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.2)',
+                  background: 'rgba(0, 0, 0, 0.03)',
+                  borderColor: isBusinessTypeOpen ? 'rgba(0, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.1)',
                   boxShadow: isBusinessTypeOpen ? '0 0 20px rgba(0, 255, 255, 0.2)' : 'none'
                 }}
               >
                 <span>{businessType || 'Pilih jenis...'}</span>
-                <ChevronDown size={18} className="text-cyan-400" />
+                <ChevronDown size={18} className="text-[#1A1A1B]" />
               </button>
 
               {isBusinessTypeOpen && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="absolute top-full left-0 right-0 mt-2 rounded-xl border overflow-hidden z-20"
+                  className="absolute top-full left-0 right-0 mt-2 rounded-2xl border overflow-hidden z-20"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    backdropFilter: 'blur(20px)',
-                    borderColor: 'rgba(255, 255, 255, 0.15)',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+                    background: '#ffffff',
+                    borderColor: 'rgba(0, 0, 0, 0.08)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)'
                   }}
                 >
                   {businessTypes.map((type) => (
@@ -171,10 +170,10 @@ export default function OnboardingStep2() {
                         setBusinessType(type);
                         setIsBusinessTypeOpen(false);
                       }}
-                      className="w-full h-10 px-4 text-sm text-[#E8E8E8] flex items-center justify-between transition-all hover:bg-gradient-to-r hover:from-[#4A1063] hover:to-[#8B4BBE]"
+                      className="w-full h-10 px-4 text-sm text-[#4B5563] flex items-center justify-between transition-all hover:bg-gradient-to-r hover:from-[#FFE16F] hover:to-[#98E2FD]"
                     >
                       <span>{type}</span>
-                      {businessType === type && <Check size={16} className="text-cyan-400" />}
+                      {businessType === type && <Check size={16} className="text-[#1A1A1B]" />}
                     </button>
                   ))}
                 </motion.div>
@@ -183,21 +182,13 @@ export default function OnboardingStep2() {
 
             {/* SKU Count - Interactive Slider */}
             <div>
-              <label className="block text-xs font-medium text-white uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-[#1A1A1B] uppercase tracking-wider mb-2">
                 Jumlah Produk (SKU)
               </label>
 
               {/* Current Value Display */}
               <div className="mb-4 text-center">
-                <span
-                  className="text-2xl font-bold"
-                  style={{
-                    background: 'linear-gradient(135deg, #00FF7F, #00FFFF)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text'
-                  }}
-                >
+                <span className="text-2xl font-bold text-[#1A1A1B]">
                   {skuCount} SKU
                 </span>
               </div>
@@ -212,48 +203,47 @@ export default function OnboardingStep2() {
                   onChange={(e) => setSkuCount(Number(e.target.value))}
                   className="w-full h-2 rounded-full appearance-none cursor-pointer"
                   style={{
-                    background: `linear-gradient(to right, #00FF7F 0%, #00FF7F ${(skuCount / 600) * 100}%, rgba(255, 255, 255, 0.1) ${(skuCount / 600) * 100}%, rgba(255, 255, 255, 0.1) 100%)`,
+                    background: `linear-gradient(to right, #D1F07B 0%, #D1F07B ${(skuCount / 600) * 100}%, rgba(0, 0, 0, 0.05) ${(skuCount / 600) * 100}%, rgba(0, 0, 0, 0.05) 100%)`,
                   }}
                 />
 
                 {/* Tick Marks */}
                 <div className="flex justify-between mt-2 px-1">
-                  <span className="text-xs text-gray-400">&lt;100</span>
-                  <span className="text-xs text-gray-400">100-500</span>
-                  <span className="text-xs text-gray-400">500+</span>
+                  <span className="text-xs text-[#4B5563]">&lt;100</span>
+                  <span className="text-xs text-[#4B5563]">100-500</span>
+                  <span className="text-xs text-[#4B5563]">500+</span>
                 </div>
               </div>
             </div>
 
             {/* City Dropdown */}
             <div className="relative">
-              <label className="block text-xs font-medium text-white uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-[#1A1A1B] uppercase tracking-wider mb-2">
                 Kota / Kabupaten
               </label>
               <button
                 type="button"
                 onClick={() => setIsCityOpen(!isCityOpen)}
-                className="w-full h-12 px-4 rounded-xl border text-sm text-[#E8E8E8] flex items-center justify-between transition-all hover:border-cyan-400"
+                className="w-full h-12 px-4 rounded-2xl border text-sm text-[#4B5563] flex items-center justify-between transition-all hover:border-cyan-400"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  borderColor: isCityOpen ? 'rgba(0, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.2)',
+                  background: 'rgba(0, 0, 0, 0.03)',
+                  borderColor: isCityOpen ? 'rgba(0, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.1)',
                   boxShadow: isCityOpen ? '0 0 20px rgba(0, 255, 255, 0.2)' : 'none'
                 }}
               >
                 <span>{city || 'Pilih kota...'}</span>
-                <ChevronDown size={18} className="text-cyan-400" />
+                <ChevronDown size={18} className="text-[#1A1A1B]" />
               </button>
 
               {isCityOpen && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="absolute top-full left-0 right-0 mt-2 rounded-xl border overflow-hidden z-20"
+                  className="absolute top-full left-0 right-0 mt-2 rounded-2xl border overflow-hidden z-20"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    backdropFilter: 'blur(20px)',
-                    borderColor: 'rgba(255, 255, 255, 0.15)',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+                    background: '#ffffff',
+                    borderColor: 'rgba(0, 0, 0, 0.08)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)'
                   }}
                 >
                   {cities.map((c) => (
@@ -264,10 +254,10 @@ export default function OnboardingStep2() {
                         setCity(c);
                         setIsCityOpen(false);
                       }}
-                      className="w-full h-10 px-4 text-sm text-[#E8E8E8] flex items-center justify-between transition-all hover:bg-gradient-to-r hover:from-[#4A1063] hover:to-[#8B4BBE]"
+                      className="w-full h-10 px-4 text-sm text-[#4B5563] flex items-center justify-between transition-all hover:bg-gradient-to-r hover:from-[#FFE16F] hover:to-[#98E2FD]"
                     >
                       <span>{c}</span>
-                      {city === c && <Check size={16} className="text-cyan-400" />}
+                      {city === c && <Check size={16} className="text-[#1A1A1B]" />}
                     </button>
                   ))}
                 </motion.div>
@@ -276,30 +266,30 @@ export default function OnboardingStep2() {
 
             {/* Revenue - Optional */}
             <div>
-              <label className="block text-xs font-medium text-white uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-[#1A1A1B] uppercase tracking-wider mb-2">
                 Estimasi Omzet Bulanan (Opsional)
               </label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-gray-400">Rp.</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-[#4B5563]">Rp.</span>
                 <input
                   type="text"
                   value={revenue}
                   onChange={handleRevenueChange}
                   placeholder="e.g., 50,000,000"
-                  className="w-full h-12 pl-12 pr-4 rounded-xl border text-sm text-[#E8E8E8] placeholder-white/50 transition-all focus:outline-none focus:border-cyan-400"
+                  className="w-full h-12 pl-12 pr-4 rounded-2xl border text-sm text-[#4B5563] placeholder-white/50 transition-all focus:outline-none focus:border-cyan-400"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    borderColor: 'rgba(255, 255, 255, 0.2)'
+                    background: 'rgba(0, 0, 0, 0.03)',
+                    borderColor: 'rgba(0, 0, 0, 0.1)'
                   }}
                   onFocus={(e) => {
                     e.target.style.borderColor = 'rgba(0, 255, 255, 0.8)';
                     e.target.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.2)';
-                    e.target.style.background = 'rgba(255, 255, 255, 0.08)';
+                    e.target.style.background = 'rgba(0, 0, 0, 0.04)';
                   }}
                   onBlur={(e) => {
-                    e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                    e.target.style.borderColor = 'rgba(0, 0, 0, 0.1)';
                     e.target.style.boxShadow = 'none';
-                    e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                    e.target.style.background = 'rgba(0, 0, 0, 0.03)';
                   }}
                 />
               </div>
@@ -310,16 +300,16 @@ export default function OnboardingStep2() {
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full h-12 rounded-xl font-bold text-white mt-8 cursor-pointer transition-all"
+              className="w-full h-12 rounded-full font-bold text-[#1A1A1B] mt-8 cursor-pointer transition-all"
               style={{
-                background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
-                boxShadow: '0 4px 16px rgba(74, 16, 99, 0.3)'
+                background: '#FFE16F',
+                boxShadow: '0 4px 16px rgba(255, 225, 111, 0.3)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(74, 16, 99, 0.4)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(255, 225, 111, 0.4)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 4px 16px rgba(74, 16, 99, 0.3)';
+                e.currentTarget.style.boxShadow = '0 4px 16px rgba(255, 225, 111, 0.3)';
               }}
             >
               Lanjut ke Integrasi
@@ -329,11 +319,13 @@ export default function OnboardingStep2() {
             <button
               type="button"
               onClick={() => navigate('/onboarding')}
-              className="w-full h-12 rounded-xl border text-sm font-medium text-cyan-400 transition-all hover:border-cyan-400"
+              className="w-full h-12 rounded-2xl border text-sm font-medium text-[#1A1A1B] transition-all"
               style={{
                 background: 'transparent',
-                borderColor: 'rgba(255, 255, 255, 0.3)'
+                borderColor: 'rgba(0, 0, 0, 0.15)'
               }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.35)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.15)'; }}
             >
               Kembali
             </button>
@@ -348,7 +340,7 @@ export default function OnboardingStep2() {
           width: 20px;
           height: 20px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #4A1063, #8B4BBE);
+          background: linear-gradient(135deg, #FFE16F, #98E2FD);
           cursor: pointer;
           box-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
           transition: all 0.2s;
@@ -363,7 +355,7 @@ export default function OnboardingStep2() {
           width: 20px;
           height: 20px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #4A1063, #8B4BBE);
+          background: linear-gradient(135deg, #FFE16F, #98E2FD);
           cursor: pointer;
           border: none;
           box-shadow: 0 0 10px rgba(0, 255, 127, 0.5);

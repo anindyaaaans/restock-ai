@@ -1,59 +1,37 @@
 import { Search, Bell } from 'lucide-react';
 import { useNavigate } from 'react-router';
-import RestockAILogo from '../brand/RestockAILogo';
 
 export default function Navbar() {
   const navigate = useNavigate();
   return (
-    <nav
-      className="fixed top-0 right-0 left-60 h-16 z-40 border-b flex items-center justify-between px-10"
-      style={{
-        background: 'rgba(15, 15, 15, 0.85)',
-        backdropFilter: 'blur(15px)',
-        borderColor: 'rgba(255, 255, 255, 0.1)'
-      }}
-    >
-      {/* Left Section */}
+    <nav className="fixed top-0 right-0 left-60 h-16 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 flex items-center justify-between px-10 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.02)]">
       <div className="flex items-center gap-8">
-        <span className="text-white">Toko Berkah</span>
+        <span className="text-[#1A1A1B] font-semibold text-lg">Toko Berkah</span>
       </div>
 
-      {/* Center Section - Date Range */}
-      <div
-        className="px-4 h-10 rounded-full border flex items-center text-sm text-[#E8E8E8]"
-        style={{
-          background: 'rgba(255, 255, 255, 0.05)',
-          backdropFilter: 'blur(10px)',
-          borderColor: 'rgba(255, 255, 255, 0.2)'
-        }}
-      >
+      <div className="px-5 h-10 rounded-full bg-slate-50 border border-gray-100 flex items-center text-sm text-[#4B5563] font-medium">
         01-30 Mei 2024
       </div>
 
-      {/* Right Section */}
       <div className="flex items-center gap-4">
-        {/* Search */}
         <button
           onClick={() => navigate('/dashboard/search')}
-          className="w-10 h-10 rounded-full flex items-center justify-center text-white hover:text-cyan-400 transition-colors"
+          className="w-10 h-10 rounded-2xl bg-white border border-gray-100 flex items-center justify-center text-[#4B5563] hover:text-[#1A1A1B] hover:bg-[#FFFBEB] hover:border-indigo-200 transition-colors shadow-sm"
         >
-          <Search size={20} />
+          <Search size={18} />
         </button>
 
-        {/* Notifications */}
         <button
           onClick={() => navigate('/dashboard/notifikasi')}
-          className="relative w-10 h-10 rounded-full flex items-center justify-center text-white hover:text-cyan-400 transition-colors"
+          className="relative w-10 h-10 rounded-2xl bg-white border border-gray-100 flex items-center justify-center text-[#4B5563] hover:text-[#1A1A1B] hover:bg-[#FFFBEB] hover:border-indigo-200 transition-colors shadow-sm"
         >
-          <Bell size={20} />
-          <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#FF00FF]" />
+          <Bell size={18} />
+          <div className="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-rose-500 border-2 border-white" />
         </button>
 
-        {/* User Avatar */}
         <button
           onClick={() => navigate('/dashboard/pengaturan')}
-          className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm transition-opacity hover:opacity-80"
-          style={{ background: 'linear-gradient(135deg, #4A1063, #8B4BBE)', border: 'none', cursor: 'pointer' }}
+          className="w-10 h-10 rounded-full flex items-center justify-center text-[#1A1A1B] font-bold text-sm bg-[#FFE16F] hover:bg-[#E8CD65] transition-colors shadow-sm border border-gray-100 ml-2"
         >
           TB
         </button>

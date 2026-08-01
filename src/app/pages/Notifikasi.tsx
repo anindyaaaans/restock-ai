@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router';
+import { Bell, PackageX, CalendarClock, Sparkles, CheckCircle2, Tag, type LucideIcon } from 'lucide-react';
 import Navbar from '../components/dashboard/Navbar';
 import Sidebar from '../components/dashboard/Sidebar';
 
@@ -24,12 +25,12 @@ interface Notification {
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const TYPE_CONFIG: Record<AlertType, { color: string; bg: string; icon: string }> = {
-  stockout: { color: '#FF00FF', bg: 'rgba(255,0,127,0.18)',   icon: '⚠️' },
-  expiry:   { color: '#F5E04A', bg: 'rgba(245,224,74,0.18)',  icon: '⏰' },
-  ai:       { color: '#00FFFF', bg: 'rgba(0,255,255,0.18)',   icon: '🧠' },
-  po:       { color: '#00FF7F', bg: 'rgba(0,255,127,0.18)',   icon: '✅' },
-  promo:    { color: '#F5C897', bg: 'rgba(245,200,150,0.18)', icon: '🎯' },
+const TYPE_CONFIG: Record<AlertType, { color: '#1A1A1B'; bg: string; icon: LucideIcon }> = {
+  stockout: { color: '#1A1A1B', bg: 'rgba(255,0,127,0.18)',   icon: PackageX },
+  expiry:   { color: '#1A1A1B', bg: 'rgba(245,224,74,0.18)',  icon: CalendarClock },
+  ai:       { color: '#1A1A1B', bg: 'rgba(0,255,255,0.18)',   icon: Sparkles },
+  po:       { color: '#1A1A1B', bg: 'rgba(0,255,127,0.18)',   icon: CheckCircle2 },
+  promo:    { color: '#1A1A1B', bg: 'rgba(245,200,150,0.18)', icon: Tag },
 };
 
 const TABS = [
@@ -45,9 +46,9 @@ const NOTIFICATIONS: Notification[] = [
     id: 'n1',
     type: 'stockout',
     category: 'stockout',
-    title: '⚠️ Beras Premium Habis',
-    description: 'Stok Beras Premium 5kg sudah habis. Silakan restock segera.',
-    fullMessage: 'Stok Beras Premium 5kg sudah habis sejak 10 menit lalu. Silakan lakukan restock segera untuk menghindari kehilangan penjualan. Produk ini termasuk top-seller dengan rata-rata 45 pcs terjual per hari.',
+    title: ' Beras Premium Habis',
+    description: 'Stok Beras Premium 5kg sudah habis. Silakan Optimalkan Segera.',
+    fullMessage: 'Stok Beras Premium 5kg sudah habis sejak 10 menit lalu. Silakan lakukan Optimalkan Segera untuk menghindari kehilangan penjualan. Produk ini termasuk top-seller dengan rata-rata 45 pcs terjual per hari.',
     timestamp: '10 menit lalu',
     actionLabel: 'Tindak Lanjut →',
     fields: [
@@ -62,7 +63,7 @@ const NOTIFICATIONS: Notification[] = [
     id: 'n2',
     type: 'expiry',
     category: 'expiry',
-    title: '⏰ Gula Pasir Akan Kadaluarsa',
+    title: ' Gula Pasir Akan Kadaluarsa',
     description: 'Gula Pasir 1kg akan kadaluarsa dalam 3 hari. Pertimbangkan untuk diskon/promo.',
     fullMessage: 'Gula Pasir 1kg (SKU: GUL-003) akan melewati tanggal kadaluarsa pada 20 Mei 2024. Tersisa 48 pcs di gudang. Disarankan untuk menjalankan promo flash sale atau bundle untuk menghabiskan stok sebelum kadaluarsa.',
     timestamp: '2 jam lalu',
@@ -79,7 +80,7 @@ const NOTIFICATIONS: Notification[] = [
     id: 'n3',
     type: 'ai',
     category: 'ai',
-    title: '🧠 Rekomendasi: Tingkatkan Stok Beras',
+    title: ' Rekomendasi: Tingkatkan Stok Beras',
     description: 'Berdasarkan prediksi AI, permintaan beras meningkat 30% minggu depan.',
     fullMessage: 'Model prediksi AI mendeteksi pola musiman dan tren kenaikan permintaan untuk Beras Premium 5kg. Diperkirakan permintaan akan naik 30% pada minggu depan (17–23 Mei). Disarankan menambah stok minimal 150 pcs sebelum tanggal 16 Mei.',
     timestamp: '4 jam lalu',
@@ -97,7 +98,7 @@ const NOTIFICATIONS: Notification[] = [
     id: 'n4',
     type: 'po',
     category: 'po',
-    title: '✅ PO Dikonfirmasi Supplier',
+    title: 'PO Dikonfirmasi Supplier',
     description: 'PO-2024-05-001 untuk Beras dan Minyak sudah dikonfirmasi. Pengiriman 30 Mei.',
     fullMessage: 'Purchase Order PO-2024-05-001 telah dikonfirmasi oleh PT Sumber Makmur. Order meliputi Beras Premium 5kg (200 pcs) dan Minyak Goreng 2L (100 pcs). Estimasi tiba di gudang: 30 Mei 2024.',
     timestamp: '1 hari lalu',
@@ -115,7 +116,7 @@ const NOTIFICATIONS: Notification[] = [
     id: 'n5',
     type: 'stockout',
     category: 'stockout',
-    title: '⚠️ Minyak Goreng Hampir Habis',
+    title: ' Minyak Goreng Hampir Habis',
     description: 'Stok Minyak Goreng 2L tersisa 5 pcs. Perkiraan habis dalam 2 hari.',
     fullMessage: 'Stok Minyak Goreng 2L (SKU: MYK-002) saat ini tersisa 5 pcs. Berdasarkan rata-rata penjualan harian 3 pcs, diperkirakan stok akan habis dalam 2 hari. Segera buat Purchase Order ke supplier.',
     timestamp: '5 jam lalu',
@@ -132,7 +133,7 @@ const NOTIFICATIONS: Notification[] = [
     id: 'n6',
     type: 'ai',
     category: 'ai',
-    title: '🧠 Insight: Penjualan Indomie Turun',
+    title: ' Insight: Penjualan Indomie Turun',
     description: 'Penjualan Indomie Goreng turun 15% dalam 2 minggu terakhir.',
     fullMessage: 'AI mendeteksi penurunan penjualan Indomie Goreng sebesar 15% selama 2 minggu terakhir. Kemungkinan penyebab: harga kompetitor lebih rendah atau perubahan preferensi pelanggan. Disarankan untuk meninjau harga jual atau membuat bundling promo.',
     timestamp: '1 hari lalu',
@@ -173,14 +174,14 @@ function NotifItem({
       className="flex gap-3 cursor-pointer border-b relative"
       style={{
         padding: '16px 24px',
-        borderBottomColor: 'rgba(255,255,255,0.05)',
+        borderBottomColor: 'rgba(0, 0, 0, 0.03)',
         borderLeftWidth: 3,
         borderLeftStyle: 'solid',
         borderLeftColor: selected ? cfg.color : hovered ? cfg.color + '88' : 'transparent',
         background: selected
           ? 'rgba(255,255,255,0.07)'
           : hovered
-          ? 'rgba(255,255,255,0.05)'
+          ? 'rgba(0, 0, 0, 0.03)'
           : 'transparent',
         transition: 'all 0.2s ease',
       }}
@@ -195,26 +196,26 @@ function NotifItem({
 
       {/* Icon circle */}
       <div
-        className="w-10 h-10 rounded-full flex items-center justify-center text-base flex-shrink-0"
+        className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
         style={{ background: cfg.bg }}
       >
-        {TYPE_CONFIG[notif.type].icon}
+        <cfg.icon size={18} color={cfg.color} />
       </div>
 
       {/* Content */}
       <div className="flex-1 min-w-0">
         <div className="flex justify-between items-start gap-2 mb-1">
-          <p className="text-[13px] font-bold text-white leading-snug">{notif.title}</p>
-          <span className="text-[10px] text-[#E8E8E8] whitespace-nowrap flex-shrink-0">
+          <p className="text-[13px] font-bold text-[#1A1A1B] leading-snug">{notif.title}</p>
+          <span className="text-[10px] text-[#4B5563] whitespace-nowrap flex-shrink-0">
             {notif.timestamp}
           </span>
         </div>
-        <p className="text-[12px] text-[#E8E8E8]" style={{ lineHeight: 1.5 }}>
+        <p className="text-[12px] text-[#4B5563]" style={{ lineHeight: 1.5 }}>
           {notif.description}
         </p>
         <button
           className="text-[11px] font-bold mt-1.5"
-          style={{ color: '#00FFFF' }}
+          style={{ color: '#1A1A1B' }}
         >
           {notif.actionLabel}
         </button>
@@ -240,31 +241,31 @@ function DetailPanel({ notif }: { notif: Notification | null }) {
         >
           {/* Large icon */}
           <div
-            className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-5"
+            className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
             style={{ background: cfg.bg, boxShadow: `0 4px 20px ${cfg.color}33` }}
           >
-            {cfg.icon}
+            <cfg.icon size={26} color={cfg.color} />
           </div>
 
           {/* Title */}
-          <h2 className="text-lg font-bold text-white mb-3" style={{ lineHeight: 1.3 }}>
+          <h2 className="text-lg font-bold text-[#1A1A1B] mb-3" style={{ lineHeight: 1.3 }}>
             {notif.title}
           </h2>
 
           {/* Full message */}
-          <p className="text-[13px] text-[#E8E8E8]" style={{ lineHeight: 1.7 }}>
+          <p className="text-[13px] text-[#4B5563]" style={{ lineHeight: 1.7 }}>
             {notif.fullMessage}
           </p>
 
           {/* Divider */}
-          <div className="my-6 h-px" style={{ background: 'rgba(255,255,255,0.1)' }} />
+          <div className="my-6 h-px" style={{ background: 'rgba(0, 0, 0, 0.05)' }} />
 
           {/* Detail fields */}
           <div className="flex flex-col gap-3">
             {notif.fields.map((f) => (
               <div key={f.label} className="flex justify-between items-center">
-                <span className="text-[12px] text-[#E8E8E8]">{f.label}</span>
-                <span className="text-[12px] font-semibold text-white text-right ml-4">{f.value}</span>
+                <span className="text-[12px] text-[#4B5563]">{f.label}</span>
+                <span className="text-[12px] font-semibold text-[#1A1A1B] text-right ml-4">{f.value}</span>
               </div>
             ))}
           </div>
@@ -272,13 +273,13 @@ function DetailPanel({ notif }: { notif: Notification | null }) {
           {/* Actions */}
           <div className="mt-auto pt-6 flex flex-col gap-2">
             <motion.button
-              whileHover={{ scale: 1.02, boxShadow: '0 0 20px rgba(74,16,99,0.6)' }}
+              whileHover={{ scale: 1.02, boxShadow: '0 0 20px rgba(255, 225, 111,0.6)' }}
               whileTap={{ scale: 0.97 }}
               onClick={() => notif.actionPath && navigate(notif.actionPath)}
-              className="w-full font-bold text-sm text-white rounded-xl"
+              className="w-full font-bold text-sm text-[#1A1A1B] rounded-full"
               style={{
                 height: 44,
-                background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
+                background: '#FFE16F',
                 border: 'none',
                 cursor: 'pointer',
               }}
@@ -289,12 +290,12 @@ function DetailPanel({ notif }: { notif: Notification | null }) {
               whileHover={{ scale: 1.02, boxShadow: `0 0 16px ${cfg.color}44` }}
               whileTap={{ scale: 0.97 }}
               onClick={() => notif.actionPath && navigate(notif.actionPath)}
-              className="w-full font-bold text-sm rounded-xl"
+              className="w-full font-bold text-sm rounded-full"
               style={{
                 height: 40,
                 background: 'transparent',
-                border: '1px solid #00FFFF',
-                color: '#00FFFF',
+                border: '1px solid #98E2FD',
+                color: '#1A1A1B',
                 cursor: 'pointer',
               }}
             >
@@ -303,7 +304,7 @@ function DetailPanel({ notif }: { notif: Notification | null }) {
           </div>
 
           {/* Timestamp */}
-          <p className="text-[10px] text-[#E8E8E8] text-center mt-4">{notif.timestamp}</p>
+          <p className="text-[10px] text-[#4B5563] text-center mt-4">{notif.timestamp}</p>
         </motion.div>
       ) : (
         <motion.div
@@ -314,8 +315,8 @@ function DetailPanel({ notif }: { notif: Notification | null }) {
           className="flex flex-col items-center justify-center h-full text-center"
           style={{ padding: '60px 20px' }}
         >
-          <span className="text-5xl mb-4">📭</span>
-          <p className="text-sm text-[#E8E8E8]" style={{ lineHeight: 1.6 }}>
+          <Bell size={44} className="mb-4 text-[#4B5563]" />
+          <p className="text-sm text-[#4B5563]" style={{ lineHeight: 1.6 }}>
             Pilih notifikasi dari kiri<br />untuk melihat detail
           </p>
         </motion.div>
@@ -349,7 +350,7 @@ export default function Notifikasi() {
   return (
     <div
       className="min-h-screen w-full"
-      style={{ background: 'linear-gradient(180deg, #0F0F0F 0%, #1a0f2e 100%)' }}
+      style={{ background: '#f8fafc' }}
     >
       <Sidebar activePage="notifikasi" />
       <Navbar />
@@ -358,17 +359,17 @@ export default function Notifikasi() {
         {/* Page header */}
         <div className="flex justify-between items-start mb-6">
           <div>
-            <h1 className="text-xl font-bold text-white">NOTIFIKASI & ALERT</h1>
-            <p className="text-sm text-[#E8E8E8] mt-1">Pantau semua alert dan insight bisnis Anda</p>
+            <h1 className="text-xl font-bold text-[#1A1A1B]">NOTIFIKASI & ALERT</h1>
+            <p className="text-sm text-[#4B5563] mt-1">Pantau semua alert dan insight bisnis Anda</p>
           </div>
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="px-4 py-2 rounded-full border text-sm font-bold"
+            className="px-4 py-2 rounded-2xl border text-sm font-bold"
             style={{
               background: 'rgba(255,0,127,0.12)',
               borderColor: 'rgba(255,0,127,0.4)',
-              color: '#FF00FF',
+              color: '#1A1A1B',
             }}
           >
             {unreadCount} belum dibaca
@@ -384,19 +385,19 @@ export default function Notifikasi() {
             style={{
               width: '65%',
               flexShrink: 0,
-              background: 'rgba(255,255,255,0.05)',
+              background: '#ffffff', boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
               backdropFilter: 'blur(12px)',
-              borderColor: 'rgba(255,255,255,0.15)',
+              borderColor: 'rgba(0, 0, 0, 0.08)',
             }}
           >
             {/* Sticky header */}
             <div
               className="flex-shrink-0 border-b"
-              style={{ borderColor: 'rgba(255,255,255,0.1)' }}
+              style={{ borderColor: 'rgba(0, 0, 0, 0.05)' }}
             >
               <div style={{ padding: '20px 24px 16px' }}>
-                <p className="text-sm font-bold text-white">PUSAT NOTIFIKASI</p>
-                <p className="text-[12px] text-[#E8E8E8] mt-0.5">{unreadCount} notifikasi baru</p>
+                <p className="text-sm font-bold text-[#1A1A1B]">PUSAT NOTIFIKASI</p>
+                <p className="text-[12px] text-[#4B5563] mt-0.5">{unreadCount} notifikasi baru</p>
               </div>
 
               {/* Filter tabs */}
@@ -404,7 +405,7 @@ export default function Notifikasi() {
                 className="flex border-b"
                 style={{
                   padding: '0 24px',
-                  borderColor: 'rgba(255,255,255,0.1)',
+                  borderColor: 'rgba(0, 0, 0, 0.05)',
                   gap: 0,
                 }}
               >
@@ -416,15 +417,15 @@ export default function Notifikasi() {
                       onClick={() => setActiveTab(tab.id)}
                       className="text-[13px] font-bold pb-3 mr-6 transition-all"
                       style={{
-                        color: isActive ? '#fff' : '#E8E8E8',
+                        color: '#1A1A1B',
                         background: 'none',
                         border: 'none',
-                        borderBottom: isActive ? '3px solid #00FF7F' : '3px solid transparent',
+                        borderBottom: isActive ? '3px solid #D1F07B' : '3px solid transparent',
                         cursor: 'pointer',
                         paddingBottom: 12,
                       }}
                       onMouseEnter={(e) => {
-                        if (!isActive) e.currentTarget.style.borderBottomColor = '#00FFFF88';
+                        if (!isActive) e.currentTarget.style.borderBottomColor = '#98E2FD88';
                       }}
                       onMouseLeave={(e) => {
                         if (!isActive) e.currentTarget.style.borderBottomColor = 'transparent';
@@ -462,8 +463,8 @@ export default function Notifikasi() {
                     animate={{ opacity: 1 }}
                     className="flex flex-col items-center justify-center py-20 text-center"
                   >
-                    <span className="text-4xl mb-3">🔔</span>
-                    <p className="text-sm text-[#E8E8E8]">Tidak ada notifikasi di kategori ini</p>
+                    <Bell size={36} className="mb-3 text-[#1A1A1B]" />
+                    <p className="text-sm text-[#4B5563]">Tidak ada notifikasi di kategori ini</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -474,9 +475,9 @@ export default function Notifikasi() {
           <div
             className="flex-1 rounded-[20px] border overflow-y-auto"
             style={{
-              background: 'rgba(255,255,255,0.06)',
+              background: '#f8fafc',
               backdropFilter: 'blur(12px)',
-              borderColor: 'rgba(255,255,255,0.15)',
+              borderColor: 'rgba(0, 0, 0, 0.08)',
               padding: 28,
               scrollbarWidth: 'none',
             }}

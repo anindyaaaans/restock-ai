@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router';
+import { Sparkles, LayoutDashboard, Bell, TrendingUp } from 'lucide-react';
 import RestockAIMascot from './brand/RestockAIMascot';
 import RestockAILogo from './brand/RestockAILogo';
 
@@ -30,9 +31,9 @@ export default function OnboardingSuccess() {
           className="absolute inset-0"
           animate={{
             background: [
-              'linear-gradient(135deg, #0F0F0F 0%, #2a0f4a 100%)',
-              'linear-gradient(135deg, #2a0f4a 0%, #0F0F0F 100%)',
-              'linear-gradient(135deg, #0F0F0F 0%, #2a0f4a 100%)',
+              'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%)',
+              'linear-gradient(135deg, #E2E8F0 0%, #FFFFFF 100%)',
+              'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%)',
             ],
           }}
           transition={{
@@ -48,7 +49,7 @@ export default function OnboardingSuccess() {
             key={i}
             className="absolute w-2 h-2 rounded-full"
             style={{
-              background: i % 3 === 0 ? '#00FF7F' : i % 3 === 1 ? '#00FFFF' : '#FF00FF',
+              background: i % 3 === 0 ? '#D1F07B' : i % 3 === 1 ? '#98E2FD' : '#1A1A1B',
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
@@ -75,12 +76,12 @@ export default function OnboardingSuccess() {
       >
         {/* Success Card */}
         <div
-          className="rounded-3xl p-12 border text-center"
+          className="rounded-2xl p-12 border text-center"
           style={{
-            background: 'rgba(255, 255, 255, 0.08)',
+            background: 'rgba(0, 0, 0, 0.04)',
             backdropFilter: 'blur(20px)',
-            borderColor: 'rgba(255, 255, 255, 0.15)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+            borderColor: 'rgba(0, 0, 0, 0.08)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.05)'
           }}
         >
           {/* Logo */}
@@ -108,9 +109,9 @@ export default function OnboardingSuccess() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-4xl font-bold text-white mb-4"
+            className="text-4xl font-bold text-[#1A1A1B] mb-4"
           >
-            Selamat Datang di RestockAI! 🎉
+            Selamat Datang di Restock AI!
           </motion.h1>
 
           {/* Subtitle */}
@@ -118,7 +119,7 @@ export default function OnboardingSuccess() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-lg text-[#E8E8E8] mb-8 leading-relaxed"
+            className="text-lg text-[#4B5563] mb-8 leading-relaxed"
           >
             Akun Anda berhasil dibuat! Kami sedang menyinkronkan data inventory Anda dan menyiapkan dashboard prediksi AI.
           </motion.p>
@@ -131,20 +132,20 @@ export default function OnboardingSuccess() {
             className="grid grid-cols-2 gap-3 mb-8 text-left"
           >
             {[
-              { icon: '🧠', text: 'AI analisis pola penjualan' },
-              { icon: '📊', text: 'Dashboard real-time aktif' },
-              { icon: '🔔', text: 'Notifikasi restock otomatis' },
-              { icon: '📈', text: 'Prediksi demand 30 hari' },
+              { icon: Sparkles, text: 'AI analisis pola penjualan' },
+              { icon: LayoutDashboard, text: 'Dashboard real-time aktif' },
+              { icon: Bell, text: 'Notifikasi restock otomatis' },
+              { icon: TrendingUp, text: 'Prediksi demand 30 hari' },
             ].map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6 + index * 0.08 }}
-                className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10"
+                className="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-gray-100"
               >
-                <span className="text-xl">{item.icon}</span>
-                <span className="text-xs text-[#E8E8E8]">{item.text}</span>
+                <item.icon size={20} className="text-[#1A1A1B]" />
+                <span className="text-xs text-[#4B5563]">{item.text}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -157,10 +158,10 @@ export default function OnboardingSuccess() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate('/dashboard')}
-            className="w-full h-14 rounded-xl font-bold cursor-pointer transition-all"
+            className="w-full h-14 rounded-full font-bold cursor-pointer transition-all"
             style={{
-              background: 'linear-gradient(135deg, #F5E04A, #FFD700)',
-              color: '#0F0F0F',
+              background: '#FFE16F',
+              color: '#1A1A1B',
               boxShadow: '0 8px 32px rgba(245, 224, 74, 0.4)'
             }}
           >
@@ -175,18 +176,18 @@ export default function OnboardingSuccess() {
           transition={{ delay: 1.0 }}
           className="mt-5 rounded-2xl border overflow-hidden"
           style={{
-            background: 'rgba(255,255,255,0.04)',
+            background: '#ffffff', boxShadow: '0 4px 12px -2px rgba(0,0,0,0.05)',
             backdropFilter: 'blur(16px)',
-            borderColor: 'rgba(255,255,255,0.1)',
+            borderColor: 'rgba(0, 0, 0, 0.05)',
           }}
         >
           {/* Section label */}
           <div
             className="px-6 py-3 border-b flex items-center gap-2"
-            style={{ borderColor: 'rgba(255,255,255,0.08)' }}
+            style={{ borderColor: 'rgba(0, 0, 0, 0.04)' }}
           >
-            <span className="text-[11px] uppercase tracking-widest text-[#888] font-semibold">
-              Dampak Nyata RestockAI untuk Toko Anda
+            <span className="text-[11px] uppercase tracking-widest text-[#4B5563] font-semibold">
+              Dampak Nyata Restock AI untuk Toko Anda
             </span>
           </div>
 
@@ -194,17 +195,17 @@ export default function OnboardingSuccess() {
             {/* Before */}
             <div
               className="p-6 border-r"
-              style={{ borderColor: 'rgba(255,255,255,0.08)' }}
+              style={{ borderColor: 'rgba(0, 0, 0, 0.04)' }}
             >
               <div className="flex items-center gap-2 mb-4">
                 <span
                   className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
-                  style={{ background: 'rgba(255,80,80,0.2)', color: '#FF5050' }}
+                  style={{ background: 'rgba(255,80,80,0.2)', color: '#1A1A1B' }}
                 >
                   ✕
                 </span>
-                <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#FF5050' }}>
-                  Sebelum RestockAI
+                <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#1A1A1B' }}>
+                  Sebelum Restock AI
                 </span>
               </div>
               <div className="space-y-3">
@@ -228,12 +229,12 @@ export default function OnboardingSuccess() {
               <div className="flex items-center gap-2 mb-4">
                 <span
                   className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
-                  style={{ background: 'rgba(0,255,127,0.2)', color: '#00FF7F' }}
+                  style={{ background: 'rgba(0,255,127,0.2)', color: '#1A1A1B' }}
                 >
-                  ✓
+                  
                 </span>
-                <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#00FF7F' }}>
-                  Sesudah RestockAI
+                <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#1A1A1B' }}>
+                  Sesudah Restock AI
                 </span>
               </div>
               <div className="space-y-3">
@@ -245,8 +246,8 @@ export default function OnboardingSuccess() {
                     transition={{ delay: 1.1 + i * 0.07 }}
                     className="flex items-start gap-2.5"
                   >
-                    <span className="mt-0.5 shrink-0 text-sm" style={{ color: '#00FF7F' }}>✓</span>
-                    <span className="text-xs text-[#E8E8E8] leading-relaxed">{item.text}</span>
+                    <span className="mt-0.5 shrink-0 text-sm" style={{ color: '#1A1A1B' }}></span>
+                    <span className="text-xs text-[#4B5563] leading-relaxed">{item.text}</span>
                   </motion.div>
                 ))}
               </div>
@@ -256,13 +257,13 @@ export default function OnboardingSuccess() {
           {/* Footer note */}
           <div
             className="px-6 py-3 border-t flex items-center justify-between"
-            style={{ borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(0,255,127,0.03)' }}
+            style={{ borderColor: 'rgba(0, 0, 0, 0.04)', background: 'rgba(0,255,127,0.03)' }}
           >
             <span className="text-[10px] text-[#555]">
-              Berdasarkan rata-rata pengguna aktif RestockAI bulan pertama
+              Berdasarkan rata-rata pengguna aktif Restock AI bulan pertama
             </span>
-            <span className="text-[11px] font-bold" style={{ color: '#00FF7F' }}>
-              +46% arus kas bebas 🚀
+            <span className="text-[11px] font-bold" style={{ color: '#1A1A1B' }}>
+              +46% arus kas bebas 
             </span>
           </div>
         </motion.div>

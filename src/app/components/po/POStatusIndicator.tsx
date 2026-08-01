@@ -21,17 +21,17 @@ export default function POStatusIndicator({ currentStep }: POStatusIndicatorProp
             {/* Step Circle */}
             <div
               className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${
-                step.id <= currentStep ? 'text-white' : 'text-gray-500'
+                step.id <= currentStep ? 'text-[#1A1A1B]' : 'text-[#4B5563]'
               }`}
               style={
                 step.id <= currentStep
                   ? {
-                      background: 'linear-gradient(135deg, #4A1063, #8B4BBE)',
-                      boxShadow: '0 0 12px rgba(74, 16, 99, 0.5)'
+                      background: '#FFE16F',
+                      boxShadow: '0 0 12px rgba(255, 225, 111, 0.5)'
                     }
                   : {
                       background: 'transparent',
-                      border: '2px solid rgba(255, 255, 255, 0.2)'
+                      border: '2px solid rgba(0, 0, 0, 0.1)'
                     }
               }
             >
@@ -42,7 +42,7 @@ export default function POStatusIndicator({ currentStep }: POStatusIndicatorProp
               )}
             </div>
             {/* Label */}
-            <p className="text-[9px] text-[#E8E8E8] mt-1 text-center">
+            <p className="text-[9px] text-[#4B5563] mt-1 text-center">
               {step.label}
             </p>
           </div>
@@ -54,9 +54,9 @@ export default function POStatusIndicator({ currentStep }: POStatusIndicatorProp
               style={{
                 background:
                   step.id < currentStep
-                    ? '#00FF7F'
-                    : 'rgba(255, 255, 255, 0.2)',
-                borderTop: step.id < currentStep ? 'none' : '1px dashed rgba(255, 255, 255, 0.2)'
+                    ? '#D1F07B'
+                    : 'rgba(0, 0, 0, 0.1)',
+                borderTop: step.id < currentStep ? 'none' : '1px dashed rgba(0, 0, 0, 0.1)'
               }}
             />
           )}
