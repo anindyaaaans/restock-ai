@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router';
-import { ChevronDown, Gem, Heart } from 'lucide-react';
+import { ChevronDown, Gem, Heart, Star } from 'lucide-react';
 import RestockAILogo from '../components/brand/RestockAILogo';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -122,7 +122,7 @@ export default function Pricing() {
   return (
     <div
       className="min-h-screen w-full overflow-x-hidden"
-      style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #2a0f4a 100%)' }}
+      style={{ background: '#f8fafc' }}
     >
       {/* Ambient blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
@@ -152,9 +152,9 @@ export default function Pricing() {
         <nav
           className="flex justify-between items-center px-10 h-16 border-b sticky top-0"
           style={{
-            background: 'rgba(15,15,15,0.85)',
+            background: 'rgba(255,255,255,0.85)',
             backdropFilter: 'blur(15px)',
-            borderColor: 'rgba(0, 0, 0, 0.05)',
+            borderColor: 'rgba(0, 0, 0, 0.08)',
             zIndex: 50
           }}
         >
