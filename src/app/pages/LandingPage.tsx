@@ -14,7 +14,7 @@ const pricingFeatures: { label: string; starter: string | boolean; growth: strin
   { label: 'Outlet / Cabang',         starter: '1 outlet',     growth: '3 outlet',     pro: 'Unlimited' },
   { label: 'Prediksi permintaan',     starter: 'Dasar',        growth: 'Advanced + AI', pro: 'Premium + ML' },
   { label: 'Dashboard real-time',     starter: true,           growth: true,           pro: true },
-  { label: 'Integrasi POS',           starter: false,          growth: true,           pro: true },
+  { label: 'Integrasi POS',           starter: '1 platform',   growth: 'Multi-platform', pro: 'Multi-platform' },
   { label: 'Sinkronisasi supplier',   starter: false,          growth: true,           pro: true },
   { label: 'Integrasi logistik',      starter: false,          growth: false,          pro: true },
   { label: 'Inventory financing',     starter: false,          growth: false,          pro: true },
@@ -396,7 +396,8 @@ export default function LandingPage() {
                 features={[
                   { label: 'Hingga 100 SKU', ok: true }, { label: 'Prediksi permintaan dasar', ok: true },
                   { label: 'Dashboard stok real-time', ok: true }, { label: '1 outlet', ok: true },
-                  { label: 'Email support', ok: true }, { label: 'Integrasi supplier', ok: false }, { label: 'Inventory financing', ok: false },
+                  { label: '1 integrasi POS (Moka, Majoo, atau Olsera)', ok: true },
+                  { label: 'Email support', ok: true }, { label: 'Sinkronisasi supplier', ok: false }, { label: 'Inventory financing', ok: false },
                 ]}
                 buttonLabel="Mulai Gratis" buttonStyle={{ background: '#FFE16F', color: '#1A1A1B' }}
                 onAction={() => navigate('/onboarding')}
@@ -406,7 +407,7 @@ export default function LandingPage() {
                 features={[
                   { label: 'Hingga 500 SKU', ok: true }, { label: 'Prediksi permintaan advanced + AI', ok: true },
                   { label: 'Dashboard analytics lengkap', ok: true }, { label: '3 outlet / cabang', ok: true },
-                  { label: 'Integrasi POS (Moka, Majoo, Olsera)', ok: true }, { label: 'Sinkronisasi supplier otomatis', ok: true },
+                  { label: 'Integrasi POS multi-platform (Moka, Majoo, Olsera)', ok: true }, { label: 'Sinkronisasi supplier otomatis', ok: true },
                   { label: 'Chat + email support', ok: true }, { label: 'Inventory financing', ok: false },
                 ]}
                 buttonLabel="Upgrade Sekarang" buttonStyle={{ background: '#FFE16F', color: '#1A1A1B' }}
